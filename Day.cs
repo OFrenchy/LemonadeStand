@@ -7,8 +7,25 @@ namespace LemonadeStand
 {
     public class Day
     {
-        private int rainChancePercent;
-        private int conditionForecast;
+        // TODO - change to be properties, 
+        // TODO - change to be values obtained from the Weather object
+        //private int forecastTemperature = 35;
+        //private int rainChancePercent = 10;
+        //private string forecastWeatherConditions = "Clear Skies";
+        private int forecastTemperature = -384;
+        private int actualTemperature = -384;
+        private int rainChancePercent = -10;
+        private string forecastWeatherConditions = "Clear Skies";
+        private string actualWeatherConditions = "Clear Skies";
+        
+        public int dayNumber;
+
+        //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
+
+        public Day(int dayNumber)
+        {
+            this.dayNumber = dayNumber;
+        }
 
         public int todaysRecipe
         {
@@ -26,43 +43,60 @@ namespace LemonadeStand
             }
         }
 
-        public Customers Customers
+
+        public int RainChancePercent
         {
-            get => default(Customers);
+            get => rainChancePercent;
             set
             {
+                if (rainChancePercent == -10)
+                {
+                    rainChancePercent = value;
+                }
             }
         }
-
-        public int forecastTemperature
+        public int ForecastTemperature
         {
-            get => default(int);
+            get => forecastTemperature;
             set
             {
+                if (forecastTemperature == -384)
+                {
+                    forecastTemperature = value;
+                }
             }
         }
-
-        public int actualTemperature
+        public int ActualTemperature
         {
-            get => default(int);
+            get => actualTemperature;
             set
             {
+                if (actualTemperature == -384)
+                {
+                    actualTemperature = value;
+                }
             }
         }
-
-        public int actualWeatherConditions
+        public string ActualWeatherConditions
         {
-            get => default(int);
+            get => actualWeatherConditions;
             set
             {
+                if (actualWeatherConditions != "")
+                {
+                    actualWeatherConditions = value;
+                }
             }
         }
-
-        public int forecastWeatherConditions
+        public string ForecastWeatherConditions
         {
-            get => default(int);
+            get => forecastWeatherConditions;
             set
             {
+                if (forecastWeatherConditions != "")
+                {
+                    forecastWeatherConditions = value;
+                }
             }
         }
     }

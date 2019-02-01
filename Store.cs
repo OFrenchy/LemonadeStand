@@ -18,6 +18,7 @@ namespace LemonadeStand
         public Store()
         {
             inventory = new Recipe(10000, 10000, 100000, 100000);
+            // inventory = new Recipe(10000, 10000, 100000, 100000);
             inventory.ingredients[0].PriceForQuantity = 0.20;   // lemons
             inventory.ingredients[0].QuantityInPrice = 1;       // each
             inventory.ingredients[1].PriceForQuantity = 2.30;   // sugar

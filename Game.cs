@@ -65,6 +65,16 @@ namespace LemonadeStand
         
         public void playGame()
         {
+            // Create a list of days/rounds
+            List<Day> days = new List<Day>();
+            for (int i = 0; i < 7; i++)
+            {
+                days.Add(new Day(i+1));
+            }
+            // create the store
+            Store store = new Store();
+            
+            
             // Create list of players
             List<Player> players = new List<Player>();
             do
@@ -82,7 +92,71 @@ namespace LemonadeStand
             {
                 UserInterface.showWelcomeScreen(thisPlayer.name);
             }
-            
+
+            foreach (Day day in days)
+            {
+                // TODO - Get today's forecast weather from the weather object
+                //      & set it in the day object
+
+                // Display the Daily prep screen for each player
+                foreach (Player thisPlayer in players)
+                {
+                    int intOption;
+                    do
+                    {
+                        intOption = UserInterface.ShowPreparationScreen(thisPlayer,
+                            day, store);
+                        if (intOption > 0)
+                        {
+                            // TODO - change recipe or purchase ingredients
+                            if (intOption >= 1 || intOption <= 3)
+                            {
+                                UserInterface.displayMessage("This is where I will prompt for recipe item change", true);
+                            }
+                            else if (intOption >= 4 || intOption <= 7)
+                            {
+                                UserInterface.displayMessage("This is where I will prompt for recipe item change", true);
+                            }
+                            else if (intOption == 8)
+                            {
+                                UserInterface.displayMessage("Invalid entry.  Press enter/return to continue.", true);
+                            }
+                            else if (intOption == 9)
+                            {
+                                // user wants to quit
+                                return;
+                            }
+                        }
+
+                    }
+                    while (intOption != 0);
+
+                
+                }
+                // Get the current day's actual weather from the weather object
+                // TODO - SetCurrentDayActualWeather
+                // Weather.SetCurrentDayActualWeather(day);
+
+                // Play today's round:
+                // Generate:
+                //      the number of potential customers, 
+                //      the number of actual customers, 
+                //      today's results
+                // Display the Daily results screen for each player
+                // Display welcome / instruction screen to each player (?)
+                foreach (Player thisPlayer in players)
+                {
+                    UserInterface.showResultsScreen(thisPlayer);
+                }
+                
+                    //do
+                    //{
+                    //    intOption = UserInterface.ShowPreparationScreen(thisPlayer,
+                    //        day, store);
+
+                    //}
+            }  // for each day 
+
 
 
 
@@ -113,13 +187,6 @@ namespace LemonadeStand
             }
         }
 
-        public Players Players
-        {
-            get => default(Players);
-            set
-            {
-            }
-        }
 
         
         public void setNumberOfPotentialCustomersForDay()
@@ -132,10 +199,7 @@ namespace LemonadeStand
             throw new System.NotImplementedException();
         }
 
-        public Players getPlayers()
-        {
-            throw new System.NotImplementedException();
-        }
+      
 
         
     }

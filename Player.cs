@@ -14,66 +14,52 @@ namespace LemonadeStand
         public string name;
         public Recipe recipe;
         public Recipe inventory;
-
+        public double moneyOnHand;
 
         public Player(string greeting = "")
         {
-            this.moneyOnHand = 20.00;
-            this.name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
+            moneyOnHand = 20.00;
+            name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
             recipe = new Recipe();
             inventory = new Recipe(0, 0, 0, 0);
             
         }
 
-        public LemonadeStand.Days DaysRounds
-        {
-            get => default(LemonadeStand.Days);
-            set
-            {
-            }
-        }
+        
+        //public double moneyOnHand
+        //{
+        //    get => default(int);
+        //    set
+        //    {
+        //    }
+        //}
 
-        public int baseRecipe
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        public LemonadeStand.Recipe Recipe
-        {
-            get => default(LemonadeStand.Recipe);
-            set
-            {
-            }
-        }
-
-        public double moneyOnHand
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        // member methods - … Can Do …
-        public virtual int MakeSelection(int rangeZeroBased)
-        {
-            // prompt for selection
-            string message = name + "'s turn: Please make a selection, enter 1 for Rock, 2 for Paper, " +
-                "3 for Scissors, 4 for Lizard, or 5 for Spock: ";
-            return Convert.ToInt32(UserInterface.pickWholeNumberOneThrough(5, message, false) - 1);
-        }
+        //// member methods - … Can Do …
+        //public virtual int MakeSelection(int rangeZeroBased)
+        //{
+        //    // prompt for selection
+        //    string message = name + "'s turn: Please make a selection, enter 1 for Rock, 2 for Paper, " +
+        //        "3 for Scissors, 4 for Lizard, or 5 for Spock: ";
+        //    return Convert.ToInt32(UserInterface.pickWholeNumberOneThrough(5, message, false) - 1);
+        //}
 
         public double getCostPerPitcher()
         {
-            throw new System.NotImplementedException();
+            // loop through ingredients, multiplying GetPriceEach by quantity &
+            // adding to subtotal for pitcher
+            double costPerPitcher = 0;
+            foreach (Ingredient ingredient in recipe.ingredients)
+            {
+                costPerPitcher = costPerPitcher + (ingredient.GetPriceEach() * ingredient.quantity);
+            }
+            return costPerPitcher;
         }
 
         public int getMaxNumberOfPitchers()
         {
-            throw new System.NotImplementedException();
+            // TODO - calculate actual cost per pitcher
+            return -1;
+            //throw new System.NotImplementedException();
         }
     }
 }

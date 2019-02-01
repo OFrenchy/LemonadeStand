@@ -14,19 +14,12 @@
         <Point X="6.5" Y="4.994" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Players" Type="LemonadeStand.Players" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="3.688" Y="2.824" />
-        <Point X="3.688" Y="3.25" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>IBAAgABAAAEAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAgABAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Recipe" />
-      <Property Name="Players" />
     </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Program">
@@ -39,40 +32,17 @@
       <Property Name="Game" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="LemonadeStand.Players">
-    <Position X="3" Y="3.25" Width="1.5" />
-    <AssociationLine Name="Player" Type="LemonadeStand.Player" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="3" Y="3.802" />
-        <Point X="2.75" Y="3.802" />
-        <Point X="2.75" Y="4.603" />
-        <Point X="3.25" Y="4.603" />
-        <Point X="3.25" Y="5" />
-      </Path>
-    </AssociationLine>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAA=</HashCode>
-      <FileName>Players.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Player" />
-    </ShowAsAssociation>
-  </Class>
   <Class Name="LemonadeStand.Player">
     <Position X="3" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAAAAQAABABAAAAAAAAAEAAACAgAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAABABAAAAAAAAAEAAACAAAAEAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="DaysRounds" />
-      <Property Name="Recipe" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.UserInterface">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAABAhAAAAAAAAAAAAACAAAAAAACAAAAAAIIQ=</HashCode>
+      <HashCode>AAAAAAQAABAhAAAAAAAAAAAAACCAAAAAACAAAAAAIIQ=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -86,7 +56,7 @@
   <Class Name="LemonadeStand.Store">
     <Position X="8.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAIAAAAAAAAAAAAAEAACABAAABAAAACAAAQAAAAEA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAEAAAAAAAABAAACAAAAQAAAAAA=</HashCode>
       <FileName>Store.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -100,7 +70,7 @@
   <Class Name="LemonadeStand.Ingredient">
     <Position X="10.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAAACAAAAQgAAEAACAAAAAAACAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAAACAAAAQgAAEAICAAAAAAACAAAA=</HashCode>
       <FileName>Ingredient.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -109,28 +79,17 @@
     <AssociationLine Name="Recipe" Type="LemonadeStand.Recipe" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="4.688" Y="8.75" />
-        <Point X="4.688" Y="8.45" />
-        <Point X="5.562" Y="8.45" />
+        <Point X="4.688" Y="8.375" />
+        <Point X="5.562" Y="8.375" />
         <Point X="5.562" Y="6.69" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAEAAABAAAAAAAAAABAAAAAAAIAAAIAAAAIgAIAAAAA=</HashCode>
+      <HashCode>AAAAAABAEAAAAAAAABAAAICAAAAAAKAAgAKgAIAAAAA=</HashCode>
       <FileName>Day.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Recipe" />
-      <Property Name="Customers" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="LemonadeStand.Days">
-    <Position X="1" Y="9.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
-      <FileName>DaysRounds.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="DayRound" />
     </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Weather">
@@ -139,16 +98,6 @@
       <HashCode>AAAAAIAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Weather.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="LemonadeStand.Customers">
-    <Position X="6.25" Y="8.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Customers.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Customer" />
-    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

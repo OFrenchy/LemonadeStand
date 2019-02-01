@@ -17,6 +17,7 @@ namespace LemonadeStand
         public Ingredient(string name, int quantity = 0)
         {
             this.name = name;
+            this.quantity = quantity;
         }
 
         public double PriceForQuantity
@@ -25,7 +26,7 @@ namespace LemonadeStand
             // allow priceForQuantity to be set once
             set
             {
-                if (priceForQuantity != 0)
+                if (priceForQuantity != 0.00)
                 {
                     priceForQuantity = value;
                 }

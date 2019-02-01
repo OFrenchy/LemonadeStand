@@ -13,13 +13,13 @@ namespace LemonadeStand
 
         public Recipe(int numberOfLemons = 1, int cupsOfSugar = 1, int iceCubes = 1, int cups = 1)
         {
-            ingredients.Add(new Ingredient("Lemons", numberOfLemons));
-            ingredients.Add(new Ingredient("Cups of Sugar", cupsOfSugar));
-            ingredients.Add(new Ingredient("Ice Cubes", iceCubes));
+            ingredients = new List<Ingredient>();
+            ingredients.Add(new Ingredient("Lemon(s)", numberOfLemons));
+            ingredients.Add(new Ingredient("Cup(s) of Sugar", cupsOfSugar));
+            ingredients.Add(new Ingredient("Ice Cube(s)", iceCubes));
             ingredients.Add(new Ingredient("Cup(s)", cups));
         }
-
-
+        
         //public Ingredients Ingredients
         //{
         //    get => default(Ingredients);
