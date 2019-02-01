@@ -145,14 +145,14 @@ namespace LemonadeStand
 
             // throw new System.NotImplementedException();
         }
-        public static int ShowPreparationScreen(Player player, Day day, Store store)
+        public static int ShowPreparationScreen(Player player, Day day, Store store, Weather weather)
         {
             // Construct the display of all the information the player needs to start
             string prepScreen ;
             prepScreen = "\n" +
                 $"========== {player.name}'s Lemonade Stand - Day {day.dayNumber} ==========\n" +
                 "\n" +
-                $"Today's forecast is {day.ForecastTemperature} degrees and {day.ForecastWeatherConditions} with {day.RainChancePercent}% chance of rain.\n" +
+                $"Today's forecast is {weather.temperatures[day.dayNumber].ToString()} degrees and {weather.conditionsList[weather.conditions[day.dayNumber]]} with {weather.chancesOfRainPercent[day.dayNumber].ToString()}% chance of rain.\n" +
                 $"You currently have ${player.moneyOnHand} in the till. \n" +
                 "Each pitcher holds 12 servings (cups) of 10 ounces. \n";
 

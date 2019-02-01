@@ -65,15 +65,20 @@ namespace LemonadeStand
         
         public void playGame()
         {
+            int numberOfDays = 7;
+
             // Create a list of days/rounds
             List<Day> days = new List<Day>();
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < numberOfDays; i++)
             {
                 days.Add(new Day(i+1));
             }
+
+            // create the Weather object
+            Weather weather = new Weather(numberOfDays);
+
             // create the store
             Store store = new Store();
-            
             
             // Create list of players
             List<Player> players = new List<Player>();
@@ -105,15 +110,15 @@ namespace LemonadeStand
                     do
                     {
                         intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                            day, store);
+                            day, store, weather);
                         if (intOption > 0)
                         {
                             // TODO - change recipe or purchase ingredients
-                            if (intOption >= 1 || intOption <= 3)
+                            if (intOption >= 1 && intOption <= 3)
                             {
                                 UserInterface.displayMessage("This is where I will prompt for recipe item change", true);
                             }
-                            else if (intOption >= 4 || intOption <= 7)
+                            else if (intOption >= 4 && intOption <= 7)
                             {
                                 UserInterface.displayMessage("This is where I will prompt for inventory purchases", true);
                             }
@@ -149,12 +154,6 @@ namespace LemonadeStand
                     UserInterface.showResultsScreen(thisPlayer);
                 }
                 
-                    //do
-                    //{
-                    //    intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                    //        day, store);
-
-                    //}
             }  // for each day 
 
 
