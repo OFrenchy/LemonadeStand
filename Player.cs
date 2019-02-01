@@ -16,13 +16,19 @@ namespace LemonadeStand
         public Recipe inventory;
         public double moneyOnHand;
 
-        public Player(string greeting = "")
+        public Player(Store store, string greeting = "")
         {
             moneyOnHand = 20.00;
             name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
             recipe = new Recipe();
             inventory = new Recipe(0, 0, 0, 0);
-            
+            // Get the prices from the store:  
+            // loop through ingredients & get & set the price from the store
+            for (int i = 0; i < recipe.ingredients.Count; i++) //  each (Ingredient ingredient in recipe.ingredients)
+            {
+                recipe.ingredients[i].PriceForQuantity = store.inventory.ingredients[i].PriceForQuantity;
+                recipe.ingredients[i].QuantityInPrice = store.inventory.ingredients[i].QuantityInPrice;
+            }
         }
 
         
@@ -54,12 +60,27 @@ namespace LemonadeStand
             }
             return costPerPitcher;
         }
-
         public int getMaxNumberOfPitchers()
         {
-            // TODO - calculate actual cost per pitcher
-            return -1;
-            //throw new System.NotImplementedException();
+            // calculate the number of pitchers you can make based on current inventory
+            //foreach (Ingredient ingredient in recipe.ingredients)
+            int maxPitchers = 0;
+            for (int i = 0; i < recipe.ingredients.Count; i++)
+            {
+                // numberPerRecipe, numberOnHand
+                int numberPerRecipe = recipe.ingredients[i].quantity;
+                int numberOnHand = inventory.ingredients[i].quantity;
+                int quotient = numberOnHand / numberPerRecipe;
+                if (quotient < maxPitchers)
+                {
+                    maxPitchers = quotient;
+                }
+                if (maxPitchers == 0)
+                {
+                    return 0;
+                }
+            }
+            return maxPitchers;
         }
     }
 }

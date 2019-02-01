@@ -173,7 +173,7 @@ namespace LemonadeStand
                 $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers.  \n";
 
             prepScreen = prepScreen + "\n" +
-            "Your current inventory is below.  \n" +
+            "Your current inventory is shown below.  \n" +
             "(To purchase any item, enter the line number.): \n";
             // +
             // loop through inventory & append to prepScreen 

@@ -80,7 +80,7 @@ namespace LemonadeStand
             do
             {
                 // Create player, add to players
-                Player thisPlayer = new Player("Welcome to the game 'Lemonade Stand!'\n");
+                Player thisPlayer = new Player(store, "Welcome to the game 'Lemonade Stand!'\n");
                 players.Add(thisPlayer);
                 UserInterface.clearScreen();
             }
@@ -115,7 +115,7 @@ namespace LemonadeStand
                             }
                             else if (intOption >= 4 || intOption <= 7)
                             {
-                                UserInterface.displayMessage("This is where I will prompt for recipe item change", true);
+                                UserInterface.displayMessage("This is where I will prompt for inventory purchases", true);
                             }
                             else if (intOption == 8)
                             {

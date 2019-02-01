@@ -26,7 +26,7 @@ namespace LemonadeStand
             // allow priceForQuantity to be set once
             set
             {
-                if (priceForQuantity != 0.00)
+                if (priceForQuantity == 0.00)
                 {
                     priceForQuantity = value;
                 }
@@ -38,7 +38,7 @@ namespace LemonadeStand
             // allow quantityInPrice to be set once
             set
             {
-                if (quantityInPrice != 0)
+                if (quantityInPrice == 0)
                 {
                     quantityInPrice = value;
                 }
@@ -47,7 +47,7 @@ namespace LemonadeStand
 
         public double GetPriceEach()
         {
-            return PriceForQuantity / quantityInPrice;
+            return priceForQuantity / quantityInPrice;
         }
 
             
