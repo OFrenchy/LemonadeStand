@@ -7,9 +7,9 @@ namespace LemonadeStand
 {
     public class Players
     {
-        internal RockPaperScizzorsLizardSpock.Player Player
+        internal LemonadeStand.Player Player
         {
-            get => default(RockPaperScizzorsLizardSpock.Player);
+            get => default(LemonadeStand.Player);
             set
             {
             }

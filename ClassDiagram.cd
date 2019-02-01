@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Recipe inherits Ingredients and adds Quantity of each Ingredient">
-    <Position X="5.031" Y="7.161" Height="0.75" Width="1.7" />
+  <Comment CommentText="Each player has Days to facilitate multiple players">
+    <Position X="0.874" Y="7.442" Height="0.75" Width="1.7" />
   </Comment>
   <Class Name="LemonadeStand.Game">
     <Position X="3.25" Y="0.5" Width="1.5" />
@@ -10,20 +10,18 @@
         <Point X="3.688" Y="0.5" />
         <Point X="3.688" Y="0.438" />
         <Point X="8.576" Y="0.438" />
-        <Point X="8.576" Y="4.938" />
-        <Point X="6.5" Y="4.938" />
+        <Point X="8.576" Y="4.994" />
+        <Point X="6.5" Y="4.994" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="Players" Type="LemonadeStand.Players" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.688" Y="2.632" />
-        <Point X="3.688" Y="2.882" />
-        <Point X="3.688" Y="2.882" />
+        <Point X="3.688" Y="2.824" />
         <Point X="3.688" Y="3.25" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>ABAAgABAAAEAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IBAAgABAAAEAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -34,19 +32,22 @@
   <Class Name="LemonadeStand.Program">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Players">
     <Position X="3" Y="3.25" Width="1.5" />
-    <AssociationLine Name="Player" Type="RockPaperScizzorsLizardSpock.Player" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Player" Type="LemonadeStand.Player" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="3" Y="3.802" />
         <Point X="2.75" Y="3.802" />
         <Point X="2.75" Y="4.603" />
         <Point X="3.25" Y="4.603" />
-        <Point X="3.25" Y="4.75" />
+        <Point X="3.25" Y="5" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -57,13 +58,10 @@
       <Property Name="Player" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="RockPaperScizzorsLizardSpock.Player">
-    <Position X="3" Y="4.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  <Class Name="LemonadeStand.Player">
+    <Position X="3" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAADBAAAEAAAAgABAIAAAAAAAEAAAABgAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAABAAAAAQAABABAAAAAAAAAEAAACAgAAEAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -71,32 +69,10 @@
       <Property Name="Recipe" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="RockPaperScizzorsLizardSpock.AI" Collapsed="true">
-    <Position X="5" Y="3.25" Width="1.5" />
-    <InheritanceLine Type="RockPaperScizzorsLizardSpock.Player" FixedFromPoint="true">
-      <Path>
-        <Point X="4.188" Y="4.75" />
-        <Point X="4.188" Y="4.558" />
-        <Point X="5.75" Y="4.558" />
-        <Point X="5.75" Y="3.941" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="LemonadeStand.UserInterface">
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>AI.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="RockPaperScizzorsLizardSpock.Human" Collapsed="true">
-    <Position X="6.75" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Human.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="RockPaperScizzorsLizardSpock.UserInterface">
-    <Position X="11" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAAABAhAAAAAAAAAAAAACAAAAAAACAAAAAAIIA=</HashCode>
+      <HashCode>AAAAAAQAABAhAAAAAAAAAAAAACAAAAAAACAAAAAAIIQ=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -108,46 +84,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Store">
-    <Position X="7" Y="5.25" Width="1.5" />
+    <Position X="8.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAIAAAAAAAAAAAAAEAACABAAABAAAACAAAQAAAAEA=</HashCode>
       <FileName>Store.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Ingredients" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Recipe">
     <Position X="5" Y="4.75" Width="1.5" />
-    <AssociationLine Name="Ingredients" Type="LemonadeStand.Ingredients" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="6.25" Y="6.238" />
-        <Point X="6.25" Y="6.934" />
-        <Point X="7" Y="6.934" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAQAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAQAAACAAA=</HashCode>
       <FileName>Recipe.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Ingredients" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="LemonadeStand.Ingredients">
-    <Position X="7" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Ingredients.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Ingredient" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Ingredient">
-    <Position X="9.75" Y="3.75" Width="1.5" />
+    <Position X="10.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAAAIAAAAEEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAAACAAAAQgAAEAACAAAAAAACAAAA=</HashCode>
       <FileName>Ingredient.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -156,14 +109,14 @@
     <AssociationLine Name="Recipe" Type="LemonadeStand.Recipe" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="4.688" Y="8.75" />
-        <Point X="4.688" Y="6.478" />
-        <Point X="5.562" Y="6.478" />
-        <Point X="5.562" Y="6.238" />
+        <Point X="4.688" Y="8.45" />
+        <Point X="5.562" Y="8.45" />
+        <Point X="5.562" Y="6.69" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAEAAABAAAAAAAAAAACAAAAgAAAAEAAAAAIAAIAAAAA=</HashCode>
-      <FileName>DayRound.cs</FileName>
+      <HashCode>AAEAAABAAAAAAAAAABAAAAAAAIAAAIAAAAIgAIAAAAA=</HashCode>
+      <FileName>Day.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Recipe" />
@@ -171,7 +124,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Days">
-    <Position X="3" Y="7.5" Width="1.5" />
+    <Position X="1" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>DaysRounds.cs</FileName>
@@ -181,7 +134,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Weather">
-    <Position X="0.75" Y="5.5" Width="1.5" />
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Weather.cs</FileName>

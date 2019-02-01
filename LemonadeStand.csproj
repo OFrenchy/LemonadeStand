@@ -43,15 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Customers.cs" />
-    <Compile Include="DayRound.cs" />
+    <Compile Include="Day.cs" />
     <Compile Include="DaysRounds.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="Ingredient.cs" />
-    <Compile Include="Ingredients.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Players.cs" />
     <Compile Include="Program.cs" />

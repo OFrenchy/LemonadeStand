@@ -14,7 +14,13 @@ namespace LemonadeStand
 
         public void GetForecast()
         {
-            throw new System.NotImplementedException();
+            // Set up a forecast for the next 7 or more days
+            // consisting of temperature, conditions
+            // Conditions will have a range from 
+            // 0 rain, 1 overcast, 2 mostly cloudy, 3 partly cloudy, 4sunny
+            // 
+
+            // throw new System.NotImplementedException();
         }
 
         public void SetActualWeatherForDay()

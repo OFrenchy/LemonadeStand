@@ -7,24 +7,55 @@ namespace LemonadeStand
 {
     public class Ingredient
     {
-        private int pricePerUnit;
+        public string name;
+        public int quantity;
+        public string quantityDescription;
 
-        public int name
+        private double priceForQuantity;
+        private int quantityInPrice;
+        
+        public Ingredient(string name, int quantity = 0)
         {
-            get => default(int);
+            this.name = name;
+        }
+
+        public double PriceForQuantity
+        {
+            get => priceForQuantity;
+            // allow priceForQuantity to be set once
             set
             {
+                if (priceForQuantity != 0)
+                {
+                    priceForQuantity = value;
+                }
+            }
+        }
+        public int QuantityInPrice
+        {
+            get => quantityInPrice;
+            // allow quantityInPrice to be set once
+            set
+            {
+                if (quantityInPrice != 0)
+                {
+                    quantityInPrice = value;
+                }
             }
         }
 
-        public void canSpoil()
+        public double GetPriceEach()
         {
-            throw new System.NotImplementedException();
+            return PriceForQuantity / quantityInPrice;
         }
 
-        public void willSpoil()
-        {
-            throw new System.NotImplementedException();
-        }
+            
+        //public int PriceEach
+        //{
+        //    get => default(int);
+        //    set
+        //    {
+        //    }
+        //}
     }
 }

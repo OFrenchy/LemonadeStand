@@ -7,9 +7,8 @@ namespace LemonadeStand
 {
     public class Day
     {
-        private int temperatureForecast;
-        private int temperatureActual;
         private int rainChancePercent;
+        private int conditionForecast;
 
         public int todaysRecipe
         {
@@ -35,9 +34,36 @@ namespace LemonadeStand
             }
         }
 
-        public void numberPitchersToMake()
+        public int forecastTemperature
         {
-            throw new System.NotImplementedException();
+            get => default(int);
+            set
+            {
+            }
+        }
+
+        public int actualTemperature
+        {
+            get => default(int);
+            set
+            {
+            }
+        }
+
+        public int actualWeatherConditions
+        {
+            get => default(int);
+            set
+            {
+            }
+        }
+
+        public int forecastWeatherConditions
+        {
+            get => default(int);
+            set
+            {
+            }
         }
     }
 }

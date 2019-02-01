@@ -4,30 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScizzorsLizardSpock
+namespace LemonadeStand
 {
-    class Player
+    public class Player
     {
         // class - … Is A …
         // member variables - … Has A …
-        public bool isHuman;
+        
         public string name;
-        // TODO - how do I make this private, & still work?
-        protected int score;
-        // TODO - find out if private variables are accessible in child classes
-        // private doesn't work when trying to set it in the Human & AI classes...???
-        //private int currentSelection;
-        protected int currentSelection;
+        public Recipe recipe;
+        public Recipe inventory;
 
-        public Player(string name, bool isHuman)
+
+        public Player(string greeting = "")
         {
-            this.score = 0;
-            // works b4 huyman/ai class implementsation
-            //this.name = UserInterface.promptForStringInput("Enter this player's name:");
-            //this.isHuman = (UserInterface.promptForYesNoInput("Is this player human?  Enter y or n:") 
-            //    == Convert.ToChar("y"));
-            this.name = name;
-            this.isHuman = isHuman;
+            this.moneyOnHand = 20.00;
+            this.name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
+            recipe = new Recipe();
+            inventory = new Recipe(0, 0, 0, 0);
+            
         }
 
         public LemonadeStand.Days DaysRounds
@@ -54,36 +49,31 @@ namespace RockPaperScizzorsLizardSpock
             }
         }
 
+        public double moneyOnHand
+        {
+            get => default(int);
+            set
+            {
+            }
+        }
+
         // member methods - … Can Do …
         public virtual int MakeSelection(int rangeZeroBased)
         {
             // prompt for selection
             string message = name + "'s turn: Please make a selection, enter 1 for Rock, 2 for Paper, " +
                 "3 for Scissors, 4 for Lizard, or 5 for Spock: ";
-            currentSelection = Convert.ToInt32(UserInterface.pickWholeNumberOneThrough(5, message, !isHuman) - 1);
-            // if this player is not human, write its selection to the window
-            if (!isHuman)
-            {
-                Console.WriteLine(currentSelection + 1);
-            }
-            return currentSelection;
+            return Convert.ToInt32(UserInterface.pickWholeNumberOneThrough(5, message, false) - 1);
         }
-        public int GetCurrentSelection()
+
+        public double getCostPerPitcher()
         {
-            return currentSelection;
+            throw new System.NotImplementedException();
         }
-        public int incrementScore()
+
+        public int getMaxNumberOfPitchers()
         {
-            score++;
-            return score;
-        }
-        public void resetScore() 
-        {
-            score = 0;
-        }
-        public int getCurrentScore()
-        {
-            return score;
+            throw new System.NotImplementedException();
         }
     }
 }
