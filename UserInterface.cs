@@ -153,7 +153,7 @@ namespace LemonadeStand
                 $"========== {player.name}'s Lemonade Stand - Day {day.dayNumber} ==========\n" +
                 "\n" +
                 $"Today's forecast is {weather.temperatures[day.dayNumber].ToString()} degrees and {weather.conditionsList[weather.conditions[day.dayNumber]]} with {weather.chancesOfRainPercent[day.dayNumber].ToString()}% chance of rain.\n" +
-                $"You currently have ${player.moneyOnHand} in the till. \n" +
+                $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the till. \n" +
                 "Each pitcher holds 12 servings (cups) of 10 ounces. \n";
 
             prepScreen = prepScreen + "\n" +
@@ -169,7 +169,7 @@ namespace LemonadeStand
             
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
-                $"your cost per pitcher is ${player.getCostPerPitcher().ToString()}, and   \n" +
+                $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")}, and \n" +
                 $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers.  \n";
 
             prepScreen = prepScreen + "\n" +
@@ -179,8 +179,11 @@ namespace LemonadeStand
             // loop through inventory & append to prepScreen 
             for (int i = 0; i < player.recipe.ingredients.Count; i++)
             {
+                string leftPart = $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} ";// - avail. from store for { string.Format("{0:C}", store.inventory.ingredients[i].PriceForQuantity)  } for {store.inventory.ingredients[i].QuantityInPrice} \n";
+                string rightPart = $"- avail. from store for {store.inventory.ingredients[i].PriceForQuantity.ToString("C")} for {store.inventory.ingredients[i].QuantityInPrice.ToString()} \n";
+                leftPart = padRightToColumn(24, leftPart);
                 prepScreen = prepScreen +
-                $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} - avail. from store for ${store.inventory.ingredients[i].PriceForQuantity} for {store.inventory.ingredients[i].QuantityInPrice} \n";
+                    leftPart + rightPart; // $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} - avail. from store for { string.Format("{0:C}", store.inventory.ingredients[i].PriceForQuantity)  } for {store.inventory.ingredients[i].QuantityInPrice} \n";
             }
             //$"4)  {player.inventory.ingredients[0].quantity} lemons - available from the store for ${store.PriceLemon.ToString()} per lemon\n" +
             //$"5)  {player.inventory.sugar} cups of sugar - available from the store for ${store.PriceSugar4lbs10Cups.ToString()} for 4 lbs. (10 cups)\n" +
@@ -189,8 +192,9 @@ namespace LemonadeStand
             //"\n";
 
             prepScreen = prepScreen + "\n" +
-                "Enter the number of the line you wish to change, enter 9 to quit, or \n" +
-                "Enter 0 (zero) to play today's round.";
+                "9) to quit \n" +
+                "0) to play today's round.\n" +
+                "Enter your selection:";
 
             clearScreen();
             return UserInterface.promptForIntegerInput(prepScreen, 1, 9);
@@ -204,6 +208,15 @@ namespace LemonadeStand
             string resultsScreen;
 
             throw new System.NotImplementedException();
+        }
+        public static string padRightToColumn(int column, string stringToPad)
+        {
+            // pads the right side of the string up to column
+            for (int i = stringToPad.Length; i < column; i++)
+            {
+                stringToPad = stringToPad + " ";
+            }
+            return stringToPad;
         }
     }
 }
