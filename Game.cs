@@ -73,43 +73,48 @@ namespace LemonadeStand
 
             // create the store
             Store store = new Store();
-
-            // Create a list of days/rounds
-            List<Day> days = new List<Day>();
-            for (int i = 0; i < numberOfDays; i++)
-            {
-                // Get today's forecast weather from the weather object
-                //      & set it in the day object
-                // index 0 is temp, 1 is conditions (per weather.conditionsList), 
-                // 2 is percent chance of rain
-                int[] todaysWeather = weather.GetForecast(i);
-
-                days.Add(new Day(i+1, todaysWeather[0], 
-                    weather.conditionsList[todaysWeather[1]], todaysWeather[2]));
-            }
-
+            
             // Create list of players
             List<Player> players = new List<Player>();
             do
             {
                 // Create player, add to players
                 Player thisPlayer = new Player(store, "Welcome to the game 'Lemonade Stand!'\n",  initialInvestment);
+                UserInterface.showWelcomeScreen(thisPlayer.name, initialInvestment);
                 players.Add(thisPlayer);
                 UserInterface.clearScreen();
             }
             while (UserInterface.promptForYesNoInput("Do you want to add another player? Enter y or n:").ToString() == "y");
             UserInterface.clearScreen();
 
-            // Display welcome / instruction screen to each player (?)
-            foreach (Player thisPlayer in players)
+            //// Display welcome / instruction screen to each player (?)
+            //foreach (Player thisPlayer in players)
+            //{
+            //    UserInterface.showWelcomeScreen(thisPlayer.name, initialInvestment);
+            //}
+            
+            // Create a list of days
+            List<Day> days = new List<Day>();
+            for (int i = 0; i < numberOfDays; i++)
             {
-                UserInterface.showWelcomeScreen(thisPlayer.name, initialInvestment);
-            }
+                // Get today's forecast weather from the weather object
+                //      & pass it to the day object
+                // index 0 is temp, 1 is conditions (per weather.conditionsList), 
+                // 2 is percent chance of rain
+                int[] todaysWeather = weather.GetForecast(i);
 
-            foreach (Day day in days)
-            {
-                // Display the Daily prep screen for each player
-                foreach (Player thisPlayer in players)
+                // create day, add to days
+                Day day = new Day(i + 1, todaysWeather[0],
+                    weather.conditionsList[todaysWeather[1]], todaysWeather[2]);
+                days.Add(day);
+
+            //days.Add(new Day(i + 1, todaysWeather[0],
+            //        weather.conditionsList[todaysWeather[1]], todaysWeather[2]));
+            //}
+            //foreach (Day day in days)
+            //{
+            // Display the Daily prep screen for each player
+            foreach (Player thisPlayer in players)
                 {
                     int intOption;
                     do
