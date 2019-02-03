@@ -71,6 +71,9 @@ namespace LemonadeStand
             // create the Weather object
             Weather weather = new Weather(numberOfDays);
 
+            // create the store
+            Store store = new Store();
+
             // Create a list of days/rounds
             List<Day> days = new List<Day>();
             for (int i = 0; i < numberOfDays; i++)
@@ -85,9 +88,6 @@ namespace LemonadeStand
                     weather.conditionsList[todaysWeather[1]], todaysWeather[2]));
             }
 
-            // create the store
-            Store store = new Store();
-            
             // Create list of players
             List<Player> players = new List<Player>();
             do
