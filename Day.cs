@@ -22,9 +22,12 @@ namespace LemonadeStand
 
         //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
 
-        public Day(int dayNumber)
+        public Day(int dayNumber, int forecastTemperature, string forecastWeatherConditions, int rainChancePercent)
         {
             this.dayNumber = dayNumber;
+            this.forecastTemperature = forecastTemperature;
+            this.forecastWeatherConditions = forecastWeatherConditions;
+            this.rainChancePercent = rainChancePercent;
         }
 
         public int todaysRecipe

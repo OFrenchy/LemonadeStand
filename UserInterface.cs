@@ -112,7 +112,7 @@ namespace LemonadeStand
             Console.Clear();
         }
 
-        public static void showWelcomeScreen(string playerName)
+        public static void showWelcomeScreen(string playerName, double initialInvestment)
         {
             // Construct the display of all the information the player needs to start
             string welcomeScreen = "";
@@ -136,7 +136,7 @@ namespace LemonadeStand
                 "Also remember that all of the ice that is not used will melt overnight.";
             welcomeScreen = welcomeScreen + "\n" +
                 "The game is played for 7 days (meaning 7 rounds). \n" +
-                "You will begin with $20, an 'investment' from your grandparents \n" +
+                $"You will begin with {initialInvestment.ToString("C")}, an 'investment' from your grandparents \n" +
                 "with their blessing and your promise of the occasional free glass of lemonade.  \n";
 
             welcomeScreen = welcomeScreen + "\n" + "Press enter/return to begin:";
@@ -145,14 +145,15 @@ namespace LemonadeStand
 
             // throw new System.NotImplementedException();
         }
-        public static int ShowPreparationScreen(Player player, Day day, Store store, Weather weather)
+        public static int ShowPreparationScreen(Player player, Day day, Store store) //, Weather weather)
         {
             // Construct the display of all the information the player needs to start
             string prepScreen ;
             prepScreen = "\n" +
                 $"========== {player.name}'s Lemonade Stand - Day {day.dayNumber} ==========\n" +
                 "\n" +
-                $"Today's forecast is {weather.temperatures[day.dayNumber].ToString()} degrees and {weather.conditionsList[weather.conditions[day.dayNumber]]} with {weather.chancesOfRainPercent[day.dayNumber].ToString()}% chance of rain.\n" +
+                $"Today's forecast is {day.ForecastTemperature.ToString()} degrees and " +
+                    $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain.\n" +
                 $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the till. \n" +
                 "Each pitcher holds 12 servings (cups) of 10 ounces. \n";
 
@@ -185,12 +186,6 @@ namespace LemonadeStand
                 prepScreen = prepScreen +
                     leftPart + rightPart; // $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} - avail. from store for { string.Format("{0:C}", store.inventory.ingredients[i].PriceForQuantity)  } for {store.inventory.ingredients[i].QuantityInPrice} \n";
             }
-            //$"4)  {player.inventory.ingredients[0].quantity} lemons - available from the store for ${store.PriceLemon.ToString()} per lemon\n" +
-            //$"5)  {player.inventory.sugar} cups of sugar - available from the store for ${store.PriceSugar4lbs10Cups.ToString()} for 4 lbs. (10 cups)\n" +
-            //$"6)  {player.inventory.iceCubes} ice cubes - available from the store for ${store.PriceIce5lbs.ToString()} for 5 lbs. (150 cubes)\n" +
-            //$"7)  {player.inventory.cups} cups \n" +
-            //"\n";
-
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
                 "0) to play today's round.\n" +
@@ -199,7 +194,6 @@ namespace LemonadeStand
             clearScreen();
             return UserInterface.promptForIntegerInput(prepScreen, 1, 9);
             
-            //throw new System.NotImplementedException();
         }
 
         public static void showResultsScreen(Player player)

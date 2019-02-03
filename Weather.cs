@@ -7,19 +7,14 @@ namespace LemonadeStand
 {
     public class Weather
     {
-        //private int forecastTemperature = -384;
-        //private int actualTemperature = -384;
-        //private int rainChancePercent = -10;
-        //private string forecastWeatherConditions = "Clear Skies";
-        //private string actualWeatherConditions = "Clear Skies";
-
-        public string[] conditionsList = { "rain", "overcast", "mostly cloudy",
-            "partly cloudy", "mostly sunny", "clear" };
+        public string[] conditionsList = {"rain", "overcast", "mostly cloudy",
+            "partly cloudy", "mostly sunny", "clear"};
         // TODO - change conditions & temperatures to be properties
-        public List<int> conditions;
-        public List<int> temperatures;
-        public List<int> chancesOfRainPercent;
+        private List<int> conditions;
+        private List<int> temperatures;
+        private List<int> chancesOfRainPercent;
 
+        // the base temperature for mid-July, from which we deviate + or -
         private int baseTemperature = 85;
 
         public Weather(int numberOfDays)
@@ -32,7 +27,7 @@ namespace LemonadeStand
             for (int i = 0; i < numberOfDays; i++)
             {
                 Random randomGenerator = new Random();
-                
+
                 // For the overall weather conditions, 
                 // generate a random number between 0 & 5 
                 // which corresponds to the list of conditions (strings) above, 
@@ -61,20 +56,16 @@ namespace LemonadeStand
             //Console.WriteLine(conditions.ToString(), temperatures);
         }
 
-            public void affectCustomersMoods()
+        public void affectCustomersMoods()
         {
             throw new System.NotImplementedException();
         }
 
-        public void GetForecast()
+        public int[] GetForecast(int dayNumber)
         {
-            // Set up a forecast for the next 7 or more days
-            // consisting of temperature, conditions
-            // Conditions will have a range from 
-            // 0 rain, 1 overcast, 2 mostly cloudy, 3 partly cloudy, 4sunny
-            // 
-
-            // throw new System.NotImplementedException();
+            // Return an array consisting of temperature, conditions, 
+            // and percent chance of rain for the requested day
+            return new int[] {temperatures[dayNumber], conditions[dayNumber], chancesOfRainPercent[dayNumber]};
         }
 
         public void SetActualWeatherForDay()

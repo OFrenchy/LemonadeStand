@@ -66,16 +66,24 @@ namespace LemonadeStand
         public void playGame()
         {
             int numberOfDays = 7;
+            double initialInvestment = 20.00;
+
+            // create the Weather object
+            Weather weather = new Weather(numberOfDays);
 
             // Create a list of days/rounds
             List<Day> days = new List<Day>();
             for (int i = 0; i < numberOfDays; i++)
             {
-                days.Add(new Day(i+1));
-            }
+                // Get today's forecast weather from the weather object
+                //      & set it in the day object
+                // index 0 is temp, 1 is conditions (per weather.conditionsList), 
+                // 2 is percent chance of rain
+                int[] todaysWeather = weather.GetForecast(i);
 
-            // create the Weather object
-            Weather weather = new Weather(numberOfDays);
+                days.Add(new Day(i+1, todaysWeather[0], 
+                    weather.conditionsList[todaysWeather[1]], todaysWeather[2]));
+            }
 
             // create the store
             Store store = new Store();
@@ -85,7 +93,7 @@ namespace LemonadeStand
             do
             {
                 // Create player, add to players
-                Player thisPlayer = new Player(store, "Welcome to the game 'Lemonade Stand!'\n");
+                Player thisPlayer = new Player(store, "Welcome to the game 'Lemonade Stand!'\n",  initialInvestment);
                 players.Add(thisPlayer);
                 UserInterface.clearScreen();
             }
@@ -95,14 +103,11 @@ namespace LemonadeStand
             // Display welcome / instruction screen to each player (?)
             foreach (Player thisPlayer in players)
             {
-                UserInterface.showWelcomeScreen(thisPlayer.name);
+                UserInterface.showWelcomeScreen(thisPlayer.name, initialInvestment);
             }
 
             foreach (Day day in days)
             {
-                // TODO - Get today's forecast weather from the weather object
-                //      & set it in the day object
-
                 // Display the Daily prep screen for each player
                 foreach (Player thisPlayer in players)
                 {
@@ -110,7 +115,7 @@ namespace LemonadeStand
                     do
                     {
                         intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                            day, store, weather);
+                            day, store);
                         if (intOption > 0)
                         {
                             // TODO - change recipe or purchase ingredients

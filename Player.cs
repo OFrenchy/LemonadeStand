@@ -16,9 +16,9 @@ namespace LemonadeStand
         public Recipe inventory;
         public double moneyOnHand;
 
-        public Player(Store store, string greeting = "")
+        public Player(Store store, string greeting, double initialInvestment)
         {
-            moneyOnHand = 20.00;
+            moneyOnHand = initialInvestment;
             name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
             recipe = new Recipe();
             inventory = new Recipe(0, 0, 0, 0);
