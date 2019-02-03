@@ -167,7 +167,7 @@ namespace LemonadeStand
             
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
-                $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")}, and \n" +
+                $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")} which is {(player.getCostPerPitcher()/12).ToString("C")} per cup, and \n" +
                 $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
 
             prepScreen = prepScreen + "\n" +
@@ -185,6 +185,8 @@ namespace LemonadeStand
             }
             prepScreen = prepScreen + "\n" +
                 $"8) You are charging {player.pricePerCupOfLemonade.ToString("C")} per cup of lemonade that you sell. \n";
+            // TODO - Add cost per cup based on selling all pitchers you can 
+
 
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
@@ -192,8 +194,7 @@ namespace LemonadeStand
                 "Enter your selection:";
 
             clearScreen();
-            return UserInterface.promptForIntegerInput(prepScreen, 1, 9);
-            
+            return UserInterface.promptForIntegerInput(prepScreen, 0 , 9);
         }
 
         public static void showResultsScreen(Player player)

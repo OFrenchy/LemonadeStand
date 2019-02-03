@@ -61,7 +61,8 @@ namespace LemonadeStand
     // As a developer, we will assume that the store has unlimited quantities and will therefore 
     //      not keep track of its inventory;  
     // As a developer, we will not concern ourselves with the money the store accumulates
-    
+    // As a player, I want the game to calculate what my cost per pitcher and cost per cup of lemonade is
+
     public class Game
     {
         
@@ -161,7 +162,6 @@ namespace LemonadeStand
                             else if (intOption == 8)
                             {
                                 // TODO - Change the price per cup you will charge.  
-                                // TODO - add a today's cost per cup of lemonade
                                 UserInterface.displayMessage("this is where we change the price per cup.  And update the cost per cup..", true);
                             }
                             else if (intOption == 9)
