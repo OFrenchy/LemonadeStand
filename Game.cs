@@ -58,7 +58,9 @@ namespace LemonadeStand
     // As a developer, I will give the user a default recipe
     // As a developer, there will be an optimum recipe which will result in more sales 
     //      than less tasty recipes
-    //
+    // As a developer, we will assume that the store has unlimited quantities and will therefore 
+    //      not keep track of its inventory;  
+    // As a developer, we will not concern ourselves with the money the store accumulates
     
     public class Game
     {
@@ -123,18 +125,44 @@ namespace LemonadeStand
                             day, store);
                         if (intOption > 0)
                         {
-                            // TODO - change recipe or purchase ingredients
+                            // change recipe or purchase ingredients
                             if (intOption >= 1 && intOption <= 3)
                             {
-                                UserInterface.displayMessage("This is where I will prompt for recipe item change", true);
+                                // Change the recipe item quantity to the number the user enters
+                                thisPlayer.recipe.ingredients[intOption - 1].quantity = 
+                                    UserInterface.promptForIntegerInput(
+                                        $"Enter new quantity of {thisPlayer.recipe.ingredients[intOption - 1].name} for the recipe:", 
+                                        1, 20);
                             }
                             else if (intOption >= 4 && intOption <= 7)
                             {
-                                UserInterface.displayMessage("This is where I will prompt for inventory purchases", true);
+                                // get the player's quantity, then check if he/she has enough money;
+                                // if so, change the inventory & reduce his moneyOnHand
+                                int quantityToPurchase = UserInterface.promptForIntegerInput(
+                                        $"Enter the quantity of {store.inventory.ingredients[intOption - 4].quantityDescription} to purchase for {store.inventory.ingredients[intOption - 4].PriceForQuantity.ToString("C")} each:",
+                                        1, 80);
+                                // check that the player has enough money
+                                if (thisPlayer.moneyOnHand >= ((double)quantityToPurchase * store.inventory.ingredients[intOption - 4].PriceForQuantity)) 
+                                {
+                                    // Add the quantityToPurchase * quantityInPrice to the inventory
+                                    thisPlayer.inventory.ingredients[intOption - 4].quantity =
+                                        thisPlayer.inventory.ingredients[intOption - 4].quantity +
+                                        (quantityToPurchase * store.inventory.ingredients[intOption - 4].QuantityInPrice);
+                                    // Deduct the amount from his moneyOnHand
+                                    thisPlayer.moneyOnHand = thisPlayer.moneyOnHand -
+                                        ((double)quantityToPurchase * store.inventory.ingredients[intOption - 4].PriceForQuantity);
+                                    Console.WriteLine("purchase complete");
+                                }
+                                else
+                                {
+                                    UserInterface.displayMessage("Sorry, you don't have enought money to buy that many.", true);
+                                }
                             }
                             else if (intOption == 8)
                             {
-                                UserInterface.displayMessage("Invalid entry.  Press enter/return to continue.", true);
+                                // TODO - Change the price per cup you will charge.  
+                                // TODO - add a today's cost per cup of lemonade
+                                UserInterface.displayMessage("this is where we change the price per cup.  And update the cost per cup..", true);
                             }
                             else if (intOption == 9)
                             {

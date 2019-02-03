@@ -8,9 +8,7 @@ namespace LemonadeStand
 {
     public static class UserInterface
     {
-        // public static string[] selectionNames = {"Rock", "Paper", "Scissors", "Lizard", "Spock"};
-
-        public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
+         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
         {
             // pick a whole number from 1 to upperBound;  if you want a random number, don't prompt
             if (!isRandom)
@@ -154,8 +152,7 @@ namespace LemonadeStand
                 "\n" +
                 $"Today's forecast is {day.ForecastTemperature.ToString()} degrees and " +
                     $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain.\n" +
-                $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the till. \n" +
-                "Each pitcher holds 12 servings (cups) of 10 ounces. \n";
+                $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the till. \n";
 
             prepScreen = prepScreen + "\n" +
                 "Your current recipe for a pitcher of lemonade is below.  \n" +
@@ -171,7 +168,7 @@ namespace LemonadeStand
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
                 $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")}, and \n" +
-                $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers.  \n";
+                $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
 
             prepScreen = prepScreen + "\n" +
             "Your current inventory is shown below.  \n" +
@@ -184,8 +181,11 @@ namespace LemonadeStand
                 string rightPart = $"- avail. from store for {store.inventory.ingredients[i].PriceForQuantity.ToString("C")} for {store.inventory.ingredients[i].QuantityInPrice.ToString()} \n";
                 leftPart = padRightToColumn(24, leftPart);
                 prepScreen = prepScreen +
-                    leftPart + rightPart; // $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} - avail. from store for { string.Format("{0:C}", store.inventory.ingredients[i].PriceForQuantity)  } for {store.inventory.ingredients[i].QuantityInPrice} \n";
+                    leftPart + rightPart;
             }
+            prepScreen = prepScreen + "\n" +
+                $"8) You are charging {player.pricePerCupOfLemonade.ToString("C")} per cup of lemonade that you sell. \n";
+
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
                 "0) to play today's round.\n" +
@@ -199,9 +199,16 @@ namespace LemonadeStand
         public static void showResultsScreen(Player player)
         {
             // Construct the display of the results of the day's sales
-            string resultsScreen;
+            string resultsScreen = "";
 
-            throw new System.NotImplementedException();
+
+
+
+
+
+            clearScreen();
+            resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
+            UserInterface.displayMessage(resultsScreen, true);
         }
         public static string padRightToColumn(int column, string stringToPad)
         {

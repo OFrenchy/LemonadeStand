@@ -7,6 +7,7 @@ namespace LemonadeStand
 {
     public class Ingredient
     {
+        // TODO - change to private w/acccompanying property sets/gets
         public string name;
         public int quantity;
         public string quantityDescription;
