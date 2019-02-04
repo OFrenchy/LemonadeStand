@@ -228,18 +228,18 @@ namespace LemonadeStand
             return UserInterface.promptForIntegerInput(prepScreen, 0 , 9);
         }
 
-        public static void showResultsScreen(Player player)
+        public static void showResultsScreen(Player player, Day day)
         {
             // Construct the display of the results of the day's sales
-            string resultsScreen = "";
+            string resultsScreen = $"The forecast was for {day.ForecastTemperature.ToString()} degrees & " +
+                $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain. \n" +
+                $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " + 
+                $"{day.ActualWeatherConditions}.";
 
 
 
-
-
-
-            clearScreen();
             resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
+            clearScreen();
             UserInterface.displayMessage(resultsScreen, true);
         }
         public static string padRightToColumn(int column, string stringToPad)

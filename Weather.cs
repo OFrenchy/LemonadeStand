@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace LemonadeStand
 {
@@ -23,6 +24,8 @@ namespace LemonadeStand
 
         public Weather(int numberOfDays)
         {
+            //Thread.Sleep(20);
+            Random randomGenerator = new Random(); // needs to be outside of loop so numbers can be random
             // generate forecast temperatures & weather conditions, & % chance of rain
             // for the next numberOfDays
             // generate actual temperatures & weather conditions for the same period
@@ -33,32 +36,37 @@ namespace LemonadeStand
             actualTemperatures = new List<int>();
             for (int i = 0; i < numberOfDays; i++)
             {
-                Random randomGenerator = new Random();
-
                 // For the overall weather conditions, 
                 // generate a random number between 0 & 5 
                 // which corresponds to the list of conditions (strings) above, 
                 // then add that number to as day's condition 
                 conditions.Add(randomGenerator.Next(5));
                 // For the temperatures, 
-                // generate a random number between 0 & 15, then
+                // generate a random number between 0 & 10, then
                 // generate a coin flip to decide whether to add or subtract that 
                 // number from the baseTemperature
-                temperatures.Add(generateTemperatureGuess(baseTemperature));
-                 // chance of rain is from 0% to 100% in 10% increments
+
+                // TODO - figure out which is better
+                //temperatures.Add(generateTemperatureGuess(baseTemperature));
+                temperatures.Add(randomGenerator.Next(75, 95));
+
+                // chance of rain is from 0% to 100% in 10% increments
                 chancesOfRainPercent.Add(randomGenerator.Next(10) * 10);
                 
                 // for the actual weather (temp & conditions), 
                 // repeat the above algorithms - why not, the forecast vs. actual 
                 // weather can vary that much
                 actualConditions.Add(randomGenerator.Next(5));
-                actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
+                // TODO - figure out which is better
+                //actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
+                actualTemperatures.Add(randomGenerator.Next(75, 95));
+
             } // i = each day
         } // weather instantiated
 
         private int generateTemperatureGuess(int baseTemperature)
         {
-            // generate a random number between 0 & 15, then
+            // generate a random number between 0 & 10, then
             // generate a coin flip to decide whether to add or subtract that 
             // number from the baseTemperature (typically baseTemperature is 85 degrees)
             Random randomGenerator = new Random();
@@ -66,11 +74,11 @@ namespace LemonadeStand
             if (addSubtract == 0)
             {
                 // TODO - ask a professional how to do an "inline if" - 
-                return baseTemperature + randomGenerator.Next(15);
+                return baseTemperature + randomGenerator.Next(10);
             }
             else
             {
-                return baseTemperature - randomGenerator.Next(15);
+                return baseTemperature - randomGenerator.Next(10);
             }
         }
 

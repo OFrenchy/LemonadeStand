@@ -40,6 +40,10 @@ namespace LemonadeStand
     // As a developer, I will assume the store has unlimited quantities
     // As a developer, I will weight the weather opportunity to better weather
 
+    // TODO - figure out an algorithm to determine the customer's likelihood of purchasing
+    // TODO  - figure out an algorithm to produce a number of potential customers
+
+    // TODO - update this below
     // As a developer, I will use the following algorithm to determine # of potential customers 
     //based on
     //  a) forecast temp
@@ -62,6 +66,9 @@ namespace LemonadeStand
     //      not keep track of its inventory;  
     // As a developer, we will not concern ourselves with the money the store accumulates
     // As a player, I want the game to calculate what my cost per pitcher and cost per cup of lemonade is
+    // TODO - for future improvement, calculate if the user doesn't have enough money
+    //      to buy whatever they need to make another pitcher, 
+    //      and thus cannot continue in the game = bankrupt.
 
     public class Game
     {
@@ -90,12 +97,6 @@ namespace LemonadeStand
             while (UserInterface.promptForYesNoInput("Do you want to add another player? Enter y or n:").ToString() == "y");
             UserInterface.clearScreen();
 
-            //// Display welcome / instruction screen to each player (?)
-            //foreach (Player thisPlayer in players)
-            //{
-            //    UserInterface.showWelcomeScreen(thisPlayer.name, initialInvestment);
-            //}
-            
             // Create a list of days
             List<Day> days = new List<Day>();
             for (int i = 0; i < numberOfDays; i++)
@@ -154,7 +155,7 @@ namespace LemonadeStand
                             {
                                 // Change the price per cup you will charge.  
                                 thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
-                                    "Enter the new price to charge per cup of lemonade: ", 0.0, 20.0);
+                                    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
                             }
                             else if (intOption == 9)
                             {
@@ -180,7 +181,8 @@ namespace LemonadeStand
                 // Display welcome / instruction screen to each player (?)
                 foreach (Player thisPlayer in players)
                 {
-                    UserInterface.showResultsScreen(thisPlayer);
+                    
+                    UserInterface.showResultsScreen(thisPlayer, day);
                 }
                 
             }  // for each day 
