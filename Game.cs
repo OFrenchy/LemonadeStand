@@ -235,46 +235,36 @@ namespace LemonadeStand
             // throw new System.NotImplementedException();
         }
 
-        // ScorePrice
-        public int ScorePrice(double playersRecipe, double optimalRecipe)
+        public int ScorePrice(double playerPrice, double optimalPrice)
         {
-            // scoreTheLemonade method - returns integer +/-  to add to likelihoodScore
-            // for the quality of the lemonade, 
-            //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
-            //      if the # of lemons is optimum, add 2(?) to customer's score
-            //      else if the # of lemons is   < or > 1/2 the optimum, deduct 2, 
-            //      else if the # of lemons is < or > 1/4 the optimum, deduct 1, 
-            // 1-6 lemons (-2), 6-9 (-1), 9-11 (0), 12 (+2)
+            // ScorePrice method - returns integer +/-  to add to likelihoodScore
+            // for the price of the lemonade, 
+            //      score it based on cost:
+            //      if price is > 15 cents above optimal, return -1 
+            //      else if price is equal to or greater than optimal, return 0, 
+            //      else if price is 10 cents less than optimal or less, return + 1, 
 
-            int weightForRecipe = 0;
-            int optimalLemons = optimalRecipe.ingredients[0].quantity;
 
-            if (playersRecipe.ingredients[0].quantity == optimalLemons)
+            int weightForPrice=0;
+            
+            if (playerPrice > optimalPrice + 0.15)
             {
-                weightForRecipe = 2;
+                weightForPrice = -1;
             }
-            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons / 2))  // 1-6
+            else if (playerPrice > optimalPrice)  
             {
-                weightForRecipe = -2;
+                weightForPrice = 0;
             }
-            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons - (optimalLemons / 4)))  // 7-9
+            else if (playerPrice <= optimalPrice)  
             {
-                weightForRecipe = -1;
+                weightForPrice = 1;
             }
-            else if (playersRecipe.ingredients[0].quantity >= optimalLemons + (optimalLemons / 2))  // 18 or more
-            {
-                weightForRecipe = -2;
-            }
-            else if (playersRecipe.ingredients[0].quantity >= (optimalLemons + (optimalLemons / 4))) // 15-17
-            {
-                weightForRecipe = -1;
-            }
-            return weightForRecipe;
+            return weightForPrice;
         }
 
         public int ScoreLemonade(Recipe playersRecipe, Recipe optimalRecipe)
         {
-            // scoreTheLemonade method - returns integer +/-  to add to likelihoodScore
+            // scoreLemonade method - returns integer +/-  to add to likelihoodScore
             // for the quality of the lemonade, 
             //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
             //      if the # of lemons is optimum, add 2(?) to customer's score
