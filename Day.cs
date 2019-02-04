@@ -22,12 +22,9 @@ namespace LemonadeStand
 
         //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
 
-        public Day(int dayNumber, int forecastTemperature, string forecastWeatherConditions, int rainChancePercent)
+        public Day(int dayNumber)
         {
             this.dayNumber = dayNumber;
-            this.forecastTemperature = forecastTemperature;
-            this.forecastWeatherConditions = forecastWeatherConditions;
-            this.rainChancePercent = rainChancePercent;
         }
 
         public int todaysRecipe
@@ -45,19 +42,6 @@ namespace LemonadeStand
             {
             }
         }
-
-
-        public int RainChancePercent
-        {
-            get => rainChancePercent;
-            set
-            {
-                if (rainChancePercent == -10)
-                {
-                    rainChancePercent = value;
-                }
-            }
-        }
         public int ForecastTemperature
         {
             get => forecastTemperature;
@@ -66,6 +50,28 @@ namespace LemonadeStand
                 if (forecastTemperature == -384)
                 {
                     forecastTemperature = value;
+                }
+            }
+        }
+        public string ForecastWeatherConditions
+        {
+            get => forecastWeatherConditions;
+            set
+            {
+                if (forecastWeatherConditions != "")
+                {
+                    forecastWeatherConditions = value;
+                }
+            }
+        }
+        public int RainChancePercent
+        {
+            get => rainChancePercent;
+            set
+            {
+                if (rainChancePercent == -10)
+                {
+                    rainChancePercent = value;
                 }
             }
         }
@@ -88,17 +94,6 @@ namespace LemonadeStand
                 if (actualWeatherConditions != "")
                 {
                     actualWeatherConditions = value;
-                }
-            }
-        }
-        public string ForecastWeatherConditions
-        {
-            get => forecastWeatherConditions;
-            set
-            {
-                if (forecastWeatherConditions != "")
-                {
-                    forecastWeatherConditions = value;
                 }
             }
         }

@@ -100,24 +100,15 @@ namespace LemonadeStand
             List<Day> days = new List<Day>();
             for (int i = 0; i < numberOfDays; i++)
             {
-                // Get today's forecast weather from the weather object
-                //      & pass it to the day object
-                // index 0 is temp, 1 is conditions (per weather.conditionsList), 
-                // 2 is percent chance of rain
-                int[] todaysWeather = weather.GetForecast(i);
-
                 // create day, add to days
-                Day day = new Day(i + 1, todaysWeather[0],
-                    weather.conditionsList[todaysWeather[1]], todaysWeather[2]);
+                Day day = new Day(i + 1);
                 days.Add(day);
 
-            //days.Add(new Day(i + 1, todaysWeather[0],
-            //        weather.conditionsList[todaysWeather[1]], todaysWeather[2]));
-            //}
-            //foreach (Day day in days)
-            //{
-            // Display the Daily prep screen for each player
-            foreach (Player thisPlayer in players)
+                // Have the weather object set the day's forecast
+                weather.GetForecast(day);
+
+                // Display the Daily prep screen for each player
+                foreach (Player thisPlayer in players)
                 {
                     int intOption;
                     do
@@ -161,24 +152,24 @@ namespace LemonadeStand
                             }
                             else if (intOption == 8)
                             {
-                                // TODO - Change the price per cup you will charge.  
-                                UserInterface.displayMessage("this is where we change the price per cup.  And update the cost per cup..", true);
+                                // Change the price per cup you will charge.  
+                                thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
+                                    "Enter the new price to charge per cup of lemonade: ", 0.0, 20.0);
                             }
                             else if (intOption == 9)
                             {
                                 // user wants to quit
                                 return;
                             }
-                        }
-
+                        } // if
                     }
                     while (intOption != 0);
+                } // thisPlayer in players
 
-                
-                }
-                // Get the current day's actual weather from the weather object
-                // TODO - SetCurrentDayActualWeather
-                // Weather.SetCurrentDayActualWeather(day);
+                // ONLY AFTER EACH player has set their choices in the ShowPreparationScreen method, 
+                // set the current day's actual weather from the weather object
+                weather.SetActualWeatherForDay(day);
+                Console.WriteLine();
 
                 // Play today's round:
                 // Generate:

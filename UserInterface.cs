@@ -89,6 +89,37 @@ namespace LemonadeStand
             while (isInteger == false || inputInteger < lowerBound || inputInteger > upperBound);
             return inputInteger;
         }
+        public static double promptForNumberInput(string message, double lowerBound, double upperBound)
+        {
+            double inputNumber = 0;
+            bool isNumber;
+            string input;
+            do
+            {
+                isNumber = false;
+                clearScreen();
+                Console.WriteLine(message);
+                input = Console.ReadLine();
+                try
+                {
+                    inputNumber = double.Parse(input);
+                    isNumber = true;
+                    if (inputNumber < lowerBound || inputNumber > upperBound)
+                    {
+                        Console.WriteLine("That number is out of range.");
+                        Console.ReadLine();
+                    }
+                }
+                // Note:  thisException is not used, but left in for future use/debugging/improvement
+                catch (Exception thisException)
+                {
+                    Console.WriteLine("That is not a number.");
+                    //Console.WriteLine(thisException.ToString());
+                }
+            }
+            while (isNumber == false || inputNumber < lowerBound || inputNumber > upperBound);
+            return inputNumber;
+        }
         // Note:  this method not used in RPSLS game;  left here as stub for future improvement
         public static char promptForCharInput(string message)
         {
