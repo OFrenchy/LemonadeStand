@@ -152,6 +152,7 @@ namespace LemonadeStand
                 "the quality of your lemonade (which is determined by your recipe), \n" +
                 "and the price per cup that you set at the beginning of each day.  \n";
 
+            // TODO - change the number of servings & ounces to an extensible variable
             welcomeScreen = welcomeScreen + "\n" +
                 "Each day you must decide what your recipe will be for the day - \n" +
                 "how many lemons and cups of sugar for each pitcher, as well as \n" +
@@ -216,9 +217,7 @@ namespace LemonadeStand
             }
             prepScreen = prepScreen + "\n" +
                 $"8) You are charging {player.pricePerCupOfLemonade.ToString("C")} per cup of lemonade that you sell. \n";
-            // TODO - Add cost per cup based on selling all pitchers you can 
-
-
+            
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
                 "0) to play today's round.\n" +
@@ -236,14 +235,14 @@ namespace LemonadeStand
                 $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " + 
                 $"{day.ActualWeatherConditions}.";
 
-            recipeRecommendation = compareRecipes(player.recipe, optimalRecipe)
-            string resultsScreen = resultsScreen + $"{recipeRecommendation}. \n";
+            string recipeRecommendation = CompareRecipes(player.recipe, optimalRecipe);
+            resultsScreen = resultsScreen + $"{recipeRecommendation}. \n";
 
             resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
             clearScreen();
             UserInterface.displayMessage(resultsScreen, true);
         }
-        private string compareRecipes(Recipe playerRecipe, Recipe optimalRecipe)
+        private static string CompareRecipes(Recipe playerRecipe, Recipe optimalRecipe)
         {
             // we will help the user hone in on the correct # of lemons first, 
             // then work on the correct # of cups of sugar.
@@ -263,7 +262,10 @@ namespace LemonadeStand
             {
                 return "Some people said the lemonade was too sweet.";
             }
-            else { return "Everybody said the lemonade was just right!"; }
+            else
+            {
+                return "Everybody said the lemonade was just right!";
+            }
         }
         public static string padRightToColumn(int column, string stringToPad)
         {
@@ -274,5 +276,6 @@ namespace LemonadeStand
             }
             return stringToPad;
         }
-    }
-}
+
+    } // class
+} // namespace

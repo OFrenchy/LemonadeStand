@@ -88,5 +88,29 @@ namespace LemonadeStand
             while (i < recipe.ingredients.Count);
             return maxPitchers;
         }
+        public void PurchaseItem(int itemNumber, Store store)
+        {
+            // get the player's quantity, then check if he/she has enough money;
+            // if so, change the inventory & reduce his moneyOnHand
+            int quantityToPurchase = UserInterface.promptForIntegerInput(
+                    $"Enter the quantity of {store.inventory.ingredients[itemNumber].quantityDescription} to purchase for {store.inventory.ingredients[itemNumber].PriceForQuantity.ToString("C")} each:",
+                    0, 80);
+            // check that the player has enough money
+            if (moneyOnHand >= ((double)quantityToPurchase * store.inventory.ingredients[itemNumber].PriceForQuantity))
+            {
+                // Add the quantityToPurchase * quantityInPrice to the inventory
+                inventory.ingredients[itemNumber].quantity =
+                    inventory.ingredients[itemNumber].quantity +
+                    (quantityToPurchase * store.inventory.ingredients[itemNumber].QuantityInPrice);
+                // Deduct the amount from his moneyOnHand
+                moneyOnHand = moneyOnHand -
+                    ((double)quantityToPurchase * store.inventory.ingredients[itemNumber].PriceForQuantity);
+                Console.WriteLine("purchase complete");
+            }
+            else
+            {
+                UserInterface.displayMessage("Sorry, you don't have enought money to buy that many.", true);
+            }
+        }
     }
 }

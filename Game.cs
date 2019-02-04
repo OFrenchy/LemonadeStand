@@ -119,8 +119,6 @@ namespace LemonadeStand
                 // Have the weather object set the day's forecast
                 weather.GetForecast(day);
 
-
-
                 // Display the Daily prep screen for each player
                 foreach (Player thisPlayer in players)
                 {
@@ -142,27 +140,8 @@ namespace LemonadeStand
                             }
                             else if (intOption >= 4 && intOption <= 7)
                             {
-                                // get the player's quantity, then check if he/she has enough money;
-                                // if so, change the inventory & reduce his moneyOnHand
-                                int quantityToPurchase = UserInterface.promptForIntegerInput(
-                                        $"Enter the quantity of {store.inventory.ingredients[intOption - 4].quantityDescription} to purchase for {store.inventory.ingredients[intOption - 4].PriceForQuantity.ToString("C")} each:",
-                                        1, 80);
-                                // check that the player has enough money
-                                if (thisPlayer.moneyOnHand >= ((double)quantityToPurchase * store.inventory.ingredients[intOption - 4].PriceForQuantity)) 
-                                {
-                                    // Add the quantityToPurchase * quantityInPrice to the inventory
-                                    thisPlayer.inventory.ingredients[intOption - 4].quantity =
-                                        thisPlayer.inventory.ingredients[intOption - 4].quantity +
-                                        (quantityToPurchase * store.inventory.ingredients[intOption - 4].QuantityInPrice);
-                                    // Deduct the amount from his moneyOnHand
-                                    thisPlayer.moneyOnHand = thisPlayer.moneyOnHand -
-                                        ((double)quantityToPurchase * store.inventory.ingredients[intOption - 4].PriceForQuantity);
-                                    Console.WriteLine("purchase complete");
-                                }
-                                else
-                                {
-                                    UserInterface.displayMessage("Sorry, you don't have enought money to buy that many.", true);
-                                }
+                                // purchase an item 
+                                thisPlayer.PurchaseItem(intOption - 4, store);
                             }
                             else if (intOption == 8)
                             {
@@ -182,7 +161,7 @@ namespace LemonadeStand
 
                 // ONLY AFTER EACH player has set their choices in the ShowPreparationScreen method, 
                 // determine the number of potential customers - (weather forecast affects turnout)
-                weather.affectCustomerTurnout(initialNumberOfPotentialCustomers, day.dayNumber);
+                weather.affectCustomerTurnout(initialNumberOfPotentialCustomers, day);
                 // set the current day's actual weather from the weather object
                 weather.SetActualWeatherForDay(day);
                 Console.WriteLine();
@@ -208,22 +187,7 @@ namespace LemonadeStand
 
             // throw new System.NotImplementedException();
         }
-        public int optimalRecipe
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        public int defaultRecipe
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
+        
         public Recipe Recipe
         {
             get => default(Recipe);
@@ -234,17 +198,6 @@ namespace LemonadeStand
 
 
         
-        public void setNumberOfPotentialCustomersForDay()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void setOptimalPricePerCupForDay()
-        {
-            throw new System.NotImplementedException();
-        }
-
-      
 
         
     }

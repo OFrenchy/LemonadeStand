@@ -113,7 +113,7 @@ namespace LemonadeStand
             day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber]];
         }
 
-        public int affectCustomerTurnout(int initialNumberOfPotentialCustomers, Day day)
+        public void affectCustomerTurnout(int initialNumberOfPotentialCustomers, Day day)
         {
             // Depending on the forecast, change the turnout as follows:
             // 0 rain reduce turnout by 12
@@ -126,15 +126,13 @@ namespace LemonadeStand
             //{"rain", "overcast", "mostly cloudy", "partly cloudy", "mostly sunny", "clear"}
             
             int[] weatherAffects = {-12, -6, 0, 6, 12, 18};
-            day.numberOfPotentialCustomers = initialNumberOfPotentialCustomers + weatherAffects[conditions[day.dayNumber]];
-
+            day.NumberOfPotentialCustomers = initialNumberOfPotentialCustomers + 
+                weatherAffects[conditions[day.dayNumber]];
         }
-
-
     }
 
 
 
 
-    }
+    
 }

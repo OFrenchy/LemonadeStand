@@ -12,7 +12,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>ABAAgABAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -32,14 +32,14 @@
   <Class Name="LemonadeStand.Player">
     <Position X="3" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAABABAAAAAAAIAEAAACAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAABABAAAAACAIAEAAACAAAAEAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.UserInterface">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAABAhAAAAAAAAAAAAACGAIAAAACAAAAAAIIQ=</HashCode>
+      <HashCode>AAAAAAQAABAhAAAAAAAAAAAAACGQIAAAACAAAAAAIIQ=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
