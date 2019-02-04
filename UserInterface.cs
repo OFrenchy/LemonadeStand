@@ -228,7 +228,7 @@ namespace LemonadeStand
             return UserInterface.promptForIntegerInput(prepScreen, 0 , 9);
         }
 
-        public static void showResultsScreen(Player player, Day day)
+        public static void showResultsScreen(Player player, Day day, Weather weather, Recipe optimalRecipe)
         {
             // Construct the display of the results of the day's sales
             string resultsScreen = $"The forecast was for {day.ForecastTemperature.ToString()} degrees & " +
@@ -236,11 +236,34 @@ namespace LemonadeStand
                 $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " + 
                 $"{day.ActualWeatherConditions}.";
 
-
+            recipeRecommendation = compareRecipes(player.recipe, optimalRecipe)
+            string resultsScreen = resultsScreen + $"{recipeRecommendation}. \n"
 
             resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
             clearScreen();
             UserInterface.displayMessage(resultsScreen, true);
+        }
+        private string compareRecipes(Recipe playerRecipe, Recipe optimalRecipe)
+        {
+            // we will help the user hone in on the correct # of lemons first, 
+            // then work on the correct # of cups of sugar.
+            if (playerRecipe.ingredients[0].quantity < optimalRecipe.ingredients[0].quantity)
+            {
+                return "Some people said the lemonade was too weak.";
+            }
+            else if (playerRecipe.ingredients[0].quantity > optimalRecipe.ingredients[0].quantity)
+            {
+                return "Some people said the lemonade was too strong.";
+            }
+            else if (playerRecipe.ingredients[1].quantity < optimalRecipe.ingredients[1].quantity)
+            {
+                return "Some people said the lemonade was too sour.";
+            }
+            else if (playerRecipe.ingredients[1].quantity > optimalRecipe.ingredients[1].quantity)
+            {
+                return "Some people said the lemonade was too sweet.";
+            }
+            else { return "Everybody said the lemonade was just right!"; }
         }
         public static string padRightToColumn(int column, string stringToPad)
         {

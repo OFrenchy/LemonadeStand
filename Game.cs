@@ -42,6 +42,8 @@ namespace LemonadeStand
 
     // TODO - figure out an algorithm to determine the customer's likelihood of purchasing
     // TODO  - figure out an algorithm to produce a number of potential customers
+    //          - maybe a table for a number based on weather, then a random number between
+    //            0 & 20 added to that number?
 
     // TODO - update this below
     // As a developer, I will use the following algorithm to determine # of potential customers 
@@ -77,13 +79,18 @@ namespace LemonadeStand
         {
             int numberOfDays = 7;
             double initialInvestment = 20.00;
+            int numberOfPotentialCustomers = 60;    // 5 pitchers = 60 
 
             // create the Weather object
             Weather weather = new Weather(numberOfDays);
 
             // create the store
             Store store = new Store();
-            
+
+            // create the optimal recipe - according to AllRecipes.com; https://www.allrecipes.com/recipe/20487/old-fashioned-lemonade
+            // 12 lemons & 2 cups of sugar
+            Recipe optimalRecipe = new Recipe(12, 2, 10, 1);
+
             // Create list of players
             List<Player> players = new List<Player>();
             do
@@ -182,7 +189,7 @@ namespace LemonadeStand
                 foreach (Player thisPlayer in players)
                 {
                     
-                    UserInterface.showResultsScreen(thisPlayer, day);
+                    UserInterface.showResultsScreen(thisPlayer, day, weather, optimalRecipe);
                 }
                 
             }  // for each day 

@@ -9,7 +9,7 @@ namespace LemonadeStand
     {
         // set price of ingredients.  We will assume the store has unlimited quantities.
         private double priceLemon = 0.20;
-        private double priceSugar4lbs10Cups = 2.30;
+        private double priceSugar4lbs10Cups = 1.75;
         private double priceIce5lbs = 1.50;
         private double price100Cups = 1.50;
         
