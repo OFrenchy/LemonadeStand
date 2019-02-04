@@ -109,8 +109,8 @@ namespace LemonadeStand
 
             
             // set actual temperature & conditions for the requested day
-            day.ActualTemperature = actualTemperatures[day.dayNumber];
-            day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber]];
+            day.ActualTemperature = actualTemperatures[day.dayNumber - 1];
+            day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber - 1]];
         }
 
         public void affectCustomerTurnout(int initialNumberOfPotentialCustomers, Day day)

@@ -129,32 +129,35 @@ namespace LemonadeStand
                             day, store);
                         if (intOption > 0)
                         {
-                            // change recipe or purchase ingredients
-                            if (intOption >= 1 && intOption <= 3)
+                            // change recipe or purchase ingredients - was series of if - else if blocks
+                            switch (intOption)
                             {
-                                // Change the recipe item quantity to the number the user enters
-                                thisPlayer.recipe.ingredients[intOption - 1].quantity = 
-                                    UserInterface.promptForIntegerInput(
-                                        $"Enter new quantity of {thisPlayer.recipe.ingredients[intOption - 1].name} for the recipe:", 
-                                        1, 20);
-                            }
-                            else if (intOption >= 4 && intOption <= 7)
-                            {
-                                // purchase an item 
-                                thisPlayer.PurchaseItem(intOption - 4, store);
-                            }
-                            else if (intOption == 8)
-                            {
-                                // Change the price per cup you will charge.  
-                                thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
-                                    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
-                            }
-                            else if (intOption == 9)
-                            {
-                                // user wants to quit
-                                return;
-                            }
-                        } // if
+                                case 1:
+                                case 2:
+                                case 3:
+                                    // Change the recipe item quantity to the number the user enters
+                                    thisPlayer.recipe.ingredients[intOption - 1].quantity = 
+                                        UserInterface.promptForIntegerInput(
+                                            $"Enter new quantity of {thisPlayer.recipe.ingredients[intOption - 1].name} for the recipe:", 
+                                            1, 20);
+                                    break;
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    // purchase an item 
+                                    thisPlayer.PurchaseItem(intOption - 4, store);
+                                    break;
+                                case 8:
+                                    // Change the price per cup you will charge.  
+                                    thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
+                                        "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
+                                    break;
+                                case 9:
+                                    // user wants to quit
+                                    return;
+                            } // switch
+                        } // if intOption > 0
                     }
                     while (intOption != 0);
                 } // thisPlayer in players
@@ -169,13 +172,18 @@ namespace LemonadeStand
                 // Play today's round:
                 // Generate:
                 //      the number of potential customers, 
+                //      create the actual customers, 
                 //      the number of actual customers, 
                 //      today's results
                 // Display the Daily results screen for each player
                 // Display welcome / instruction screen to each player (?)
                 foreach (Player thisPlayer in players)
                 {
-                    
+                    // play round
+
+                    //sellLemonadeForDay(thisPlayer, day, weather);
+
+                    // si
                     UserInterface.showResultsScreen(thisPlayer, day, weather, optimalRecipe);
                 }
                 

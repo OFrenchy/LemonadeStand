@@ -233,10 +233,10 @@ namespace LemonadeStand
             string resultsScreen = $"The forecast was for {day.ForecastTemperature.ToString()} degrees & " +
                 $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain. \n" +
                 $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " + 
-                $"{day.ActualWeatherConditions}.";
+                $"{day.ActualWeatherConditions}. \n";
 
-            string recipeRecommendation = CompareRecipes(player.recipe, optimalRecipe);
-            resultsScreen = resultsScreen + $"{recipeRecommendation}. \n";
+            //string recipeRecommendation = CompareRecipes(player.recipe, optimalRecipe);
+            resultsScreen = resultsScreen + $"\n {CompareRecipes(player.recipe, optimalRecipe)}. \n";
 
             resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
             clearScreen();
