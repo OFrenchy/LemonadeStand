@@ -17,7 +17,7 @@ namespace LemonadeStand
         private int rainChancePercent = -10;
         private string forecastWeatherConditions = "Clear Skies";
         private string actualWeatherConditions = "Clear Skies";
-        
+        private int numberOfPotentialCustomers = -100;
         public int dayNumber;
 
         //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
@@ -94,6 +94,18 @@ namespace LemonadeStand
                 if (actualWeatherConditions != "")
                 {
                     actualWeatherConditions = value;
+                }
+            }
+        }
+
+        public int NumberOfPotentialCustomers
+        {
+            get => numberOfPotentialCustomers;
+            set
+            {
+                if (numberOfPotentialCustomers == -100)
+                {
+                    numberOfPotentialCustomers = value;
                 }
             }
         }

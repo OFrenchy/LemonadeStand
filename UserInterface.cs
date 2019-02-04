@@ -237,7 +237,7 @@ namespace LemonadeStand
                 $"{day.ActualWeatherConditions}.";
 
             recipeRecommendation = compareRecipes(player.recipe, optimalRecipe)
-            string resultsScreen = resultsScreen + $"{recipeRecommendation}. \n"
+            string resultsScreen = resultsScreen + $"{recipeRecommendation}. \n";
 
             resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
             clearScreen();

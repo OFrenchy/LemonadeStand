@@ -52,14 +52,16 @@ namespace LemonadeStand
 
                 // chance of rain is from 0% to 100% in 10% increments
                 chancesOfRainPercent.Add(randomGenerator.Next(10) * 10);
-                
-                // for the actual weather (temp & conditions), 
-                // repeat the above algorithms - why not, the forecast vs. actual 
-                // weather can vary that much
-                actualConditions.Add(randomGenerator.Next(5));
-                // TODO - figure out which is better
-                //actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
-                actualTemperatures.Add(randomGenerator.Next(75, 95));
+
+                // Moved to SetActualWeatherForDay
+                //// TODO - move to method called after each player has gone through prep screen
+                //// for the actual weather (temp & conditions), 
+                //// repeat the above algorithms - why not, the forecast vs. actual 
+                //// weather can vary that much
+                //actualConditions.Add(randomGenerator.Next(5));
+                //// TODO - figure out which is better
+                ////actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
+                //actualTemperatures.Add(randomGenerator.Next(75, 95));
 
             } // i = each day
         } // weather instantiated
@@ -97,9 +99,42 @@ namespace LemonadeStand
         }
         public void SetActualWeatherForDay(Day day)
         {
+            // for the actual weather (temp & conditions), we can use a random number; 
+            // the forecast vs. actual weather can vary that much
+            Random randomGenerator = new Random();
+            actualConditions.Add(randomGenerator.Next(5));
+            // TODO - figure out which is better
+            //actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
+            actualTemperatures.Add(randomGenerator.Next(75, 95));
+
+            
             // set actual temperature & conditions for the requested day
             day.ActualTemperature = actualTemperatures[day.dayNumber];
             day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber]];
         }
+
+        public int affectCustomerTurnout(int initialNumberOfPotentialCustomers, Day day)
+        {
+            // Depending on the forecast, change the turnout as follows:
+            // 0 rain reduce turnout by 12
+            // 1 overcast reduce by 6
+            // 2 mostly cloudy, don't change the number of customers 
+            // 3 partly cloudy, increase by 6;
+            // 4 mostly sunny, increase by 12, 
+            // 5 clear increase by 18
+
+            //{"rain", "overcast", "mostly cloudy", "partly cloudy", "mostly sunny", "clear"}
+            
+            int[] weatherAffects = {-12, -6, 0, 6, 12, 18};
+            day.numberOfPotentialCustomers = initialNumberOfPotentialCustomers + weatherAffects[conditions[day.dayNumber]];
+
+        }
+
+
+    }
+
+
+
+
     }
 }

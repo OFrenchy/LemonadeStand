@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Each player has Days to facilitate multiple players">
-    <Position X="0.874" Y="7.442" Height="0.75" Width="1.7" />
-  </Comment>
   <Class Name="LemonadeStand.Game">
     <Position X="3.25" Y="0.5" Width="1.5" />
     <AssociationLine Name="Recipe" Type="LemonadeStand.Recipe" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
@@ -47,7 +44,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Customer">
-    <Position X="9.5" Y="8.75" Width="1.5" />
+    <Position X="6.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Customer.cs</FileName>
@@ -85,7 +82,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAABAEAAAAAAAABAAAICAAAAAAKAAgAKgAIAAAAA=</HashCode>
+      <HashCode>AAAAAABAEAAAAQAAABEAAICAAAAAAKAAgAKgAIAAAAA=</HashCode>
       <FileName>Day.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -95,7 +92,7 @@
   <Class Name="LemonadeStand.Weather">
     <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAFABAgBACAAAAAAAAAAgAAAQAAARAAAA=</HashCode>
+      <HashCode>ABAAAIAAAAAAFBBAgBACAAAAAAAAAAAAAAQAAARAAAA=</HashCode>
       <FileName>Weather.cs</FileName>
     </TypeIdentifier>
   </Class>

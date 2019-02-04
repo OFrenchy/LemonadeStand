@@ -68,7 +68,11 @@ namespace LemonadeStand
     //      not keep track of its inventory;  
     // As a developer, we will not concern ourselves with the money the store accumulates
     // As a player, I want the game to calculate what my cost per pitcher and cost per cup of lemonade is
-    // TODO - for future improvement, calculate if the user doesn't have enough money
+    // As a developer, we want the forecast to affect the number of potential customers, 
+    // As a developer, we want the actual weather to affect the customer's mood and thus the 
+    //      number of sales
+        
+        // TODO - for future improvement, calculate if the user doesn't have enough money
     //      to buy whatever they need to make another pitcher, 
     //      and thus cannot continue in the game = bankrupt.
 
@@ -79,7 +83,7 @@ namespace LemonadeStand
         {
             int numberOfDays = 7;
             double initialInvestment = 20.00;
-            int numberOfPotentialCustomers = 60;    // 5 pitchers = 60 
+            int initialNumberOfPotentialCustomers = 60;    // 5 pitchers = 60 
 
             // create the Weather object
             Weather weather = new Weather(numberOfDays);
@@ -114,6 +118,8 @@ namespace LemonadeStand
 
                 // Have the weather object set the day's forecast
                 weather.GetForecast(day);
+
+
 
                 // Display the Daily prep screen for each player
                 foreach (Player thisPlayer in players)
@@ -175,6 +181,8 @@ namespace LemonadeStand
                 } // thisPlayer in players
 
                 // ONLY AFTER EACH player has set their choices in the ShowPreparationScreen method, 
+                // determine the number of potential customers - (weather forecast affects turnout)
+                weather.affectCustomerTurnout(initialNumberOfPotentialCustomers, day.dayNumber);
                 // set the current day's actual weather from the weather object
                 weather.SetActualWeatherForDay(day);
                 Console.WriteLine();
