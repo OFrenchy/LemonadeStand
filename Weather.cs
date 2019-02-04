@@ -130,9 +130,5 @@ namespace LemonadeStand
                 weatherAffects[conditions[day.dayNumber]];
         }
     }
-
-
-
-
     
 }

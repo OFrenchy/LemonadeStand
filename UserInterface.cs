@@ -157,7 +157,9 @@ namespace LemonadeStand
                 "Each day you must decide what your recipe will be for the day - \n" +
                 "how many lemons and cups of sugar for each pitcher, as well as \n" +
                 "how many ice cubes in each cup that you sell. \n" +
-                "Each pitcher holds 12 servings of 10 ounces. \n";
+                "Each pitcher holds 1 gallon, which gives you 12 servings of 10 ounces. \n" +
+                "Because the pitcher is so big, many people are surprised at how many \n" +
+                "lemons are needed to make a really good lemonade. (hint, hint) \n";
 
             welcomeScreen = welcomeScreen + "\n" +
                 "Before the day's sales begin, you have the opportunity to purchase whatever \n" +
@@ -184,7 +186,7 @@ namespace LemonadeStand
                 "\n" +
                 $"Today's forecast is {day.ForecastTemperature.ToString()} degrees and " +
                     $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain.\n" +
-                $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the till. \n";
+                $"You currently have {string.Format("{0:C}", player.moneyOnHand)} in the cash box. \n";
 
             prepScreen = prepScreen + "\n" +
                 "Your current recipe for a pitcher of lemonade is below.  \n" +

@@ -15,6 +15,7 @@ namespace LemonadeStand
         public string name;
         public Recipe recipe;
         public Recipe inventory;
+        // TODO - change to private with property gets/sets
         public double moneyOnHand;
         public double pricePerCupOfLemonade = 0.25;
 

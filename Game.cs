@@ -95,6 +95,8 @@ namespace LemonadeStand
             // 12 lemons & 2 cups of sugar
             Recipe optimalRecipe = new Recipe(12, 2, 10, 1);
 
+            double optimalPrice = 0.60;
+
             // Create list of players
             List<Player> players = new List<Player>();
             do
@@ -169,16 +171,53 @@ namespace LemonadeStand
                 weather.SetActualWeatherForDay(day);
                 Console.WriteLine();
 
+                // Three things affect whether a customer will purchase:
+                // 1) weather (affects mood)  ; //{"rain", "overcast", "mostly cloudy", "partly cloudy", "mostly sunny", "clear"}
+                // 2) price
+                // 3) quality of the product
+
+                // Score potential customers on a scale from 1 - 6(?), 
+                //      starting with a starting likelihoodScore of 4(?)
+                //      because people are generally willing to purchase  
+                //      from a little kid selling lemonade
+                // 1/4 of people are tightwads and are generally not willing to buy, 
+                //      so deduct 1 from their score;
+                // 1/3 are generous and are willing to buy, 
+                //      add 1 to their score
+                // if the weather is raining or overcast, deduct 1 from everyone's score
+                // if the weather is partly cloudy (3) or better, add 1 to everyone's score
+                //
+                // scoreLemonade method - returns integer +/-  to add to likelihoodScore
+                // for the quality of the lemonade, 
+                //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
+                //      if the # of lemons is optimum, add 2(?) to customer's score
+                //      else if the # of lemons is < or > 1/2 the optimum, deduct 2, 
+                //      else if the # of lemons is < or > 1/4 the optimum, deduct 1, 
+                //       
+                
+                
                 // Play today's round:
                 // Generate:
-                //      the number of potential customers, 
                 //      create the actual customers, 
                 //      the number of actual customers, 
                 //      today's results
                 // Display the Daily results screen for each player
-                // Display welcome / instruction screen to each player (?)
                 foreach (Player thisPlayer in players)
                 {
+                    // Generate a weight for the quality of lemonade
+                    int weightforRecipe = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
+
+                    // Generate a weight for the price of lemonade
+                    int weightForPrice = ScorePrice(thisPlayer.pricePerCupOfLemonade, optimalPrice);
+
+                    //Recipe testRecipe;// = new Recipe(1, 1, 5, 1);
+                    for (double i2 = .10; i2 < 1; i2+=0.05)
+                    {
+                        weightForPrice = ScorePrice(i2, optimalPrice);
+                        Console.WriteLine(i2.ToString() + ": " + weightforRecipe.ToString());
+                    }
+
+
                     // play round
 
                     //sellLemonadeForDay(thisPlayer, day, weather);
@@ -195,18 +234,92 @@ namespace LemonadeStand
 
             // throw new System.NotImplementedException();
         }
-        
-        public Recipe Recipe
+
+        // ScorePrice
+        public int ScorePrice(double playersRecipe, double optimalRecipe)
         {
-            get => default(Recipe);
-            set
+            // scoreTheLemonade method - returns integer +/-  to add to likelihoodScore
+            // for the quality of the lemonade, 
+            //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
+            //      if the # of lemons is optimum, add 2(?) to customer's score
+            //      else if the # of lemons is   < or > 1/2 the optimum, deduct 2, 
+            //      else if the # of lemons is < or > 1/4 the optimum, deduct 1, 
+            // 1-6 lemons (-2), 6-9 (-1), 9-11 (0), 12 (+2)
+
+            int weightForRecipe = 0;
+            int optimalLemons = optimalRecipe.ingredients[0].quantity;
+
+            if (playersRecipe.ingredients[0].quantity == optimalLemons)
             {
+                weightForRecipe = 2;
             }
+            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons / 2))  // 1-6
+            {
+                weightForRecipe = -2;
+            }
+            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons - (optimalLemons / 4)))  // 7-9
+            {
+                weightForRecipe = -1;
+            }
+            else if (playersRecipe.ingredients[0].quantity >= optimalLemons + (optimalLemons / 2))  // 18 or more
+            {
+                weightForRecipe = -2;
+            }
+            else if (playersRecipe.ingredients[0].quantity >= (optimalLemons + (optimalLemons / 4))) // 15-17
+            {
+                weightForRecipe = -1;
+            }
+            return weightForRecipe;
+        }
+
+        public int ScoreLemonade(Recipe playersRecipe, Recipe optimalRecipe)
+        {
+            // scoreTheLemonade method - returns integer +/-  to add to likelihoodScore
+            // for the quality of the lemonade, 
+            //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
+            //      if the # of lemons is optimum, add 2(?) to customer's score
+            //      else if the # of lemons is   < or > 1/2 the optimum, deduct 2, 
+            //      else if the # of lemons is < or > 1/4 the optimum, deduct 1, 
+            // 1-6 lemons (-2), 6-9 (-1), 9-11 (0), 12 (+2)
+
+            int weightForRecipe = 0;
+            int optimalLemons = optimalRecipe.ingredients[0].quantity;
+
+            if (playersRecipe.ingredients[0].quantity == optimalLemons)
+            {
+                weightForRecipe = 2;
+            }
+            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons / 2) )  // 1-6
+            {
+                weightForRecipe = -2;
+            }
+            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons - (optimalLemons / 4)))  // 7-9
+            {
+                weightForRecipe = -1;
+            }
+            else if (playersRecipe.ingredients[0].quantity >= optimalLemons + (optimalLemons / 2))  // 18 or more
+            {
+                weightForRecipe = -2;
+            }
+            else if (playersRecipe.ingredients[0].quantity >= (optimalLemons + (optimalLemons / 4))) // 15-17
+            {
+                weightForRecipe = -1;
+            }
+            return weightForRecipe;
         }
 
 
-        
+        //public Recipe Recipe
+        //{
+        //    get => default(Recipe);
+        //    set
+        //    {
+        //    }
+        //}
 
-        
+
+
+
+
     }
 }
