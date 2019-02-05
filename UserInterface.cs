@@ -13,7 +13,9 @@ namespace LemonadeStand
         public static int percentGenerous = 25;
         public static int startingWeight = 4;
         public static int customerMaxScore = 9;
-        
+        public static double initialPricePerCupOfLemonade = 0.25;
+        public static int numberOfServingsPerPitcher = 12;
+
 
         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
          {
@@ -164,13 +166,14 @@ namespace LemonadeStand
                 "Each day you must decide what your recipe will be for the day - \n" +
                 "how many lemons and cups of sugar for each pitcher, as well as \n" +
                 "how many ice cubes in each cup that you sell. \n" +
-                "Each pitcher holds 12 servings of 10 ounces. \n";
+                $"Each pitcher holds {numberOfServingsPerPitcher} servings of 10 ounces. \n";
 
             welcomeScreen = welcomeScreen + "\n" +
                 "Before the day's sales begin, you have the opportunity to purchase whatever \n" +
                 "you need.  You will want to consider the forecast when deciding how much \n" +
                 "inventory (ingredients) to purchase, as well as the price that you set per cup. \n" +
-                "Also remember that all of the ice that is not used will melt overnight.";
+                "Also remember that all of the ice that is not used will melt overnight, \n" +
+                "and any lemonade remaining unsold in the pitcher must be discarded. \n";
             welcomeScreen = welcomeScreen + "\n" +
                 "The game is played for 7 days (meaning 7 rounds). \n" +
                 $"You will begin with {initialInvestment.ToString("C")}, an 'investment' from your grandparents \n" +
@@ -182,7 +185,7 @@ namespace LemonadeStand
 
             // throw new System.NotImplementedException();
         }
-        public static int ShowPreparationScreen(Player player, Day day, Store store) //, Weather weather)
+        public static int ShowPreparationScreen(Player player, Day day, Store store, ResultOfDay resultOfDay) //, Weather weather)
         {
             // Construct the display of all the information the player needs to start
             string prepScreen ;
@@ -207,7 +210,7 @@ namespace LemonadeStand
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
                 $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")} which is {(player.getCostPerPitcher()/12).ToString("C")} per cup, and \n" +
-                $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
+                $"you can make {player.pitchers.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
 
             prepScreen = prepScreen + "\n" +
             "Your current inventory is shown below.  \n" +
@@ -223,7 +226,7 @@ namespace LemonadeStand
                     leftPart + rightPart;
             }
             prepScreen = prepScreen + "\n" +
-                $"8) You are charging {player.pricePerCupOfLemonade.ToString("C")} per cup of lemonade that you sell. \n";
+                $"8) You are charging {player.resultsOfDays[day.dayNumber].PricePerCup.ToString("C")} per cup of lemonade that you sell. \n";
             
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +

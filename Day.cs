@@ -13,6 +13,7 @@ namespace LemonadeStand
         //private int rainChancePercent = 10;
         //private string forecastWeatherConditions = "Clear Skies";
         private int forecastTemperature = -384;
+        private int forecastConditionNumber = -384;
         private int actualTemperature = -384;
         private int actualConditionNumber = -384;
         private int rainChancePercent = -10;
@@ -31,13 +32,13 @@ namespace LemonadeStand
             this.dayNumber = dayNumber;
         }
 
-        public int todaysRecipe
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
+        //public int todaysRecipe
+        //{
+        //    get => default(int);
+        //    set
+        //    {
+        //    }
+        //}
 
         public Recipe Recipe
         {
@@ -54,6 +55,17 @@ namespace LemonadeStand
                 if (forecastTemperature == -384)
                 {
                     forecastTemperature = value;
+                }
+            }
+        }
+        public int ForecastConditionNumber
+        {
+            get => forecastConditionNumber;
+            set
+            {
+                if (forecastConditionNumber == -384)
+                {
+                    forecastConditionNumber = value;
                 }
             }
         }

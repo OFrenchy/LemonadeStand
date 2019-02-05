@@ -93,7 +93,7 @@ namespace LemonadeStand
 
             // create the optimal recipe - according to AllRecipes.com; https://www.allrecipes.com/recipe/20487/old-fashioned-lemonade
             // 12 lemons & 2 cups of sugar
-            Recipe optimalRecipe = new Recipe(12, 2, 10, 1);
+            Recipe optimalRecipe = new Recipe(12, 2, 10, 1, 12);
 
             double optimalPrice = 0.60;
 
@@ -124,11 +124,17 @@ namespace LemonadeStand
                 // Display the Daily prep screen for each player
                 foreach (Player thisPlayer in players)
                 {
+                    thisPlayer.ResetForNewDay(day.dayNumber);
+                    // add the forecast weather data to the resultsofdays
+                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
+                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastConditionNumber = day.ForecastConditionNumber;
+                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
+
                     int intOption;
                     do
                     {
                         intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                            day, store);
+                            day, store , thisPlayer.resultsOfDays[day.dayNumber]);
                         if (intOption > 0)
                         {
                             // change recipe or purchase ingredients - was series of if - else if blocks
@@ -152,8 +158,12 @@ namespace LemonadeStand
                                     break;
                                 case 8:
                                     // Change the price per cup you will charge.  
-                                    thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
+                                    // TODO - chg to only store in one place
+                                    //thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
+                                    //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
+                                    thisPlayer.resultsOfDays[day.dayNumber].PricePerCup = UserInterface.promptForNumberInput(
                                         "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
+
                                     break;
                                 case 9:
                                     // user wants to quit
@@ -171,8 +181,6 @@ namespace LemonadeStand
                 // set the current day's actual weather from the weather object
                 weather.SetActualWeatherForDay(day);
                 Console.WriteLine();
-
-                
 
                 // Score potential customers on a scale from 1 - 6(?), 
                 //      starting with a starting likelihoodScore of 4(?) (= slightly in favor)
@@ -196,9 +204,8 @@ namespace LemonadeStand
                 }
                 else { weatherWeight = 1; };
 
-
                 day.CreateCustomers();
-
+                
                 // scoreLemonade method - returns integer +/-  to add to likelihoodScore
                 // for the quality of the lemonade, 
                 //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
@@ -214,13 +221,19 @@ namespace LemonadeStand
                 // Display the Daily results screen for each player
                 foreach (Player thisPlayer in players)
                 {
-                    // create new results for thisPlayer
-                    thisPlayer.addNewResultsOfDay();
+                    // add the actual weather data to the resultsofdays
+                    //thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
+                    thisPlayer.resultsOfDays[day.dayNumber].WeatherActualTemp = day.ActualTemperature;
+                    thisPlayer.resultsOfDays[day.dayNumber].WeatherActualConditionNumber = day.ActualConditionNumber;
+
+                    thisPlayer.resultsOfDays[day.dayNumber].PotentialCustomers = day.NumberOfPotentialCustomers;
+
+
                     // Generate a weight for the quality of lemonade
                     int recipeWeight = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
 
                     // Generate a weight for the price of lemonade
-                    int priceWeight = ScorePrice(thisPlayer.pricePerCupOfLemonade, optimalPrice);
+                    int priceWeight = ScorePrice(thisPlayer.resultsOfDays[day.dayNumber].PricePerCup, optimalPrice);
 
                     // reset master customer list
                     day.ScoreCustomers(

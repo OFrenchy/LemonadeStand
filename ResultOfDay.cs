@@ -11,10 +11,11 @@ namespace LemonadeStand
         private double costPerPitcher = -384.0;
         private double pricePerCup = -384.0;
         private int numberOfCupsSold = -1;
-        private int numberOfCupsThrownAway = -1;
+        private int numberOfCupsRemainingInPitcher = -1;
+        private int numberOfPitchersMade = 0;
         private double expensesForDay = -384.0;
-        private double salesForDay = -384.0;
-        private double profitForDay = -384.0;
+        private double salesIncomeForDay = -384.0;
+        //private double profitForDay = -384.0;
         private int potentialCustomers = -1;
         private bool soldOut = false;
         private string soldOutOf = "";
@@ -29,161 +30,130 @@ namespace LemonadeStand
         
 
         //==========================================================================================
-        public ResultOfDay(int dayNumber)
+        public ResultOfDay(int dayNumber, double moneyOnHand)
         {
             this.dayNumber = dayNumber;
-
+            this.moneyOnHandAtBOD = moneyOnHand;
+            this.pricePerCup = UserInterface.initialPricePerCupOfLemonade;
         }
+
         public double CostPerPitcher
         {
-            get => default(int);
-            set
-            {
-            }
+            get => costPerPitcher;
+            set => costPerPitcher = value;
         }
 
         public double PricePerCup
         {
-            get => default(int);
-            set
-            {
-            }
+            get => pricePerCup;
+            set => pricePerCup = value;
         }
 
         public int NumberOfCupsSold
         {
-            get => default(int);
-            set
-            {
-            }
+            get => numberOfCupsSold;
+            set => numberOfCupsSold = value;
         }
 
-        public int NumberOfCupsThrownAway
+        public int NumberOfCupsRemainingInPitcher
         {
-            get => default(int);
-            set
-            {
-            }
+            get => numberOfCupsRemainingInPitcher;
+            set => numberOfCupsRemainingInPitcher = value;
         }
 
+        public int NumberOfPitchersMade
+        {
+            get => numberOfPitchersMade;
+            set => numberOfPitchersMade = value;
+        }
         public double ExpensesForDay
         {
-            get => default(int);
-            set
-            {
-            }
+            get => expensesForDay;
+            set => expensesForDay = value;
         }
 
-        public double SalesForDay
+        public double SalesIncomeForDay
         {
-            get => default(int);
-            set
-            {
-            }
+            get => salesIncomeForDay;
+            set => salesIncomeForDay = value;
         }
 
         public double ProfitForDay
         {
-            get => default(int);
-            set
-            {
-            }
+            get => salesIncomeForDay - expensesForDay;
+            //set
         }
 
         public int PotentialCustomers
         {
-            get => default(int);
-            set
-            {
-            }
+            get => potentialCustomers;
+            set => potentialCustomers = value;
         }
 
         public bool SoldOut
         {
-            get => default(int);
-            set
-            {
-            }
+            get => soldOut;
+            set => soldOut = value;
         }
 
         public string SoldOutOf
         {
-            get => default(int);
-            set
-            {
-            }
+            get => soldOutOf;
+            set => soldOutOf = value;
         }
 
         public double MoneyOnHandAtBOD
         {
-            get => default(int);
-            set
-            {
-            }
+            get => moneyOnHandAtBOD;
+            set => moneyOnHandAtBOD = value;
         }
 
         public double MoneyOnHandAtEOD
         {
-            get => default(int);
-            set
-            {
-            }
+            get => moneyOnHandAtEOD;
+            set => moneyOnHandAtEOD = value;
         }
 
         public int WeatherForecastTemp
         {
-            get => default(int);
-            set
-            {
-            }
+            get => weatherForecastTemp;
+            set => weatherForecastTemp = value;
         }
 
         public int WeatherForecastConditionNumber
         {
-            get => default(int);
-            set
-            {
-            }
+            get => weatherForecastConditionNumber;
+            set => weatherForecastConditionNumber = value;
         }
 
         public int WeatherForecastChanceOfRainPercent
         {
-            get => default(int);
-            set
-            {
-            }
+            get => weatherForecastChanceOfRainPercent;
+            set => weatherForecastChanceOfRainPercent = value;
         }
 
         public int WeatherActualTemp
         {
-            get => default(int);
-            set
-            {
-            }
+            get => weatherActualTemp;
+            set => weatherActualTemp = value;
         }
 
         public int WeatherActualConditionNumber
         {
-            get => default(int);
-            set
-            {
-            }
+            get => weatherActualConditionNumber;
+            set => weatherActualConditionNumber = value;
         }
 
         public string CustomerComments
         {
-            get => default(int);
-            set
-            {
-            }
+            get => customerComments;
+            set => customerComments = value;
         }
 
         public int DayNumber
         {
-            get => default(int);
-            set
-            {
-            }
+            get => dayNumber;
+            set => dayNumber = value;
         }
     }
 }

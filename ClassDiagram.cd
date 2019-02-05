@@ -20,7 +20,7 @@
   <Class Name="LemonadeStand.Player">
     <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIBAAACQAABABCAAAACIIAEAAACAAAAEAAAAAA=</HashCode>
+      <HashCode>AAABAAIBAAACQAABABAAAAACAIAEAAACAAAAEAQAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -70,7 +70,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAABQEAAAAQAAgFEAAICAgAAAAKAAgAKgAIAAgAA=</HashCode>
+      <HashCode>AAAAAABQEAAAAQAEgFEAAICAgAAAAKAAwACgAIAAgAA=</HashCode>
       <FileName>Day.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -85,10 +85,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.ResultOfDay">
-    <Position X="12" Y="1.25" Width="1.5" />
+    <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAKQAAIAAACAABAAICHBUoCABgAAAAAAAAAAAAE=</HashCode>
+      <HashCode>gAAAAAOQAAIBkACCIRAQoCHBVqCABVAAAgAAAQAAAAE=</HashCode>
       <FileName>ResultOfDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.Pitchers">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Pitchers.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

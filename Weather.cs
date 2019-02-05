@@ -94,6 +94,7 @@ namespace LemonadeStand
             // set forecast values of temperature, conditions, 
             // and percent chance of rain for the requested day
             day.ForecastTemperature = temperatures[day.dayNumber];
+            day.ForecastConditionNumber = conditions[day.dayNumber];
             day.ForecastWeatherConditions = conditionsList[conditions[day.dayNumber]];
             day.RainChancePercent = chancesOfRainPercent[day.dayNumber];
         }
