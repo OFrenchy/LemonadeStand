@@ -110,6 +110,7 @@ namespace LemonadeStand
             
             // set actual temperature & conditions for the requested day
             day.ActualTemperature = actualTemperatures[day.dayNumber - 1];
+            day.ActualConditionNumber = actualConditions[day.dayNumber - 1];
             day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber - 1]];
         }
 
@@ -130,5 +131,9 @@ namespace LemonadeStand
                 weatherAffects[conditions[day.dayNumber]];
         }
     }
+
+
+
+
     
 }

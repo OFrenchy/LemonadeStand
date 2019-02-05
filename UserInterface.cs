@@ -8,8 +8,15 @@ namespace LemonadeStand
 {
     public static class UserInterface
     {
-         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
-        {
+
+        public static int percentTightWads = 25;
+        public static int percentGenerous = 25;
+        public static int startingWeight = 0;
+        public static int customerMaxScore = 9;
+        
+
+        public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
+         {
             // pick a whole number from 1 to upperBound;  if you want a random number, don't prompt
             if (!isRandom)
             {
@@ -157,9 +164,7 @@ namespace LemonadeStand
                 "Each day you must decide what your recipe will be for the day - \n" +
                 "how many lemons and cups of sugar for each pitcher, as well as \n" +
                 "how many ice cubes in each cup that you sell. \n" +
-                "Each pitcher holds 1 gallon, which gives you 12 servings of 10 ounces. \n" +
-                "Because the pitcher is so big, many people are surprised at how many \n" +
-                "lemons are needed to make a really good lemonade. (hint, hint) \n";
+                "Each pitcher holds 12 servings of 10 ounces. \n";
 
             welcomeScreen = welcomeScreen + "\n" +
                 "Before the day's sales begin, you have the opportunity to purchase whatever \n" +

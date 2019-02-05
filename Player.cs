@@ -15,9 +15,15 @@ namespace LemonadeStand
         public string name;
         public Recipe recipe;
         public Recipe inventory;
-        // TODO - change to private with property gets/sets
         public double moneyOnHand;
         public double pricePerCupOfLemonade = 0.25;
+
+        //TODO - chg to be private?
+        public List<Customer> customers;
+
+        // TODO - change to store more historical info - whatever's needed
+        //      for day wrapup & final wrapup
+        public int holdThis = 0;
 
         public Player(Store store, string greeting, double initialInvestment)
         {

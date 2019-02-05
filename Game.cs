@@ -166,36 +166,46 @@ namespace LemonadeStand
 
                 // ONLY AFTER EACH player has set their choices in the ShowPreparationScreen method, 
                 // determine the number of potential customers - (weather forecast affects turnout)
+                //sets day.NumberOfPotentialCustomers
                 weather.affectCustomerTurnout(initialNumberOfPotentialCustomers, day);
                 // set the current day's actual weather from the weather object
                 weather.SetActualWeatherForDay(day);
                 Console.WriteLine();
 
+                
+
+                // Score potential customers on a scale from 1 - 6(?), 
+                //      starting with a starting likelihoodScore of 4(?) (= slightly in favor)
+                //      because people are generally willing to purchase  
+                //      from a little kid selling lemonade
+                // 1/4 of people are tightwads and are generally not willing to buy, 
+                //      so deduct 1 from their score;
+                // 1/4 are generous and are more than willing to buy, 
+                //      add 1 to their score
                 // Three things affect whether a customer will purchase:
                 // 1) weather (affects mood)  ; //{"rain", "overcast", "mostly cloudy", "partly cloudy", "mostly sunny", "clear"}
                 // 2) price
                 // 3) quality of the product
 
-                // Score potential customers on a scale from 1 - 6(?), 
-                //      starting with a starting likelihoodScore of 4(?)
-                //      because people are generally willing to purchase  
-                //      from a little kid selling lemonade
-                // 1/4 of people are tightwads and are generally not willing to buy, 
-                //      so deduct 1 from their score;
-                // 1/3 are generous and are willing to buy, 
-                //      add 1 to their score
-                // if the weather is raining or overcast, deduct 1 from everyone's score
+                // if the weather is raining, overcast, or mostly cloudy, deduct 1 from everyone's score
                 // if the weather is partly cloudy (3) or better, add 1 to everyone's score
-                //
+                int weatherWeight;
+                if ( day.ActualConditionNumber <= 2)
+                {
+                    weatherWeight = -1;
+                }
+                else { weatherWeight = 1; };
+
+
+                day.CreateCustomers();
+
                 // scoreLemonade method - returns integer +/-  to add to likelihoodScore
                 // for the quality of the lemonade, 
                 //      score it based on # of lemons & cups of sugar only;  ice is not a big deal
                 //      if the # of lemons is optimum, add 2(?) to customer's score
                 //      else if the # of lemons is < or > 1/2 the optimum, deduct 2, 
                 //      else if the # of lemons is < or > 1/4 the optimum, deduct 1, 
-                //       
-                
-                
+
                 // Play today's round:
                 // Generate:
                 //      create the actual customers, 
@@ -205,25 +215,30 @@ namespace LemonadeStand
                 foreach (Player thisPlayer in players)
                 {
                     // Generate a weight for the quality of lemonade
-                    int weightforRecipe = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
+                    int recipeWeight = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
 
                     // Generate a weight for the price of lemonade
-                    int weightForPrice = ScorePrice(thisPlayer.pricePerCupOfLemonade, optimalPrice);
+                    int priceWeight = ScorePrice(thisPlayer.pricePerCupOfLemonade, optimalPrice);
 
-                    //Recipe testRecipe;// = new Recipe(1, 1, 5, 1);
-                    for (double i2 = .10; i2 < 1; i2+=0.05)
-                    {
-                        weightForPrice = ScorePrice(i2, optimalPrice);
-                        Console.WriteLine(i2.ToString() + ": " + weightforRecipe.ToString());
-                    }
-
+                    // reset master customer list
+                    day.ScoreCustomers(
+                    UserInterface.percentTightWads,
+                    UserInterface.percentGenerous,
+                    UserInterface.startingWeight,
+                    weatherWeight,
+                    recipeWeight,
+                    priceWeight
+                    );
 
                     // play round
-
-                    //sellLemonadeForDay(thisPlayer, day, weather);
+                    //TODO
+                    int quantitySold = sellLemonadeForDay(thisPlayer, day);
+                    Console.WriteLine($"{quantitySold} sold!");
+                    Console.ReadLine();
 
                     // si
                     UserInterface.showResultsScreen(thisPlayer, day, weather, optimalRecipe);
+                    
                 }
                 
             }  // for each day 
@@ -235,6 +250,27 @@ namespace LemonadeStand
             // throw new System.NotImplementedException();
         }
 
+        public int sellLemonadeForDay(Player thisPlayer, Day day)
+        {
+            Random randomGenerator = new Random();
+            int salesCount = 0;
+            foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
+            {
+                int dieRoll = randomGenerator.Next(1, 6);
+                thisCustomer.dieRoll = dieRoll;
+                if (dieRoll <= thisCustomer.score)
+                {
+                    thisCustomer.dieRoll = dieRoll;
+                    // TODO - change this to more fool-proof method
+                    thisCustomer.IsActualCustomer = true;
+                    salesCount++;
+                }
+            }
+            // TODO - change player object to hold whatever we need to save
+            //      for the day's results screen & final wrap-up screen
+            thisPlayer.holdThis = salesCount;
+            return salesCount;
+        }
         public int ScorePrice(double playerPrice, double optimalPrice)
         {
             // ScorePrice method - returns integer +/-  to add to likelihoodScore
