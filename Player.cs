@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         // class - … Is A …
         // member variables - … Has A …
-        
+
         // TODO - change to private with property gets/sets
         public string name;
         public Recipe recipe;
@@ -25,6 +25,7 @@ namespace LemonadeStand
         //      for day wrapup & final wrapup
         public int holdThis = 0;
         public List<ResultOfDay> resultOfDays;
+
         public Player(Store store, string greeting, double initialInvestment)
         {
             moneyOnHand = initialInvestment;
@@ -39,8 +40,44 @@ namespace LemonadeStand
                 recipe.ingredients[i].QuantityInPrice = store.inventory.ingredients[i].QuantityInPrice;
             }
         }
+    
+        public void addNewResultsOfDay(int dayNumber)
+        {
+            //public List<ResultOfDay> resultOfDays;
+            resultOfDays.Add(new ResultOfDay());
 
+
+
+
+        }
         
+        public int sellLemonadeForDay(Day day)
+        {
+            Console.WriteLine("In Sales");
+            Random randomGenerator = new Random();
+            int salesCount = 0;
+            foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
+            {
+                int dieRoll = randomGenerator.Next(1, 7);  // produces roll 1 - 6
+                thisCustomer.dieRoll = dieRoll;
+                Console.WriteLine($"dieRoll = {dieRoll}, score = {thisCustomer.score}, purchased = {dieRoll <= thisCustomer.score}");
+                if (dieRoll <= thisCustomer.score)
+                {
+                    thisCustomer.dieRoll = dieRoll;
+                    // TODO - change this to more fool-proof method
+                    thisCustomer.IsActualCustomer = true;
+                    salesCount++;
+                }
+                else
+                {
+                    Console.WriteLine("Not a customer!");
+                }
+            }
+            // TODO - change player object to hold whatever we need to save
+            //      for the day's results screen & final wrap-up screen
+            holdThis = salesCount;
+            return salesCount;
+        }
         //public double moneyOnHand
         //{
         //    get => default(int);

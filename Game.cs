@@ -214,6 +214,8 @@ namespace LemonadeStand
                 // Display the Daily results screen for each player
                 foreach (Player thisPlayer in players)
                 {
+                    // create new results for thisPlayer
+                    thisPlayer.addNewResultsOfDay();
                     // Generate a weight for the quality of lemonade
                     int recipeWeight = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
 
@@ -232,7 +234,7 @@ namespace LemonadeStand
 
                     // play round
                     //TODO
-                    int quantitySold = sellLemonadeForDay(thisPlayer, day);
+                    int quantitySold = thisPlayer.sellLemonadeForDay(day);
                     Console.WriteLine($"{quantitySold} sold!");
                     Console.ReadLine();
 
@@ -251,33 +253,33 @@ namespace LemonadeStand
         }
 
         //moved sellLemonadeForDay to Player
-        public int sellLemonadeForDay(Player thisPlayer, Day day)
-        {
-            Console.WriteLine("In Sales");
-            Random randomGenerator = new Random();
-            int salesCount = 0;
-            foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
-            {
-                int dieRoll = randomGenerator.Next(1, 7);  // produces roll 1 - 6
-                thisCustomer.dieRoll = dieRoll;
-                Console.WriteLine($"dieRoll = {dieRoll}, score = {thisCustomer.score}, purchased = {dieRoll <= thisCustomer.score}");
-                if (dieRoll <= thisCustomer.score)
-                {
-                    thisCustomer.dieRoll = dieRoll;
-                    // TODO - change this to more fool-proof method
-                    thisCustomer.IsActualCustomer = true;
-                    salesCount++;
-                }
-                else
-                {
-                    Console.WriteLine("Not a customer!");
-                }
-            }
-            // TODO - change player object to hold whatever we need to save
-            //      for the day's results screen & final wrap-up screen
-            thisPlayer.holdThis = salesCount;
-            return salesCount;
-        }
+        //public int sellLemonadeForDay(Player thisPlayer, Day day)
+        //{
+        //    Console.WriteLine("In Sales");
+        //    Random randomGenerator = new Random();
+        //    int salesCount = 0;
+        //    foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
+        //    {
+        //        int dieRoll = randomGenerator.Next(1, 7);  // produces roll 1 - 6
+        //        thisCustomer.dieRoll = dieRoll;
+        //        Console.WriteLine($"dieRoll = {dieRoll}, score = {thisCustomer.score}, purchased = {dieRoll <= thisCustomer.score}");
+        //        if (dieRoll <= thisCustomer.score)
+        //        {
+        //            thisCustomer.dieRoll = dieRoll;
+        //            // TODO - change this to more fool-proof method
+        //            thisCustomer.IsActualCustomer = true;
+        //            salesCount++;
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Not a customer!");
+        //        }
+        //    }
+        //    // TODO - change player object to hold whatever we need to save
+        //    //      for the day's results screen & final wrap-up screen
+        //    thisPlayer.holdThis = salesCount;
+        //    return salesCount;
+        //}
         public int ScorePrice(double playerPrice, double optimalPrice)
         {
             // ScorePrice method - returns integer +/-  to add to likelihoodScore

@@ -3,7 +3,7 @@
   <Class Name="LemonadeStand.Game">
     <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIIAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -20,7 +20,7 @@
   <Class Name="LemonadeStand.Player">
     <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAQAABABAAAAACAIAEAAACAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAIBAAACQAABABCAAAACIIAEAAACAAAAEAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -82,6 +82,13 @@
     <TypeIdentifier>
       <HashCode>ABAAAIAAAAAAFBBAgBACAAAAAAAAAAAAAAQAAARAAAA=</HashCode>
       <FileName>Weather.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.ResultOfDay">
+    <Position X="12" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAKQAAIAAACAABAAICHBUoCABgAAAAAAAAAAAAE=</HashCode>
+      <FileName>ResultOfDay.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
