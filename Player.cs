@@ -24,7 +24,7 @@ namespace LemonadeStand
         // TODO - change to store more historical info - whatever's needed
         //      for day wrapup & final wrapup
         public int holdThis = 0;
-
+        public List<ResultOfDay> resultOfDays;
         public Player(Store store, string greeting, double initialInvestment)
         {
             moneyOnHand = initialInvestment;

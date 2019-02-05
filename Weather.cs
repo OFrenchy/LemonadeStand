@@ -40,7 +40,7 @@ namespace LemonadeStand
                 // generate a random number between 0 & 5 
                 // which corresponds to the list of conditions (strings) above, 
                 // then add that number to as day's condition 
-                conditions.Add(randomGenerator.Next(5));
+                conditions.Add(randomGenerator.Next(6)); // gives roll 0-6
                 // For the temperatures, 
                 // generate a random number between 0 & 10, then
                 // generate a coin flip to decide whether to add or subtract that 
@@ -48,20 +48,20 @@ namespace LemonadeStand
 
                 // TODO - figure out which is better
                 //temperatures.Add(generateTemperatureGuess(baseTemperature));
-                temperatures.Add(randomGenerator.Next(75, 95));
+                temperatures.Add(randomGenerator.Next(75, 91)); // gives roll 75-90
 
                 // chance of rain is from 0% to 100% in 10% increments
-                chancesOfRainPercent.Add(randomGenerator.Next(10) * 10);
+                chancesOfRainPercent.Add(randomGenerator.Next(11) * 10); // gives roll 0-10
 
                 // Moved to SetActualWeatherForDay
                 //// TODO - move to method called after each player has gone through prep screen
                 //// for the actual weather (temp & conditions), 
                 //// repeat the above algorithms - why not, the forecast vs. actual 
                 //// weather can vary that much
-                //actualConditions.Add(randomGenerator.Next(5));
+                //actualConditions.Add(randomGenerator.Next(6)); // gives roll 0-5
                 //// TODO - figure out which is better
                 ////actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
-                //actualTemperatures.Add(randomGenerator.Next(75, 95));
+                //actualTemperatures.Add(randomGenerator.Next(75, 91)); // gives roll 75-90
 
             } // i = each day
         } // weather instantiated
@@ -72,15 +72,15 @@ namespace LemonadeStand
             // generate a coin flip to decide whether to add or subtract that 
             // number from the baseTemperature (typically baseTemperature is 85 degrees)
             Random randomGenerator = new Random();
-            int addSubtract = randomGenerator.Next(1);
+            int addSubtract = randomGenerator.Next(2); // gives roll 0-1
             if (addSubtract == 0)
             {
                 // TODO - ask a professional how to do an "inline if" - 
-                return baseTemperature + randomGenerator.Next(10);
+                return baseTemperature + randomGenerator.Next(11); // gives roll 0-10
             }
             else
             {
-                return baseTemperature - randomGenerator.Next(10);
+                return baseTemperature - randomGenerator.Next(11); // gives roll 0-10
             }
         }
 
@@ -102,10 +102,10 @@ namespace LemonadeStand
             // for the actual weather (temp & conditions), we can use a random number; 
             // the forecast vs. actual weather can vary that much
             Random randomGenerator = new Random();
-            actualConditions.Add(randomGenerator.Next(5));
+            actualConditions.Add(randomGenerator.Next(6)); // gives roll 0-5
             // TODO - figure out which is better
             //actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
-            actualTemperatures.Add(randomGenerator.Next(75, 95));
+            actualTemperatures.Add(randomGenerator.Next(75, 91)); //gives roll 75-90
 
             
             // set actual temperature & conditions for the requested day

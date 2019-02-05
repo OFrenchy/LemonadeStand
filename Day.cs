@@ -134,7 +134,7 @@ namespace LemonadeStand
             {
                 masterListOfCustomersForDay.Add(new Customer());
             }
-            Console.WriteLine(masterListOfCustomersForDay.Count);
+            //Console.WriteLine(masterListOfCustomersForDay.Count);
         }
 
         public void ScoreCustomers(
@@ -157,7 +157,7 @@ namespace LemonadeStand
 
             // we need NumberOfPotentialCustomers
             //masterListOfCustomersForDay = new List<Customer>();
-            int numberOfTightWads = Convert.ToInt32((Convert.ToInt32(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            int numberOfTightWads = Convert.ToInt32((Convert.ToDouble(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
             // create tightwads
             int i;
             for(i = 0; i < numberOfTightWads; i++)
@@ -173,7 +173,7 @@ namespace LemonadeStand
                     recipeWeight + priceWeight - 1;
                 Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
             }
-            int numberOfGenerous = Convert.ToInt32((Convert.ToInt32(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            int numberOfGenerous = Convert.ToInt32((Convert.ToDouble(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
             int i2;
             for (i2 = i; i2 <  numberOfTightWads + numberOfGenerous; i2++)
             {
@@ -184,9 +184,9 @@ namespace LemonadeStand
                 masterListOfCustomersForDay[i2].recipeWeight = recipeWeight;
                 masterListOfCustomersForDay[i2].priceWeight = priceWeight;
 
-                masterListOfCustomersForDay[i].score = startingScore + weatherWeight +
+                masterListOfCustomersForDay[i2].score = startingScore + weatherWeight +
                     recipeWeight + priceWeight + 1;
-                Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
+                Console.WriteLine($"isTightWad = false, isGenerous = true, score = {masterListOfCustomersForDay[i2].score}");
             }
             // reset the rest in the middle
             int i3;
@@ -198,9 +198,9 @@ namespace LemonadeStand
                 masterListOfCustomersForDay[i3].recipeWeight = recipeWeight;
                 masterListOfCustomersForDay[i3].priceWeight = priceWeight;
 
-                masterListOfCustomersForDay[i].score = startingScore + weatherWeight +
+                masterListOfCustomersForDay[i3].score = startingScore + weatherWeight +
                     recipeWeight + priceWeight;
-                Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
+                Console.WriteLine($"isTightWad = false, isGenerous = false, score = {masterListOfCustomersForDay[i3].score}");
             }
             Console.WriteLine(masterListOfCustomersForDay.Count);
         }

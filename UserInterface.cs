@@ -11,13 +11,13 @@ namespace LemonadeStand
 
         public static int percentTightWads = 25;
         public static int percentGenerous = 25;
-        public static int startingWeight = 0;
+        public static int startingWeight = 4;
         public static int customerMaxScore = 9;
         
 
         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
          {
-            // pick a whole number from 1 to upperBound;  if you want a random number, don't prompt
+            // pick a whole number from 1 to & including upperBound;  if you want a random number, don't prompt
             if (!isRandom)
             {
                 int intInput = promptForIntegerInput(message, 1, upperBound);
@@ -28,7 +28,7 @@ namespace LemonadeStand
                 //generate random number from 1 to upperBound 
                 displayMessage(message, false);
                 Random randomGenerator = new Random();
-                return(randomGenerator.Next(upperBound) + 1);
+                return(randomGenerator.Next(1, upperBound + 1));
             }
         }
         public static string promptForStringInput(string message)

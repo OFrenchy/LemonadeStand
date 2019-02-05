@@ -250,20 +250,27 @@ namespace LemonadeStand
             // throw new System.NotImplementedException();
         }
 
+        //moved sellLemonadeForDay to Player
         public int sellLemonadeForDay(Player thisPlayer, Day day)
         {
+            Console.WriteLine("In Sales");
             Random randomGenerator = new Random();
             int salesCount = 0;
             foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
             {
-                int dieRoll = randomGenerator.Next(1, 6);
+                int dieRoll = randomGenerator.Next(1, 7);  // produces roll 1 - 6
                 thisCustomer.dieRoll = dieRoll;
+                Console.WriteLine($"dieRoll = {dieRoll}, score = {thisCustomer.score}, purchased = {dieRoll <= thisCustomer.score}");
                 if (dieRoll <= thisCustomer.score)
                 {
                     thisCustomer.dieRoll = dieRoll;
                     // TODO - change this to more fool-proof method
                     thisCustomer.IsActualCustomer = true;
                     salesCount++;
+                }
+                else
+                {
+                    Console.WriteLine("Not a customer!");
                 }
             }
             // TODO - change player object to hold whatever we need to save
