@@ -206,10 +206,10 @@ namespace LemonadeStand
                 prepScreen = prepScreen +
                 $"{i + 1})  {player.recipe.ingredients[i].quantity} {player.recipe.ingredients[i].name} \n";
             }
-            
+            double costPerPitcher = player.getCostPerPitcher();
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
-                $"your cost per pitcher is {player.getCostPerPitcher().ToString("C")} which is {(player.getCostPerPitcher()/12).ToString("C")} per cup, and \n" +
+                $"your cost per pitcher is {costPerPitcher.ToString("C")} which is {(costPerPitcher / 12).ToString("C")} per cup, and \n" +
                 $"you can make {player.pitchers.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
 
             prepScreen = prepScreen + "\n" +
@@ -240,15 +240,46 @@ namespace LemonadeStand
         public static void showResultsScreen(Player player, Day day, Weather weather, Recipe optimalRecipe)
         {
             // Construct the display of the results of the day's sales
-            string resultsScreen = $"The forecast was for {day.ForecastTemperature.ToString()} degrees & " +
+            string resultsScreen = "\n" +
+                $"========== {player.name}'s Lemonade Stand - RESULTS FOR DAY {day.dayNumber} ==========\n" +
+                "\n" + $"The forecast was for {day.ForecastTemperature.ToString()} degrees & " +
                 $"{day.ForecastWeatherConditions} with {day.RainChancePercent.ToString()}% chance of rain. \n" +
-                $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " + 
+                $"The actual temperature was {day.ActualTemperature.ToString()} degrees & " +
                 $"{day.ActualWeatherConditions}. \n";
 
-            //string recipeRecommendation = CompareRecipes(player.recipe, optimalRecipe);
-            resultsScreen = resultsScreen + $"\n {CompareRecipes(player.recipe, optimalRecipe)}. \n";
+            resultsScreen += "\n" +
+                "Your current inventory is below.  \n";
+            // loop through inventory & append to screen 
+            for (int i = 0; i < player.inventory.ingredients.Count; i++)
+            {
+                resultsScreen +=
+                $"{i + 1})  {player.recipe.ingredients[i].quantity} {player.recipe.ingredients[i].name} \n";
+            }
+            
+            resultsScreen += "\n" +
+                $"Your cost per pitcher was {player.resultOfDay.CostPerPitcher.ToString("C")} which is {(player.resultOfDay.CostPerPitcher / player.recipe.servings).ToString("C")} per cup, and \n" +
+                $"you charged {player.resultsOfDays[day.dayNumber].PricePerCup.ToString("C")} per cup. \n" +
+                $"You made {player.resultOfDay.NumberOfPitchersMade} pitchers;  each pitcher holds {player.recipe.servings} servings (cups) of 10 ounces. \n" +
+                $"You discarded {player.resultOfDay.NumberOfCupsRemainingInPitcher} cups of lemonade at the end of the day. \n" +
+                $"You currently have {string.Format("{0:C}", player.resultOfDay.MoneyOnHandAtEOD)} in the cash box. \n";
 
-            resultsScreen = resultsScreen + "\n" + "Press enter/return to continue:";
+            resultsScreen += $"\n {CompareRecipes(player.recipe, optimalRecipe)}. \n";
+
+            resultsScreen +=
+                $"\nYour total sales today were {player.resultOfDay.SalesIncomeForDay.ToString("C")}. \n" +
+                $"Your total expenses were {player.resultOfDay.ExpensesForDay}. \n";
+            if (player.resultOfDay.ProfitForDay > 0)
+            {
+                resultsScreen += "Your profit ";
+            }
+            else
+            {
+                resultsScreen += "Your loss ";
+            }
+            resultsScreen += $"for today was {player.resultOfDay.ProfitForDay.ToString("C")}";
+            
+
+            resultsScreen += "\n" + "Press enter/return to continue:";
             clearScreen();
             UserInterface.displayMessage(resultsScreen, true);
         }

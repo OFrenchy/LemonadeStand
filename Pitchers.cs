@@ -43,6 +43,8 @@ namespace LemonadeStand
                 // TODO - 
                 // decrease inventory by recipe amounts
 
+                decreaseInventoryByOneRecipe();
+
                 resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
                 resultOfDay.NumberOfPitchersMade++;
 
@@ -57,6 +59,13 @@ namespace LemonadeStand
             }
         }
 
+        public void decreaseInventoryByOneRecipe()
+        {
+            for (int i = 0; i < inventory.ingredients.Count; i++)
+            {
+                inventory.ingredients[i].quantity -= recipe.ingredients[i].quantity;
+            }
+        }
         public void SoldCup()
         {
             resultOfDay.NumberOfCupsRemainingInPitcher-- ;
