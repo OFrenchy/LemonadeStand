@@ -24,6 +24,7 @@ namespace LemonadeStand
         public List<ResultOfDay> resultsOfDays= new List<ResultOfDay>();
         public ResultOfDay resultOfDay;
 
+        public double pricePerCupOfLemonade = UserInterface.initialPricePerCupOfLemonade;
         //public Pitchers pitchers;
 
         public Player(Store store, string greeting, double initialInvestment)
@@ -50,25 +51,24 @@ namespace LemonadeStand
                 inventory.items[i].PriceForQuantity = store.inventory.items[i].PriceForQuantity;
                 inventory.items[i].QuantityInPrice = store.inventory.items[i].QuantityInPrice;
             }
-
-
-
-
         }
-
-        //public void addNewResultsOfDay(int dayNumber)
-        //{
-        //    resultOfDays.Add(new ResultOfDay(dayNumber));
-        //}
-
-        public void ResetForNewDay(int dayNumber)
+        public double ProfitToDate()
+        {
+            double profitToDate = 0;
+            for (int i = 0; i < resultsOfDays.Count; i++)
+            {
+                profitToDate += resultsOfDays[i].ProfitForDay;
+            }
+            return profitToDate;
+        }
+        public void ResetForNewDay(int dayNumber, double moneyOnHand, double pricePerCupOfLemonade)
         {
             // create new results for thisPlayer
-            resultOfDay = new ResultOfDay(dayNumber, moneyOnHand);
-
+            resultOfDay = new ResultOfDay(dayNumber, moneyOnHand, pricePerCupOfLemonade);
+            resultOfDay.PricePerCup = pricePerCupOfLemonade;
             //resultsOfDays.Add(resultOfDay);
-            
-            
+
+
             //Pitchers pitchers = new Pitchers(recipe, inventory, resultOfDay);
             //pitchers = new Pitchers(recipe, inventory, resultOfDay);
 
@@ -85,7 +85,7 @@ namespace LemonadeStand
 
             resultOfDay.CostPerPitcher = getCostPerPitcher();
             // handled in showprepscreen
-            //resultOfDay.PricePerCup = pricePerCupOfLemonade;
+            resultOfDay.PricePerCup = pricePerCupOfLemonade;
             // handled in game.playgame, after customers are created
 
             //resultOfDay.PotentialCustomers = day.NumberOfPotentialCustomers;
@@ -271,7 +271,7 @@ namespace LemonadeStand
             int quantityToPurchase = UserInterface.promptForIntegerInput(
                     $"Enter the quantity of {store.inventory.items[itemNumber].quantityDescription} to purchase for {store.inventory.items[itemNumber].PriceForQuantity.ToString("C")} each:",
                     0, 80);
-            double saleAmount = (double)quantityToPurchase * store.inventory.items[itemNumber].PriceForQuantity);
+            double saleAmount = (double)quantityToPurchase * store.inventory.items[itemNumber].PriceForQuantity;
             // check that the player has enough money
             if (moneyOnHand >= saleAmount)
             {

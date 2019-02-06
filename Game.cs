@@ -78,8 +78,7 @@ namespace LemonadeStand
 
     public class Game
     {
-        
-        public void playGame()
+        public bool playGame()
         {
             int numberOfDays = 7;
             double initialInvestment = 20.00;
@@ -139,7 +138,7 @@ namespace LemonadeStand
                 // Display the Daily prep screen for each player
                 foreach (Player thisPlayer in players)
                 {
-                    thisPlayer.ResetForNewDay(day.dayNumber);
+                    thisPlayer.ResetForNewDay(day.dayNumber, thisPlayer.moneyOnHand, thisPlayer.pricePerCupOfLemonade);
                     // add the forecast weather data to the resultsofdays
                     thisPlayer.resultOfDay.WeatherForecastTemp = day.ForecastTemperature;
                     thisPlayer.resultOfDay.WeatherForecastConditionNumber = day.ForecastConditionNumber;
@@ -176,15 +175,15 @@ namespace LemonadeStand
                                     break;
                                 case 8:
                                     // Change the price per cup you will charge.  
-                                    // TODO - chg to only store in one place
-                                    //thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
-                                    //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
-                                    thisPlayer.resultOfDay.PricePerCup = UserInterface.promptForNumberInput(
+                                    thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
                                         "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
+                                    thisPlayer.resultOfDay.PricePerCup = thisPlayer.pricePerCupOfLemonade;
+                                    //thisPlayer.resultOfDay.PricePerCup = UserInterface.promptForNumberInput(
+                                    //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
                                     break;
                                 case 9:
                                     // user wants to quit
-                                    return;
+                                    return false;
                             } // switch
                         } // if intOption > 0
                     }
@@ -239,10 +238,6 @@ namespace LemonadeStand
                 foreach (Player thisPlayer in players)
                 {
                     // add the actual weather data to the resultsofdays
-                    //thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualTemp = day.ActualTemperature;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualConditionNumber = day.ActualConditionNumber;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].PotentialCustomers = day.NumberOfPotentialCustomers;
                     thisPlayer.resultOfDay.WeatherActualTemp = day.ActualTemperature;
                     thisPlayer.resultOfDay.WeatherActualConditionNumber = day.ActualConditionNumber;
                     thisPlayer.resultOfDay.PotentialCustomers = day.NumberOfPotentialCustomers;
@@ -274,11 +269,7 @@ namespace LemonadeStand
                 }
                 
             }  // for each day 
-
-
-
-
-
+            return true;
             // throw new System.NotImplementedException();
         }
 

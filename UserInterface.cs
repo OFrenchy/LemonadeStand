@@ -284,8 +284,7 @@ namespace LemonadeStand
             }
             resultsScreen += $"for today was {player.resultOfDay.ProfitForDay.ToString("C")}";
 
-            //resultsScreen += $"\nYour total profit to date is {player.totalProfits().ToString("C")}. \n";
-
+            resultsScreen += $"\nYour total profit to date is {player.ProfitToDate().ToString("C")}. \n";
 
             resultsScreen += "\n" + "Press enter/return to continue:";
             clearScreen();

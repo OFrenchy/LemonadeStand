@@ -30,11 +30,11 @@ namespace LemonadeStand
         
 
         //==========================================================================================
-        public ResultOfDay(int dayNumber, double moneyOnHand)
+        public ResultOfDay(int dayNumber, double moneyOnHand, double pricePerCupOfLemonade)
         {
             this.dayNumber = dayNumber;
             this.moneyOnHandAtBOD = moneyOnHand;
-            this.pricePerCup = UserInterface.initialPricePerCupOfLemonade;
+            this.pricePerCup = pricePerCupOfLemonade;
         }
 
         public double CostPerPitcher

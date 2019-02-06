@@ -8,22 +8,15 @@ namespace LemonadeStand
 {
     class Program
     {
-        //public Game Game
-        //{
-        //    get => default(Game);
-        //    set
-        //    {
-        //    }
-        //}
-
         static void Main(string[] args)
         {
+            bool gameReturn = true;
             do
             {
                 Game Game = new Game();
-                Game.playGame();
+                gameReturn = Game.playGame();
             }
-            while (UserInterface.promptForYesNoInput("Do you want to add another player? Enter y or n:").ToString() == "y");
+            while (gameReturn && UserInterface.promptForYesNoInput("Do you want to play again? Enter y or n:").ToString() == "y");
         }
     }
 }

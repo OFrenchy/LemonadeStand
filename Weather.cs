@@ -86,10 +86,10 @@ namespace LemonadeStand
         {
             // set forecast values of temperature, conditions, 
             // and percent chance of rain for the requested day
-            day.ForecastTemperature = temperatures[day.dayNumber];
-            day.ForecastConditionNumber = conditions[day.dayNumber];
-            day.ForecastWeatherConditions = conditionsList[conditions[day.dayNumber]];
-            day.RainChancePercent = chancesOfRainPercent[day.dayNumber];
+            day.ForecastTemperature = temperatures[day.dayNumber - 1];
+            day.ForecastConditionNumber = conditions[day.dayNumber - 1];
+            day.ForecastWeatherConditions = conditionsList[conditions[day.dayNumber - 1]];
+            day.RainChancePercent = chancesOfRainPercent[day.dayNumber - 1];
         }
         public void SetActualWeatherForDay(Day day)
         {
@@ -122,7 +122,7 @@ namespace LemonadeStand
             
             int[] weatherAffects = {-12, -6, 0, 6, 12, 18};
             day.NumberOfPotentialCustomers = initialNumberOfPotentialCustomers + 
-                weatherAffects[conditions[day.dayNumber]];
+                weatherAffects[conditions[day.dayNumber- 1]];
         }
     }
 
