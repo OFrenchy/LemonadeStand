@@ -33,10 +33,10 @@ namespace LemonadeStand
             name = UserInterface.promptForStringInput($"{greeting}Enter this player's name:");
             recipe = new LemonadeRecipe();
             inventory = new Inventory();// 0, 0, 0, 0, UserInterface.numberOfServingsPerPitcher);
-            inventory.addItem(new Lemon("lemon", 0));
-            inventory.addItem(new Sugar("sugar", 0));
-            inventory.addItem(new Ice("ice", 0));
-            inventory.addItem(new Cup("cup", 0));
+            inventory.addItem(new Lemon("Lemon(s)", 0));
+            inventory.addItem(new Sugar("Cup(s) of Sugar", 0));
+            inventory.addItem(new Ice("Ice Cubes", 0));
+            inventory.addItem(new Cup("Cup(s)", 0));
 
             // Get the prices from the store:  
             // loop through items & get & set the price from the store
@@ -65,7 +65,10 @@ namespace LemonadeStand
         {
             // create new results for thisPlayer
             resultOfDay = new ResultOfDay(dayNumber, moneyOnHand);
-            resultsOfDays.Add(resultOfDay);
+
+            //resultsOfDays.Add(resultOfDay);
+            
+            
             //Pitchers pitchers = new Pitchers(recipe, inventory, resultOfDay);
             //pitchers = new Pitchers(recipe, inventory, resultOfDay);
 
@@ -84,6 +87,7 @@ namespace LemonadeStand
             // handled in showprepscreen
             //resultOfDay.PricePerCup = pricePerCupOfLemonade;
             // handled in game.playgame, after customers are created
+
             //resultOfDay.PotentialCustomers = day.NumberOfPotentialCustomers;
 
             // TODO - find out where handled
@@ -149,10 +153,11 @@ namespace LemonadeStand
             resultOfDay.SalesIncomeForDay +=  resultOfDay.PricePerCup;
             //moneyOnHand += resultOfDay.PricePerCup;
             resultOfDay.MoneyOnHandAtEOD += resultOfDay.PricePerCup;
+            moneyOnHand += resultOfDay.PricePerCup;
             // decrement inventory of cups by 1
             inventory.items[3].quantity--;
             // increase expenses by the cost of 1 physical cup
-            resultOfDay.ExpensesForDay += inventory.items[3].GetPriceEach();
+            //resultOfDay.ExpensesForDay += inventory.items[3].GetPriceEach();
 
             // decrement cups in pitcher count; 
             resultOfDay.NumberOfCupsRemainingInPitcher--;
@@ -171,17 +176,18 @@ namespace LemonadeStand
             //  otherwise set soldout, soldoutof, and return false
             if (getMaxNumberOfPitchers() > 0)
             {
-                // TODO - 
                 // decrease inventory by recipe amounts
                 decreaseInventoryByOneRecipe();
-                // increase expenses in the ledger
-                resultOfDay.ExpensesForDay += getCostPerPitcher();
-
-                resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
-                resultOfDay.NumberOfPitchersMade++;
+                //// increase expenses in the ledger
+                //resultOfDay.ExpensesForDay += getCostPerPitcher();
 
                 // add # of servings to resultOfDay.servingsin pitcher
+                resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
                 // increment # pitchers made in 
+                resultOfDay.NumberOfPitchersMade++;
+
+                UserInterface.displayMessage("Made another pitcher.",false);
+
                 return true;
             }
             else
@@ -258,23 +264,26 @@ namespace LemonadeStand
         }
         
         
-        public void PurchaseItem(int itemNumber, Store store)
+        public void PurchaseItem(int itemNumber, Store store, ResultOfDay resultOfDay)
         {
             // get the player's quantity, then check if he/she has enough money;
             // if so, change the inventory & reduce his moneyOnHand
             int quantityToPurchase = UserInterface.promptForIntegerInput(
                     $"Enter the quantity of {store.inventory.items[itemNumber].quantityDescription} to purchase for {store.inventory.items[itemNumber].PriceForQuantity.ToString("C")} each:",
                     0, 80);
+            double saleAmount = (double)quantityToPurchase * store.inventory.items[itemNumber].PriceForQuantity);
             // check that the player has enough money
-            if (moneyOnHand >= ((double)quantityToPurchase * store.inventory.items[itemNumber].PriceForQuantity))
+            if (moneyOnHand >= saleAmount)
             {
                 // Add the quantityToPurchase * quantityInPrice to the inventory
                 inventory.items[itemNumber].quantity =
                     inventory.items[itemNumber].quantity +
                     (quantityToPurchase * store.inventory.items[itemNumber].QuantityInPrice);
                 // Deduct the amount from his moneyOnHand
-                moneyOnHand = moneyOnHand -
-                    ((double)quantityToPurchase * store.inventory.items[itemNumber].PriceForQuantity);
+                moneyOnHand = moneyOnHand - saleAmount;
+
+                // add this purchase to expenses for the day
+                resultOfDay.ExpensesForDay += saleAmount;
                 Console.WriteLine("purchase complete");
             }
             else

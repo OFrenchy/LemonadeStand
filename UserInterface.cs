@@ -226,7 +226,7 @@ namespace LemonadeStand
                     leftPart + rightPart;
             }
             prepScreen = prepScreen + "\n" +
-                $"8) You are charging {player.resultsOfDays[day.dayNumber - 1].PricePerCup.ToString("C")} per cup of lemonade that you sell. \n";
+                $"8) You are charging {player.resultOfDay.PricePerCup.ToString("C")} per cup of lemonade that you sell. \n";
             
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
@@ -263,11 +263,17 @@ namespace LemonadeStand
                 $"You discarded {player.resultOfDay.NumberOfCupsRemainingInPitcher} cups of lemonade at the end of the day. \n" +
                 $"You currently have {string.Format("{0:C}", player.resultOfDay.MoneyOnHandAtEOD)} in the cash box. \n";
 
-            resultsScreen += $"\n {CompareRecipes(player.recipe, optimalRecipe)}. \n";
+            resultsScreen += $"\n{CompareRecipes(player.recipe, optimalRecipe)}. \n";
+
+            resultsScreen += $"\nYou sold {player.resultOfDay.NumberOfCupsSold} to {player.resultOfDay.PotentialCustomers} potential customers. \n";
+            if (player.resultOfDay.SoldOut)
+            {
+                resultsScreen += $"\nYou sold out of {player.resultOfDay.SoldOutOf}! \n";
+            }
 
             resultsScreen +=
                 $"\nYour total sales today were {player.resultOfDay.SalesIncomeForDay.ToString("C")}. \n" +
-                $"Your total expenses were {player.resultOfDay.ExpensesForDay}. \n";
+                $"Your total expenses were {player.resultOfDay.ExpensesForDay.ToString("C")}. \n";
             if (player.resultOfDay.ProfitForDay > 0)
             {
                 resultsScreen += "Your profit ";
@@ -277,7 +283,9 @@ namespace LemonadeStand
                 resultsScreen += "Your loss ";
             }
             resultsScreen += $"for today was {player.resultOfDay.ProfitForDay.ToString("C")}";
-            
+
+            //resultsScreen += $"\nYour total profit to date is {player.totalProfits().ToString("C")}. \n";
+
 
             resultsScreen += "\n" + "Press enter/return to continue:";
             clearScreen();

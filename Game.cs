@@ -141,15 +141,18 @@ namespace LemonadeStand
                 {
                     thisPlayer.ResetForNewDay(day.dayNumber);
                     // add the forecast weather data to the resultsofdays
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastTemp = day.ForecastTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastConditionNumber = day.ForecastConditionNumber;
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
+                    thisPlayer.resultOfDay.WeatherForecastTemp = day.ForecastTemperature;
+                    thisPlayer.resultOfDay.WeatherForecastConditionNumber = day.ForecastConditionNumber;
+                    thisPlayer.resultOfDay.WeatherForecastChanceOfRainPercent = day.RainChancePercent;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastTemp = day.ForecastTemperature;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastConditionNumber = day.ForecastConditionNumber;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
 
                     int intOption;
                     do
                     {
                         intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                            day, store , thisPlayer.resultsOfDays[day.dayNumber - 1]);
+                            day, store , thisPlayer.resultOfDay);
                         if (intOption > 0)
                         {
                             // change recipe or purchase items - was series of if - else if blocks
@@ -169,16 +172,15 @@ namespace LemonadeStand
                                 case 6:
                                 case 7:
                                     // purchase an item 
-                                    thisPlayer.PurchaseItem(intOption - 4, store);
+                                    thisPlayer.PurchaseItem(intOption - 4, store, thisPlayer.resultOfDay);
                                     break;
                                 case 8:
                                     // Change the price per cup you will charge.  
                                     // TODO - chg to only store in one place
                                     //thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
                                     //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
-                                    thisPlayer.resultsOfDays[day.dayNumber -1].PricePerCup = UserInterface.promptForNumberInput(
+                                    thisPlayer.resultOfDay.PricePerCup = UserInterface.promptForNumberInput(
                                         "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
-
                                     break;
                                 case 9:
                                     // user wants to quit
@@ -238,17 +240,19 @@ namespace LemonadeStand
                 {
                     // add the actual weather data to the resultsofdays
                     //thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualTemp = day.ActualTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualConditionNumber = day.ActualConditionNumber;
-
-                    thisPlayer.resultsOfDays[day.dayNumber - 1].PotentialCustomers = day.NumberOfPotentialCustomers;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualTemp = day.ActualTemperature;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualConditionNumber = day.ActualConditionNumber;
+                    //thisPlayer.resultsOfDays[day.dayNumber - 1].PotentialCustomers = day.NumberOfPotentialCustomers;
+                    thisPlayer.resultOfDay.WeatherActualTemp = day.ActualTemperature;
+                    thisPlayer.resultOfDay.WeatherActualConditionNumber = day.ActualConditionNumber;
+                    thisPlayer.resultOfDay.PotentialCustomers = day.NumberOfPotentialCustomers;
 
 
                     // Generate a weight for the quality of lemonade
                     int recipeWeight = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
 
                     // Generate a weight for the price of lemonade
-                    int priceWeight = ScorePrice(thisPlayer.resultsOfDays[day.dayNumber - 1].PricePerCup, optimalPrice);
+                    int priceWeight = ScorePrice(thisPlayer.resultOfDay.PricePerCup, optimalPrice);
 
                     // reset master customer list
                     day.ScoreCustomers(
