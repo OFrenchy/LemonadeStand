@@ -136,20 +136,8 @@ namespace LemonadeStand
                     break;
                 }
             }// foreach customer
-            // TODO - change player object to hold whatever we need to save
-            //      for the day's results screen & final wrap-up screen
-           // holdThis = salesCount;
-
-            // populate the rest of resultOfDay
-             // TODO - add pitcher, #cupsRemaining
-            // move to pitchers
-                //resultOfDay.numberOfCupsRemainingInPitcher = pitchers.cupsRemaining;
-                //resultOfDay.ExpensesForDay = getCostPerPitcher() * pitchers.numberMade;
-            
-            //resultOfDay.ProfitForDay is a property calculation in resultOfDay class
-
-
-
+            // End of day, the ice melts, set inventory of ice to 0
+            inventory.items[2].quantity = 0;
             // add resultOfDay to list resultsOfDays
             resultsOfDays.Add(resultOfDay);
             return salesCount;

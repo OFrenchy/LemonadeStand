@@ -253,7 +253,7 @@ namespace LemonadeStand
             for (int i = 0; i < player.inventory.items.Count; i++)
             {
                 resultsScreen +=
-                $"{i + 1})  {player.recipe.items[i].quantity} {player.recipe.items[i].name} \n";
+                $"{i + 1})  {player.inventory.items[i].quantity} {player.inventory.items[i].name} \n";
             }
             
             resultsScreen += "\n" +
