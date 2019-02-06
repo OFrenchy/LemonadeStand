@@ -8,14 +8,6 @@ namespace LemonadeStand
 {
     class Program
     {
-        public Game Game
-        {
-            get => default(Game);
-            set
-            {
-            }
-        }
-
         //public Game Game
         //{
         //    get => default(Game);
@@ -31,7 +23,7 @@ namespace LemonadeStand
                 Game Game = new Game();
                 Game.playGame();
             }
-            while (UserInterface.promptForYesNoInput("Do you want to play another game? Enter y or n:").ToString() == "y");
+            while (UserInterface.promptForYesNoInput("Do you want to add another player? Enter y or n:").ToString() == "y");
         }
     }
 }

@@ -8,15 +8,15 @@ namespace LemonadeStand
     public class ResultOfDay
     {
         private int dayNumber;
-        private double costPerPitcher = -384.0;
-        private double pricePerCup = -384.0;
-        private int numberOfCupsSold = -1;
-        private int numberOfCupsRemainingInPitcher = -1;
+        private double costPerPitcher = 0;
+        private double pricePerCup = 0;
+        private int numberOfCupsSold = 0;
+        private int numberOfCupsRemainingInPitcher = 0;
         private int numberOfPitchersMade = 0;
-        private double expensesForDay = -384.0;
-        private double salesIncomeForDay = -384.0;
-        //private double profitForDay = -384.0;
-        private int potentialCustomers = -1;
+        private double expensesForDay = 0;
+        private double salesIncomeForDay = 0;
+        //private double profitForDay = 0;
+        private int potentialCustomers = 0;
         private bool soldOut = false;
         private string soldOutOf = "";
         private double moneyOnHandAtBOD = 0.0;

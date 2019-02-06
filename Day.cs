@@ -23,7 +23,7 @@ namespace LemonadeStand
         public int dayNumber;
 
         //TODO - chg to be private?
-        public List<Customer> masterListOfCustomersForDay;
+        public List<CustomerTightwadOrGenerous> masterListOfCustomersForDay;
 
         //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
 
@@ -135,16 +135,30 @@ namespace LemonadeStand
                 }
             }
         }
-        public void CreateCustomers()
+        public void CreateCustomers(int percentTightWads,
+                    int percentGenerous)
         {
-            //public List<Customer> masterListOfCustomersForDay;
-            
             // we need NumberOfPotentialCustomers
-            masterListOfCustomersForDay = new List<Customer>();
+            masterListOfCustomersForDay = new List<CustomerTightwadOrGenerous>();
             // create each customer
-            for (int i = 0; i < numberOfPotentialCustomers; i++)
+            int numberOfTightWads = Convert.ToInt32((Convert.ToDouble(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            // create tightwads
+            int i;
+            for (i = 0; i < numberOfTightWads; i++)
             {
-                masterListOfCustomersForDay.Add(new Customer());
+                masterListOfCustomersForDay.Add(new CustomerTightwadOrGenerous(true, false));
+            }
+            int numberOfGenerous = Convert.ToInt32((Convert.ToDouble(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            int i2;
+            for (i2 = i; i2 < numberOfTightWads + numberOfGenerous; i2++)
+            {
+                masterListOfCustomersForDay.Add(new CustomerTightwadOrGenerous(false, true));
+            }
+            // Create the rest in the middle
+            int i3;
+            for (i3 = i2; i3 < numberOfPotentialCustomers; i3++)
+            {
+                masterListOfCustomersForDay.Add(new CustomerTightwadOrGenerous(false, false));
             }
             //Console.WriteLine(masterListOfCustomersForDay.Count);
         }
@@ -158,62 +172,71 @@ namespace LemonadeStand
                     int priceWeight
                     )
         {
-            //public List<Customer> masterListOfCustomersForDay;
-            //startingWeight 
-            if (percentTightWads + percentGenerous > 100)
-            {
-                // set both to 0
-                percentTightWads = 0;
-                percentGenerous = 0;
-            }
-
-            // we need NumberOfPotentialCustomers
-            //masterListOfCustomersForDay = new List<Customer>();
-            int numberOfTightWads = Convert.ToInt32((Convert.ToDouble(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
-            // create tightwads
-            int i;
-            for(i = 0; i < numberOfTightWads; i++)
+            for (int i = 0; i < masterListOfCustomersForDay.Count; i++)
             {
                 //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
-                masterListOfCustomersForDay[i].isTightWad = true;
-                masterListOfCustomersForDay[i].isGenerous = false;
+                //masterListOfCustomersForDay[i].isTightWad = true;
+                //masterListOfCustomersForDay[i].isGenerous = false;
                 masterListOfCustomersForDay[i].weatherWeight = weatherWeight;
                 masterListOfCustomersForDay[i].recipeWeight = recipeWeight;
                 masterListOfCustomersForDay[i].priceWeight = priceWeight;
-
                 masterListOfCustomersForDay[i].score = startingScore + weatherWeight +
-                    recipeWeight + priceWeight - 1;
-                Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
+                    recipeWeight + priceWeight + masterListOfCustomersForDay[i].predispositionToBuy;
+                Console.WriteLine($"{masterListOfCustomersForDay[i].isTightWad} {masterListOfCustomersForDay[i].isGenerous}, score = {masterListOfCustomersForDay[i].score}");
             }
-            int numberOfGenerous = Convert.ToInt32((Convert.ToDouble(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
-            int i2;
-            for (i2 = i; i2 <  numberOfTightWads + numberOfGenerous; i2++)
-            {
-                //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
-                masterListOfCustomersForDay[i2].isTightWad = false;
-                masterListOfCustomersForDay[i2].isGenerous = true;
-                masterListOfCustomersForDay[i2].weatherWeight = weatherWeight;
-                masterListOfCustomersForDay[i2].recipeWeight = recipeWeight;
-                masterListOfCustomersForDay[i2].priceWeight = priceWeight;
 
-                masterListOfCustomersForDay[i2].score = startingScore + weatherWeight +
-                    recipeWeight + priceWeight + 1;
-                Console.WriteLine($"isTightWad = false, isGenerous = true, score = {masterListOfCustomersForDay[i2].score}");
-            }
-            // reset the rest in the middle
-            int i3;
-            for (i3 = i2; i3 < numberOfPotentialCustomers; i3++)
-            {
-                masterListOfCustomersForDay[i3].isTightWad = false;
-                masterListOfCustomersForDay[i3].isGenerous = false;
-                masterListOfCustomersForDay[i3].weatherWeight = weatherWeight;
-                masterListOfCustomersForDay[i3].recipeWeight = recipeWeight;
-                masterListOfCustomersForDay[i3].priceWeight = priceWeight;
-
-                masterListOfCustomersForDay[i3].score = startingScore + weatherWeight +
-                    recipeWeight + priceWeight;
-                Console.WriteLine($"isTightWad = false, isGenerous = false, score = {masterListOfCustomersForDay[i3].score}");
-            }
+            ////public List<Customer> masterListOfCustomersForDay;
+            ////startingWeight 
+            //if (percentTightWads + percentGenerous > 100)
+            //{
+            //    // set both to 0
+            //    percentTightWads = 0;
+            //    percentGenerous = 0;
+            //}
+            //// we need NumberOfPotentialCustomers
+            ////masterListOfCustomersForDay = new List<Customer>();
+            //int numberOfTightWads = Convert.ToInt32((Convert.ToDouble(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            //// create tightwads
+            //int i;
+            //for(i = 0; i < numberOfTightWads; i++)
+            //{
+            //    //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
+            //    masterListOfCustomersForDay[i].isTightWad = true;
+            //    masterListOfCustomersForDay[i].isGenerous = false;
+            //    masterListOfCustomersForDay[i].weatherWeight = weatherWeight;
+            //    masterListOfCustomersForDay[i].recipeWeight = recipeWeight;
+            //    masterListOfCustomersForDay[i].priceWeight = priceWeight;
+            //    masterListOfCustomersForDay[i].score = startingScore + weatherWeight +
+            //        recipeWeight + priceWeight - 1;
+            //    Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
+            //}
+            //int numberOfGenerous = Convert.ToInt32((Convert.ToDouble(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
+            //int i2;
+            //for (i2 = i; i2 <  numberOfTightWads + numberOfGenerous; i2++)
+            //{
+            //    //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
+            //    masterListOfCustomersForDay[i2].isTightWad = false;
+            //    masterListOfCustomersForDay[i2].isGenerous = true;
+            //    masterListOfCustomersForDay[i2].weatherWeight = weatherWeight;
+            //    masterListOfCustomersForDay[i2].recipeWeight = recipeWeight;
+            //    masterListOfCustomersForDay[i2].priceWeight = priceWeight;
+            //    masterListOfCustomersForDay[i2].score = startingScore + weatherWeight +
+            //        recipeWeight + priceWeight + 1;
+            //    Console.WriteLine($"isTightWad = false, isGenerous = true, score = {masterListOfCustomersForDay[i2].score}");
+            //}
+            //// reset the rest in the middle
+            //int i3;
+            //for (i3 = i2; i3 < numberOfPotentialCustomers; i3++)
+            //{
+            //    masterListOfCustomersForDay[i3].isTightWad = false;
+            //    masterListOfCustomersForDay[i3].isGenerous = false;
+            //    masterListOfCustomersForDay[i3].weatherWeight = weatherWeight;
+            //    masterListOfCustomersForDay[i3].recipeWeight = recipeWeight;
+            //    masterListOfCustomersForDay[i3].priceWeight = priceWeight;
+            //    masterListOfCustomersForDay[i3].score = startingScore + weatherWeight +
+            //        recipeWeight + priceWeight;
+            //    Console.WriteLine($"isTightWad = false, isGenerous = false, score = {masterListOfCustomersForDay[i3].score}");
+            //}
             Console.WriteLine(masterListOfCustomersForDay.Count);
         }
     }

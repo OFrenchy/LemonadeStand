@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LemonadeStand
 {
-    public class Ingredient
+    public class Item
     {
         // TODO - change to private w/acccompanying property sets/gets
         public string name;
@@ -15,7 +15,7 @@ namespace LemonadeStand
         private double priceForQuantity;
         private int quantityInPrice;
         
-        public Ingredient(string name, int quantity = 0)
+        public Item(string name, int quantity = 0)
         {
             this.name = name;
             this.quantity = quantity;
@@ -50,14 +50,5 @@ namespace LemonadeStand
         {
             return priceForQuantity / quantityInPrice;
         }
-
-            
-        //public int PriceEach
-        //{
-        //    get => default(int);
-        //    set
-        //    {
-        //    }
-        //}
     }
 }

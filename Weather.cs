@@ -18,7 +18,6 @@ namespace LemonadeStand
         private List<int> actualConditions;
         private List<int> actualTemperatures;
 
-
         // the base temperature for mid-July, from which we deviate + or -
         private int baseTemperature = 85;
 
@@ -83,12 +82,6 @@ namespace LemonadeStand
                 return baseTemperature - randomGenerator.Next(11); // gives roll 0-10
             }
         }
-
-        public void affectCustomersMoods()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void GetForecast(Day day)
         {
             // set forecast values of temperature, conditions, 

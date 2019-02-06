@@ -10,31 +10,28 @@
   <Class Name="LemonadeStand.Program">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Game" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Player">
     <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAIBAAACQAABABAAAAACAIAEAAACAAAAEAQAAAA=</HashCode>
+      <HashCode>AAABAEMBAAAAQAABADAAAAAiIAAEAAACAgAAEAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.UserInterface">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAABIlAAAAAAAAAAAAACGYIAAAACAAAABAIIQ=</HashCode>
+      <HashCode>AAABAAQAABIlAAAAQAAAAAAAACGYIAAAACAAAABAIIQ=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Customer">
     <Position X="6" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AkAAAAAAQAAAAEgAAAAIAGAAAAAAAAQAAgAAAAACAAA=</HashCode>
+      <HashCode>AgAAAAAAQAAAAEAAAAAIAEAAAAAAAAQAAgAAAAAAAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -48,54 +45,96 @@
   <Class Name="LemonadeStand.Recipe">
     <Position X="4" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAQAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAACAAA=</HashCode>
       <FileName>Recipe.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LemonadeStand.Ingredient">
+  <Class Name="LemonadeStand.Item">
     <Position X="7.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAACAAAAQgAAEAICAAAAAAACAAAA=</HashCode>
-      <FileName>Ingredient.cs</FileName>
+      <FileName>Item.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Day">
     <Position X="4" Y="6" Width="2" />
-    <AssociationLine Name="Recipe" Type="LemonadeStand.Recipe" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.688" Y="6" />
-        <Point X="5.688" Y="5.625" />
-        <Point X="4.562" Y="5.625" />
-        <Point X="4.562" Y="5.19" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAABQEAAAAQAEgFEAAICAgAAAAKAAwACgAIAAgAA=</HashCode>
       <FileName>Day.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Recipe" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="LemonadeStand.Weather">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAIAAAAAAFBBAgBACAAAAAAAAAAAAAAQAAARAAAA=</HashCode>
+      <HashCode>ABAAAIAAAAAAFBBAgBACAAAAAAAAAAAAAAQAAABAAAA=</HashCode>
       <FileName>Weather.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.ResultOfDay">
     <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAOQAAIBkACCIRAQoCHBVqCABVAAAgAAAQAAAAE=</HashCode>
+      <HashCode>AAAAAAOQAEIBkADCIRAQoCHBVqAABVAAAgIAAQACAAE=</HashCode>
       <FileName>ResultOfDay.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Pitchers">
     <Position X="7.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEEAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Pitchers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.Lemon">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lemon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="LemonadeStand.Sugar">
+    <Position X="10.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sugar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.Ice">
+    <Position X="9" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.Cup">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.Inventory">
+    <Position X="9.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.LemonadeRecipe">
+    <Position X="7.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LemonadeRecipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemonadeStand.CustomerTightwadOrGenerous">
+    <Position X="11.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAhAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomerTightwadOrGenerous.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

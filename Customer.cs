@@ -8,12 +8,12 @@ namespace LemonadeStand
     public class Customer
     {
         private bool isActualCustomer = false;
-        private int cupsPurchased;
-        private int mood1To5;
+        //private int cupsPurchased;
+        //private int mood1To5;
 
         // TODO - change to properties?  Protected?  
-        public bool isTightWad = false;
-        public bool isGenerous = false;
+        //public bool isTightWad = false;
+        //public bool isGenerous = false;
         public int weatherWeight = 0;
         public int recipeWeight = 0;
         public int priceWeight = 0;
@@ -22,10 +22,7 @@ namespace LemonadeStand
 
         public int dieRoll = 0;
 
-        public Customer()
-        {
-
-        }
+        
         public bool IsActualCustomer
         {
             get => isActualCustomer;

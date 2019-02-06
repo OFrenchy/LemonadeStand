@@ -93,7 +93,17 @@ namespace LemonadeStand
 
             // create the optimal recipe - according to AllRecipes.com; https://www.allrecipes.com/recipe/20487/old-fashioned-lemonade
             // 12 lemons & 2 cups of sugar
-            Recipe optimalRecipe = new Recipe(12, 2, 10, 1, 12);
+            LemonadeRecipe optimalRecipe = new LemonadeRecipe(12, 2, 5, 12, "cup");
+            // SOLID principle used above;  OPEN to extension:
+            //      LemonadeRecipe inherits Recipe inherits Inventory;
+            //      Inventory is basically a list of items with prices/description,
+            //      Recipe is an inventory (list of items with prices/description, 
+            //          so you can know how much it costs to make the recipe)
+            //      with the extension of adding the serving name (i.e. "cup") and the number of servings the recipe makes.  
+            // Also used: LISKOV'S SUBSTITUTION PRINCIPLE:
+            //      LemonadeRecipe is a Recipe that automatically hase lemon, sugar, ice;
+            //      you can use LemonadeRecipe anywhere you need a recipe
+
 
             double optimalPrice = 0.60;
 
@@ -118,6 +128,11 @@ namespace LemonadeStand
                 Day day = new Day(i + 1);
                 days.Add(day);
 
+                // SOLID PRINCIPLE USED HERE:  Single Responsibility Principle
+                //      this method gets the typical information you receive from a weather forecast
+                //      and passes it to the day object.  It does the weather forecase, does it well.
+                //      Also, the Weather object does all things regarding weather in this project
+                
                 // Have the weather object set the day's forecast
                 weather.GetForecast(day);
 
@@ -126,27 +141,27 @@ namespace LemonadeStand
                 {
                     thisPlayer.ResetForNewDay(day.dayNumber);
                     // add the forecast weather data to the resultsofdays
-                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastConditionNumber = day.ForecastConditionNumber;
-                    thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastTemp = day.ForecastTemperature;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastConditionNumber = day.ForecastConditionNumber;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
 
                     int intOption;
                     do
                     {
                         intOption = UserInterface.ShowPreparationScreen(thisPlayer,
-                            day, store , thisPlayer.resultsOfDays[day.dayNumber]);
+                            day, store , thisPlayer.resultsOfDays[day.dayNumber - 1]);
                         if (intOption > 0)
                         {
-                            // change recipe or purchase ingredients - was series of if - else if blocks
+                            // change recipe or purchase items - was series of if - else if blocks
                             switch (intOption)
                             {
                                 case 1:
                                 case 2:
                                 case 3:
                                     // Change the recipe item quantity to the number the user enters
-                                    thisPlayer.recipe.ingredients[intOption - 1].quantity = 
+                                    thisPlayer.recipe.items[intOption -1].quantity = 
                                         UserInterface.promptForIntegerInput(
-                                            $"Enter new quantity of {thisPlayer.recipe.ingredients[intOption - 1].name} for the recipe:", 
+                                            $"Enter new quantity of {thisPlayer.recipe.items[intOption -1].name} for the recipe:", 
                                             1, 20);
                                     break;
                                 case 4:
@@ -161,7 +176,7 @@ namespace LemonadeStand
                                     // TODO - chg to only store in one place
                                     //thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
                                     //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
-                                    thisPlayer.resultsOfDays[day.dayNumber].PricePerCup = UserInterface.promptForNumberInput(
+                                    thisPlayer.resultsOfDays[day.dayNumber -1].PricePerCup = UserInterface.promptForNumberInput(
                                         "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
 
                                     break;
@@ -204,7 +219,7 @@ namespace LemonadeStand
                 }
                 else { weatherWeight = 1; };
 
-                day.CreateCustomers();
+                day.CreateCustomers(UserInterface.percentGenerous, UserInterface.percentGenerous);
                 
                 // scoreLemonade method - returns integer +/-  to add to likelihoodScore
                 // for the quality of the lemonade, 
@@ -223,17 +238,17 @@ namespace LemonadeStand
                 {
                     // add the actual weather data to the resultsofdays
                     //thisPlayer.resultsOfDays[day.dayNumber].WeatherForecastTemp = day.ForecastTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber].WeatherActualTemp = day.ActualTemperature;
-                    thisPlayer.resultsOfDays[day.dayNumber].WeatherActualConditionNumber = day.ActualConditionNumber;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualTemp = day.ActualTemperature;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherActualConditionNumber = day.ActualConditionNumber;
 
-                    thisPlayer.resultsOfDays[day.dayNumber].PotentialCustomers = day.NumberOfPotentialCustomers;
+                    thisPlayer.resultsOfDays[day.dayNumber - 1].PotentialCustomers = day.NumberOfPotentialCustomers;
 
 
                     // Generate a weight for the quality of lemonade
                     int recipeWeight = ScoreLemonade(thisPlayer.recipe, optimalRecipe);
 
                     // Generate a weight for the price of lemonade
-                    int priceWeight = ScorePrice(thisPlayer.resultsOfDays[day.dayNumber].PricePerCup, optimalPrice);
+                    int priceWeight = ScorePrice(thisPlayer.resultsOfDays[day.dayNumber - 1].PricePerCup, optimalPrice);
 
                     // reset master customer list
                     day.ScoreCustomers(
@@ -246,14 +261,12 @@ namespace LemonadeStand
                     );
 
                     // play round
-                    //TODO
                     int quantitySold = thisPlayer.sellLemonadeForDay(day);
                     Console.WriteLine($"{quantitySold} sold!");
-                    Console.ReadLine();
+                    //Console.ReadLine();
 
-                    // si
+                    // show day's results
                     UserInterface.showResultsScreen(thisPlayer, day, weather, optimalRecipe);
-                    
                 }
                 
             }  // for each day 
@@ -331,25 +344,25 @@ namespace LemonadeStand
             // 1-6 lemons (-2), 6-9 (-1), 9-11 (0), 12 (+2)
 
             int weightForRecipe = 0;
-            int optimalLemons = optimalRecipe.ingredients[0].quantity;
+            int optimalLemons = optimalRecipe.items[0].quantity;
 
-            if (playersRecipe.ingredients[0].quantity == optimalLemons)
+            if (playersRecipe.items[0].quantity == optimalLemons)
             {
                 weightForRecipe = 2;
             }
-            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons / 2) )  // 1-6
+            else if (playersRecipe.items[0].quantity <= (optimalLemons / 2) )  // 1-6
             {
                 weightForRecipe = -2;
             }
-            else if (playersRecipe.ingredients[0].quantity <= (optimalLemons - (optimalLemons / 4)))  // 7-9
+            else if (playersRecipe.items[0].quantity <= (optimalLemons - (optimalLemons / 4)))  // 7-9
             {
                 weightForRecipe = -1;
             }
-            else if (playersRecipe.ingredients[0].quantity >= optimalLemons + (optimalLemons / 2))  // 18 or more
+            else if (playersRecipe.items[0].quantity >= optimalLemons + (optimalLemons / 2))  // 18 or more
             {
                 weightForRecipe = -2;
             }
-            else if (playersRecipe.ingredients[0].quantity >= (optimalLemons + (optimalLemons / 4))) // 15-17
+            else if (playersRecipe.items[0].quantity >= (optimalLemons + (optimalLemons / 4))) // 15-17
             {
                 weightForRecipe = -1;
             }

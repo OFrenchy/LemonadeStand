@@ -16,7 +16,6 @@ namespace LemonadeStand
         public static double initialPricePerCupOfLemonade = 0.25;
         public static int numberOfServingsPerPitcher = 12;
 
-
         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
          {
             // pick a whole number from 1 to & including upperBound;  if you want a random number, don't prompt
@@ -152,6 +151,7 @@ namespace LemonadeStand
 
         public static void showWelcomeScreen(string playerName, double initialInvestment)
         {
+            clearScreen();
             // Construct the display of all the information the player needs to start
             string welcomeScreen = "";
             welcomeScreen = "\nWelcome to your Lemonade Stand, " + playerName + "! \n\n" +
@@ -199,34 +199,34 @@ namespace LemonadeStand
             prepScreen = prepScreen + "\n" +
                 "Your current recipe for a pitcher of lemonade is below.  \n" +
                 "(To change any item, enter the line number.): \n";
-            // loop through ingredients (except the last one, cups, because there will always 1 cup) 
+            // loop through items (except the last one, cups, because there will always 1 cup) 
             // & append to prepScreen 
-            for (int i = 0; i < player.recipe.ingredients.Count - 1; i++)
+            for (int i = 0; i < player.recipe.items.Count; i++)
             {
                 prepScreen = prepScreen +
-                $"{i + 1})  {player.recipe.ingredients[i].quantity} {player.recipe.ingredients[i].name} \n";
+                $"{i + 1})  {player.recipe.items[i].quantity} {player.recipe.items[i].name} \n";
             }
             double costPerPitcher = player.getCostPerPitcher();
             prepScreen = prepScreen + "\n" +
                 $"Based on your current recipe, cost of ingredients, and current inventory, \n" +
                 $"your cost per pitcher is {costPerPitcher.ToString("C")} which is {(costPerPitcher / 12).ToString("C")} per cup, and \n" +
-                $"you can make {player.pitchers.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
+                $"you can make {player.getMaxNumberOfPitchers().ToString()} pitchers;  each pitcher holds 12 servings (cups) of 10 ounces. \n"; 
 
             prepScreen = prepScreen + "\n" +
             "Your current inventory is shown below.  \n" +
             "(To purchase any item, enter the line number.): \n";
             // +
             // loop through inventory & append to prepScreen 
-            for (int i = 0; i < player.recipe.ingredients.Count; i++)
+            for (int i = 0; i < player.inventory.items.Count; i++)
             {
-                string leftPart = $"{i + 4})  {player.inventory.ingredients[i].quantity} {player.inventory.ingredients[i].name} ";// - avail. from store for { string.Format("{0:C}", store.inventory.ingredients[i].PriceForQuantity)  } for {store.inventory.ingredients[i].QuantityInPrice} \n";
-                string rightPart = $"- avail. from store for {store.inventory.ingredients[i].PriceForQuantity.ToString("C")} for {store.inventory.ingredients[i].QuantityInPrice.ToString()} \n";
+                string leftPart = $"{i + 4})  {player.inventory.items[i].quantity} {player.inventory.items[i].name} ";
+                string rightPart = $"- avail. from store for {store.inventory.items[i].PriceForQuantity.ToString("C")} for {store.inventory.items[i].QuantityInPrice.ToString()} \n";
                 leftPart = padRightToColumn(24, leftPart);
                 prepScreen = prepScreen +
                     leftPart + rightPart;
             }
             prepScreen = prepScreen + "\n" +
-                $"8) You are charging {player.resultsOfDays[day.dayNumber].PricePerCup.ToString("C")} per cup of lemonade that you sell. \n";
+                $"8) You are charging {player.resultsOfDays[day.dayNumber - 1].PricePerCup.ToString("C")} per cup of lemonade that you sell. \n";
             
             prepScreen = prepScreen + "\n" +
                 "9) to quit \n" +
@@ -250,15 +250,15 @@ namespace LemonadeStand
             resultsScreen += "\n" +
                 "Your current inventory is below.  \n";
             // loop through inventory & append to screen 
-            for (int i = 0; i < player.inventory.ingredients.Count; i++)
+            for (int i = 0; i < player.inventory.items.Count; i++)
             {
                 resultsScreen +=
-                $"{i + 1})  {player.recipe.ingredients[i].quantity} {player.recipe.ingredients[i].name} \n";
+                $"{i + 1})  {player.recipe.items[i].quantity} {player.recipe.items[i].name} \n";
             }
             
             resultsScreen += "\n" +
                 $"Your cost per pitcher was {player.resultOfDay.CostPerPitcher.ToString("C")} which is {(player.resultOfDay.CostPerPitcher / player.recipe.servings).ToString("C")} per cup, and \n" +
-                $"you charged {player.resultsOfDays[day.dayNumber].PricePerCup.ToString("C")} per cup. \n" +
+                $"you charged {player.resultsOfDays[day.dayNumber - 1].PricePerCup.ToString("C")} per cup. \n" +
                 $"You made {player.resultOfDay.NumberOfPitchersMade} pitchers;  each pitcher holds {player.recipe.servings} servings (cups) of 10 ounces. \n" +
                 $"You discarded {player.resultOfDay.NumberOfCupsRemainingInPitcher} cups of lemonade at the end of the day. \n" +
                 $"You currently have {string.Format("{0:C}", player.resultOfDay.MoneyOnHandAtEOD)} in the cash box. \n";
@@ -287,19 +287,19 @@ namespace LemonadeStand
         {
             // we will help the user hone in on the correct # of lemons first, 
             // then work on the correct # of cups of sugar.
-            if (playerRecipe.ingredients[0].quantity < optimalRecipe.ingredients[0].quantity)
+            if (playerRecipe.items[0].quantity < optimalRecipe.items[0].quantity)
             {
                 return "Some people said the lemonade was too weak.";
             }
-            else if (playerRecipe.ingredients[0].quantity > optimalRecipe.ingredients[0].quantity)
+            else if (playerRecipe.items[0].quantity > optimalRecipe.items[0].quantity)
             {
                 return "Some people said the lemonade was too strong.";
             }
-            else if (playerRecipe.ingredients[1].quantity < optimalRecipe.ingredients[1].quantity)
+            else if (playerRecipe.items[1].quantity < optimalRecipe.items[1].quantity)
             {
                 return "Some people said the lemonade was too sour.";
             }
-            else if (playerRecipe.ingredients[1].quantity > optimalRecipe.ingredients[1].quantity)
+            else if (playerRecipe.items[1].quantity > optimalRecipe.items[1].quantity)
             {
                 return "Some people said the lemonade was too sweet.";
             }

@@ -8,101 +8,102 @@ namespace LemonadeStand
 {
     public class Pitchers
     {
-        private int servingsPerPitcher = -1;
-        //private int cupsRemainingInPitcher = 0;
+        //private int servingsPerPitcher = -1;
+        ////private int cupsRemainingInPitcher = 0;
 
-        private Recipe recipe;
-        private Recipe inventory;
+        //private LemonadeRecipe recipe;
+        //private Inventory inventory;
 
-        ResultOfDay resultOfDay; // = new ResultOfDay()
+        //ResultOfDay resultOfDay; // = new ResultOfDay()
 
-        public Pitchers(Recipe recipe, Recipe inventory, ResultOfDay resultOfDay)
-        {
-            servingsPerPitcher = recipe.servings;
-            this.recipe = recipe;
-            this.inventory = inventory;
+        //public Pitchers(LemonadeRecipe recipe, Inventory inventory, ResultOfDay resultOfDay)
+        //{
+        //    servingsPerPitcher = recipe.servings;
+        //    this.recipe = recipe;
+        //    this.inventory = inventory;
+            
+        //    this.servingsPerPitcher = recipe.servings; // if 0, put this back in arguments:  int numberOfServingsPerPitcher,
+        //    this.resultOfDay = resultOfDay;
+        //}
 
-            this.servingsPerPitcher = recipe.servings; // if 0, put this back in arguments:  int numberOfServingsPerPitcher,
-        }
 
+        //public int CupsRemainingInPitcher
+        //{
+        //    get => resultOfDay.NumberOfCupsRemainingInPitcher;
+        //    //set
+        //    //{
+        //    //}
+        //}
+        //public bool MakeAnotherPitcher()
+        //{
+        //    // if there is enough for another pitcher, make one, 
+        //    //  otherwise set soldout, soldoutof, and return false
+        //    if (getMaxNumberOfPitchers() > 0)
+        //    {
+        //        // TODO - 
+        //        // decrease inventory by recipe amounts
+        //        decreaseInventoryByOneRecipe();
 
-        public int CupsRemainingInPitcher
-        {
-            get => resultOfDay.NumberOfCupsRemainingInPitcher;
-            //set
-            //{
-            //}
-        }
+        //        resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
+        //        resultOfDay.NumberOfPitchersMade++;
 
-        public bool MakeAnotherPitcher()
-        {
-            // if there is enough for another pitcher, make one, 
-            //  otherwise set soldout, soldoutof, and return false
-            if (getMaxNumberOfPitchers() > 0)
-            {
-                // TODO - 
-                // decrease inventory by recipe amounts
+        //        // add # of servings to resultOfDay.servingsin pitcher
+        //        // increment # pitchers made in 
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        resultOfDay.SoldOut = true;
+        //        return false;
+        //    }
+        //}
 
-                decreaseInventoryByOneRecipe();
+        //public void decreaseInventoryByOneRecipe()
+        //{
+        //    for (int i = 0; i < inventory.items.Count - 1; i++)
+        //    {
+        //        // do not decrease cups until you sell a cup
+        //        inventory.items[i].quantity -= recipe.items[i].quantity;
+        //    }
+        //}
+        //public void SoldCup()
+        //{
+        //    resultOfDay.NumberOfCupsRemainingInPitcher-- ;
 
-                resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
-                resultOfDay.NumberOfPitchersMade++;
+        //    resultOfDay.MoneyOnHandAtEOD += resultOfDay.PricePerCup;
 
-                // add # of servings to resultOfDay.servingsin pitcher
-                // increment # pitchers made in 
-                return true;
-            }
-            else
-            {
-                resultOfDay.SoldOut = true;
-                return false;
-            }
-        }
+        //    // TODO - decrement inventory of cups by 1
+        //    inventory.items[4].quantity-- ;
 
-        public void decreaseInventoryByOneRecipe()
-        {
-            for (int i = 0; i < inventory.ingredients.Count; i++)
-            {
-                inventory.ingredients[i].quantity -= recipe.ingredients[i].quantity;
-            }
-        }
-        public void SoldCup()
-        {
-            resultOfDay.NumberOfCupsRemainingInPitcher-- ;
+        //    //throw new System.NotImplementedException();
+        //}
 
-            resultOfDay.MoneyOnHandAtEOD += resultOfDay.PricePerCup;
-
-            //throw new System.NotImplementedException();
-        }
-
-        public int getMaxNumberOfPitchers()
-        {
-            // calculate the number of pitchers you can make based on current inventory
-            //foreach (Ingredient ingredient in recipe.ingredients)
-            int maxPitchers = 0;
-            //for (int i = 0; i < recipe.ingredients.Count; i++)
-            int i = 0;
-            do
-            {
-                // numberPerRecipe, numberOnHand
-                int numberPerRecipe = recipe.ingredients[i].quantity;
-                int numberOnHand = inventory.ingredients[i].quantity;
-                int quotient = numberOnHand / numberPerRecipe;
-                if (quotient < maxPitchers || i == 0)
-                {
-                    maxPitchers = quotient;
-                    resultOfDay.SoldOutOf = "";
-                }
-                if (maxPitchers == 0)
-                {
-                    // set resultOfDay.SoldOutOf to the ingredient of which we don't have enough 
-                    resultOfDay.SoldOutOf = inventory.ingredients[i].name;
-                    return 0;
-                }
-                i++;
-            }
-            while (i < recipe.ingredients.Count);
-            return maxPitchers;
-        }
+        //public int getMaxNumberOfPitchers()
+        //{
+        //    // calculate the number of pitchers you can make based on current inventory
+        //    int maxPitchers = 0;
+        //    int i = 0;
+        //    do
+        //    {
+        //        // numberPerRecipe, numberOnHand
+        //        int numberPerRecipe = recipe.items[i].quantity;
+        //        int numberOnHand = inventory.items[i].quantity;
+        //        int quotient = numberOnHand / numberPerRecipe;
+        //        if (quotient < maxPitchers || i == 0)
+        //        {
+        //            maxPitchers = quotient;
+        //            resultOfDay.SoldOutOf = "";
+        //        }
+        //        if (maxPitchers == 0)
+        //        {
+        //            // set resultOfDay.SoldOutOf to the item of which we don't have enough 
+        //            resultOfDay.SoldOutOf = inventory.items[i].name;
+        //            return 0;
+        //        }
+        //        i++;
+        //    }
+        //    while (i < recipe.items.Count);
+        //    return maxPitchers;
+        //}
     }
 }
