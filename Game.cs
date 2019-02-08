@@ -72,7 +72,7 @@ namespace LemonadeStand
     // As a developer, we want the actual weather to affect the customer's mood and thus the 
     //      number of sales
         
-        // TODO - for future improvement, calculate if the user doesn't have enough money
+    // TODO - calculate if the user doesn't have enough money
     //      to buy whatever they need to make another pitcher, 
     //      and thus cannot continue in the game = bankrupt.
 
@@ -102,7 +102,6 @@ namespace LemonadeStand
             // Also used: LISKOV'S SUBSTITUTION PRINCIPLE:
             //      LemonadeRecipe is a Recipe that automatically hase lemon, sugar, ice;
             //      you can use LemonadeRecipe anywhere you need a recipe
-
 
             double optimalPrice = 0.60;
 
@@ -143,10 +142,7 @@ namespace LemonadeStand
                     thisPlayer.resultOfDay.WeatherForecastTemp = day.ForecastTemperature;
                     thisPlayer.resultOfDay.WeatherForecastConditionNumber = day.ForecastConditionNumber;
                     thisPlayer.resultOfDay.WeatherForecastChanceOfRainPercent = day.RainChancePercent;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastTemp = day.ForecastTemperature;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastConditionNumber = day.ForecastConditionNumber;
-                    //thisPlayer.resultsOfDays[day.dayNumber - 1].WeatherForecastChanceOfRainPercent = day.RainChancePercent;
-
+                    
                     int intOption;
                     do
                     {
@@ -178,8 +174,6 @@ namespace LemonadeStand
                                     thisPlayer.pricePerCupOfLemonade = UserInterface.promptForNumberInput( 
                                         "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
                                     thisPlayer.resultOfDay.PricePerCup = thisPlayer.pricePerCupOfLemonade;
-                                    //thisPlayer.resultOfDay.PricePerCup = UserInterface.promptForNumberInput(
-                                    //    "Enter the new price to charge per cup of lemonade (use the format 0.5 for fifty cents): ", 0.0, 20.0);
                                     break;
                                 case 9:
                                     // user wants to quit
@@ -251,12 +245,12 @@ namespace LemonadeStand
 
                     // reset master customer list
                     day.ScoreCustomers(
-                    UserInterface.percentTightWads,
-                    UserInterface.percentGenerous,
-                    UserInterface.startingWeight,
-                    weatherWeight,
-                    recipeWeight,
-                    priceWeight
+                        UserInterface.percentTightWads,
+                        UserInterface.percentGenerous,
+                        UserInterface.startingWeight,
+                        weatherWeight,
+                        recipeWeight,
+                        priceWeight
                     );
 
                     // play round
@@ -267,40 +261,9 @@ namespace LemonadeStand
                     // show day's results
                     UserInterface.showResultsScreen(thisPlayer, day, weather, optimalRecipe);
                 }
-                
             }  // for each day 
             return true;
-            // throw new System.NotImplementedException();
         }
-
-        //moved sellLemonadeForDay to Player
-        //public int sellLemonadeForDay(Player thisPlayer, Day day)
-        //{
-        //    Console.WriteLine("In Sales");
-        //    Random randomGenerator = new Random();
-        //    int salesCount = 0;
-        //    foreach (Customer thisCustomer in day.masterListOfCustomersForDay)
-        //    {
-        //        int dieRoll = randomGenerator.Next(1, 7);  // produces roll 1 - 6
-        //        thisCustomer.dieRoll = dieRoll;
-        //        Console.WriteLine($"dieRoll = {dieRoll}, score = {thisCustomer.score}, purchased = {dieRoll <= thisCustomer.score}");
-        //        if (dieRoll <= thisCustomer.score)
-        //        {
-        //            thisCustomer.dieRoll = dieRoll;
-        //            // TODO - change this to more fool-proof method
-        //            thisCustomer.IsActualCustomer = true;
-        //            salesCount++;
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("Not a customer!");
-        //        }
-        //    }
-        //    // TODO - change player object to hold whatever we need to save
-        //    //      for the day's results screen & final wrap-up screen
-        //    thisPlayer.holdThis = salesCount;
-        //    return salesCount;
-        //}
         public int ScorePrice(double playerPrice, double optimalPrice)
         {
             // ScorePrice method - returns integer +/-  to add to likelihoodScore
@@ -309,7 +272,6 @@ namespace LemonadeStand
             //      if price is > 15 cents above optimal, return -1 
             //      else if price is equal to or greater than optimal, return 0, 
             //      else if price is 10 cents less than optimal or less, return + 1, 
-
 
             int weightForPrice=0;
             
@@ -327,7 +289,6 @@ namespace LemonadeStand
             }
             return weightForPrice;
         }
-
         public int ScoreLemonade(Recipe playersRecipe, Recipe optimalRecipe)
         {
             // scoreLemonade method - returns integer +/-  to add to likelihoodScore
@@ -363,19 +324,5 @@ namespace LemonadeStand
             }
             return weightForRecipe;
         }
-
-
-        //public Recipe Recipe
-        //{
-        //    get => default(Recipe);
-        //    set
-        //    {
-        //    }
-        //}
-
-
-
-
-
     }
 }

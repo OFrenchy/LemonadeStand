@@ -10,7 +10,6 @@ namespace LemonadeStand
         public Sugar(string name = "sugar", int quantity = 1)
             :base(name, quantity)
         {
-
         }
     }
 }

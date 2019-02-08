@@ -7,11 +7,9 @@ namespace LemonadeStand
 {
     public class Item
     {
-        // TODO - change to private w/acccompanying property sets/gets
         public string name;
         public int quantity;
         public string quantityDescription;
-
         private double priceForQuantity;
         private int quantityInPrice;
         
@@ -20,11 +18,9 @@ namespace LemonadeStand
             this.name = name;
             this.quantity = quantity;
         }
-
-        public double PriceForQuantity
+        public double PriceForQuantity  // allow to be set once
         {
             get => priceForQuantity;
-            // allow priceForQuantity to be set once
             set
             {
                 if (priceForQuantity == 0.00)
@@ -33,10 +29,9 @@ namespace LemonadeStand
                 }
             }
         }
-        public int QuantityInPrice
+        public int QuantityInPrice  // allow to be set once
         {
             get => quantityInPrice;
-            // allow quantityInPrice to be set once
             set
             {
                 if (quantityInPrice == 0)
@@ -45,7 +40,6 @@ namespace LemonadeStand
                 }
             }
         }
-
         public double GetPriceEach()
         {
             return priceForQuantity / quantityInPrice;

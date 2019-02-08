@@ -12,7 +12,6 @@ namespace LemonadeStand
         private double priceSugar4lbs10Cups = 1.75;
         private double priceIce5lbs = 1.50;
         private double price100Cups = 1.50;
-        
         public Inventory inventory;
 
         public Store()
@@ -22,7 +21,6 @@ namespace LemonadeStand
             inventory.addItem(new Sugar("sugar", 10000));
             inventory.addItem(new Ice("ice", 100000));
             inventory.addItem(new Cup("cup", 100000));
-
             inventory.items[0].PriceForQuantity = priceLemon; //  0.20;   // lemons
             inventory.items[0].QuantityInPrice = 1;       // each
             inventory.items[0].quantityDescription = "lemons";
@@ -36,13 +34,5 @@ namespace LemonadeStand
             inventory.items[3].QuantityInPrice = 100;     // cups
             inventory.items[3].quantityDescription = "bags of 100 cups";
         }
-
-        //public Ingredients Ingredients
-        //{
-        //    get => default(Ingredients);
-        //    set
-        //    {
-        //    }
-        //}
     }
 }

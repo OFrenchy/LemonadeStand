@@ -23,7 +23,6 @@ namespace LemonadeStand
 
         public Weather(int numberOfDays)
         {
-            //Thread.Sleep(20);
             Random randomGenerator = new Random(); // needs to be outside of loop so numbers can be random
             // generate forecast temperatures & weather conditions, & % chance of rain
             // for the next numberOfDays
@@ -45,26 +44,14 @@ namespace LemonadeStand
                 // generate a coin flip to decide whether to add or subtract that 
                 // number from the baseTemperature
 
-                // TODO - figure out which is better
+                // TODO - figure out which is better, +/- off of base temp, or random between two numbers
                 //temperatures.Add(generateTemperatureGuess(baseTemperature));
                 temperatures.Add(randomGenerator.Next(75, 91)); // gives roll 75-90
 
                 // chance of rain is from 0% to 100% in 10% increments
                 chancesOfRainPercent.Add(randomGenerator.Next(11) * 10); // gives roll 0-10
-
-                // Moved to SetActualWeatherForDay
-                //// TODO - move to method called after each player has gone through prep screen
-                //// for the actual weather (temp & conditions), 
-                //// repeat the above algorithms - why not, the forecast vs. actual 
-                //// weather can vary that much
-                //actualConditions.Add(randomGenerator.Next(6)); // gives roll 0-5
-                //// TODO - figure out which is better
-                ////actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
-                //actualTemperatures.Add(randomGenerator.Next(75, 91)); // gives roll 75-90
-
             } // i = each day
         } // weather instantiated
-
         private int generateTemperatureGuess(int baseTemperature)
         {
             // generate a random number between 0 & 10, then
@@ -84,6 +71,7 @@ namespace LemonadeStand
         }
         public void GetForecast(Day day)
         {
+            // TODO - change the day.dayNumber to be 0-based
             // set forecast values of temperature, conditions, 
             // and percent chance of rain for the requested day
             day.ForecastTemperature = temperatures[day.dayNumber - 1];
@@ -101,13 +89,12 @@ namespace LemonadeStand
             //actualTemperatures.Add(generateTemperatureGuess(baseTemperature));
             actualTemperatures.Add(randomGenerator.Next(75, 91)); //gives roll 75-90
 
-            
+            // TODO - change the day.dayNumber to be 0-based
             // set actual temperature & conditions for the requested day
             day.ActualTemperature = actualTemperatures[day.dayNumber - 1];
             day.ActualConditionNumber = actualConditions[day.dayNumber - 1];
             day.ActualWeatherConditions = conditionsList[actualConditions[day.dayNumber - 1]];
         }
-
         public void affectCustomerTurnout(int initialNumberOfPotentialCustomers, Day day)
         {
             // Depending on the forecast, change the turnout as follows:
@@ -119,15 +106,11 @@ namespace LemonadeStand
             // 5 clear increase by 18
 
             //{"rain", "overcast", "mostly cloudy", "partly cloudy", "mostly sunny", "clear"}
-            
+
+            // TODO - change the day.dayNumber to be 0-based
             int[] weatherAffects = {-12, -6, 0, 6, 12, 18};
             day.NumberOfPotentialCustomers = initialNumberOfPotentialCustomers + 
                 weatherAffects[conditions[day.dayNumber- 1]];
         }
     }
-
-
-
-
-    
 }

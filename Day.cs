@@ -7,11 +7,6 @@ namespace LemonadeStand
 {
     public class Day
     {
-        // TODO - change to be properties, 
-        // TODO - change to be values obtained from the Weather object
-        //private int forecastTemperature = 35;
-        //private int rainChancePercent = 10;
-        //private string forecastWeatherConditions = "Clear Skies";
         private int forecastTemperature = -384;
         private int forecastConditionNumber = -384;
         private int actualTemperature = -384;
@@ -24,30 +19,20 @@ namespace LemonadeStand
 
         //TODO - chg to be private?
         public List<CustomerTightwadOrGenerous> masterListOfCustomersForDay;
-
-        //forecastTemperature.ToString()} degrees and {day.forecastWeatherConditions
-
+        
         public Day(int dayNumber)
         {
             this.dayNumber = dayNumber;
         }
 
-        //public int todaysRecipe
+        //public Recipe Recipe
         //{
-        //    get => default(int);
+        //    get => default(Recipe);
         //    set
         //    {
         //    }
         //}
-
-        public Recipe Recipe
-        {
-            get => default(Recipe);
-            set
-            {
-            }
-        }
-        public int ForecastTemperature
+        public int ForecastTemperature  // only allows it to be set once
         {
             get => forecastTemperature;
             set
@@ -58,7 +43,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public int ForecastConditionNumber
+        public int ForecastConditionNumber  // only allows it to be set once
         {
             get => forecastConditionNumber;
             set
@@ -69,7 +54,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public string ForecastWeatherConditions
+        public string ForecastWeatherConditions     // only allows it to be set once
         {
             get => forecastWeatherConditions;
             set
@@ -80,7 +65,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public int RainChancePercent
+        public int RainChancePercent    // only allows it to be set once
         {
             get => rainChancePercent;
             set
@@ -91,7 +76,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public int ActualTemperature
+        public int ActualTemperature    // only allows it to be set once
         {
             get => actualTemperature;
             set
@@ -102,7 +87,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public string ActualWeatherConditions
+        public string ActualWeatherConditions   // only allows it to be set once
         {
             get => actualWeatherConditions;
             set
@@ -113,7 +98,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public int ActualConditionNumber
+        public int ActualConditionNumber    // only allows it to be set once
         {
             get => actualConditionNumber;
             set
@@ -124,7 +109,7 @@ namespace LemonadeStand
                 }
             }
         }
-        public int NumberOfPotentialCustomers
+        public int NumberOfPotentialCustomers   // only allows it to be set once
         {
             get => numberOfPotentialCustomers;
             set
@@ -174,9 +159,6 @@ namespace LemonadeStand
         {
             for (int i = 0; i < masterListOfCustomersForDay.Count; i++)
             {
-                //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
-                //masterListOfCustomersForDay[i].isTightWad = true;
-                //masterListOfCustomersForDay[i].isGenerous = false;
                 masterListOfCustomersForDay[i].weatherWeight = weatherWeight;
                 masterListOfCustomersForDay[i].recipeWeight = recipeWeight;
                 masterListOfCustomersForDay[i].priceWeight = priceWeight;
@@ -184,59 +166,6 @@ namespace LemonadeStand
                     recipeWeight + priceWeight + masterListOfCustomersForDay[i].predispositionToBuy;
                 Console.WriteLine($"{masterListOfCustomersForDay[i].isTightWad} {masterListOfCustomersForDay[i].isGenerous}, score = {masterListOfCustomersForDay[i].score}");
             }
-
-            ////public List<Customer> masterListOfCustomersForDay;
-            ////startingWeight 
-            //if (percentTightWads + percentGenerous > 100)
-            //{
-            //    // set both to 0
-            //    percentTightWads = 0;
-            //    percentGenerous = 0;
-            //}
-            //// we need NumberOfPotentialCustomers
-            ////masterListOfCustomersForDay = new List<Customer>();
-            //int numberOfTightWads = Convert.ToInt32((Convert.ToDouble(percentTightWads) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
-            //// create tightwads
-            //int i;
-            //for(i = 0; i < numberOfTightWads; i++)
-            //{
-            //    //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
-            //    masterListOfCustomersForDay[i].isTightWad = true;
-            //    masterListOfCustomersForDay[i].isGenerous = false;
-            //    masterListOfCustomersForDay[i].weatherWeight = weatherWeight;
-            //    masterListOfCustomersForDay[i].recipeWeight = recipeWeight;
-            //    masterListOfCustomersForDay[i].priceWeight = priceWeight;
-            //    masterListOfCustomersForDay[i].score = startingScore + weatherWeight +
-            //        recipeWeight + priceWeight - 1;
-            //    Console.WriteLine($"isTightWad = true, isGenerous = false, score = {masterListOfCustomersForDay[i].score}");
-            //}
-            //int numberOfGenerous = Convert.ToInt32((Convert.ToDouble(percentGenerous) / 100) * Convert.ToDouble(numberOfPotentialCustomers));
-            //int i2;
-            //for (i2 = i; i2 <  numberOfTightWads + numberOfGenerous; i2++)
-            //{
-            //    //masterListOfCustomersForDay.Add(new Customer(true, false, weatherWeight));
-            //    masterListOfCustomersForDay[i2].isTightWad = false;
-            //    masterListOfCustomersForDay[i2].isGenerous = true;
-            //    masterListOfCustomersForDay[i2].weatherWeight = weatherWeight;
-            //    masterListOfCustomersForDay[i2].recipeWeight = recipeWeight;
-            //    masterListOfCustomersForDay[i2].priceWeight = priceWeight;
-            //    masterListOfCustomersForDay[i2].score = startingScore + weatherWeight +
-            //        recipeWeight + priceWeight + 1;
-            //    Console.WriteLine($"isTightWad = false, isGenerous = true, score = {masterListOfCustomersForDay[i2].score}");
-            //}
-            //// reset the rest in the middle
-            //int i3;
-            //for (i3 = i2; i3 < numberOfPotentialCustomers; i3++)
-            //{
-            //    masterListOfCustomersForDay[i3].isTightWad = false;
-            //    masterListOfCustomersForDay[i3].isGenerous = false;
-            //    masterListOfCustomersForDay[i3].weatherWeight = weatherWeight;
-            //    masterListOfCustomersForDay[i3].recipeWeight = recipeWeight;
-            //    masterListOfCustomersForDay[i3].priceWeight = priceWeight;
-            //    masterListOfCustomersForDay[i3].score = startingScore + weatherWeight +
-            //        recipeWeight + priceWeight;
-            //    Console.WriteLine($"isTightWad = false, isGenerous = false, score = {masterListOfCustomersForDay[i3].score}");
-            //}
             Console.WriteLine(masterListOfCustomersForDay.Count);
         }
     }

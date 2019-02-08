@@ -8,14 +8,13 @@ namespace LemonadeStand
 {
     public static class UserInterface
     {
-
+        // TODO - change to properties (gets only)
         public static int percentTightWads = 25;
         public static int percentGenerous = 25;
         public static int startingWeight = 4;
         public static int customerMaxScore = 9;
         public static double initialPricePerCupOfLemonade = 0.25;
         public static int numberOfServingsPerPitcher = 12;
-
         public static int pickWholeNumberOneThrough(int upperBound, string message, bool isRandom)
          {
             // pick a whole number from 1 to & including upperBound;  if you want a random number, don't prompt
@@ -76,7 +75,7 @@ namespace LemonadeStand
                 Console.WriteLine(message);
                 input = Console.ReadLine();
                 //bool isInteger = int.TryParse(input, inputInteger); 
-                // in order to use try/parse
+                // in order to use try/catch
                 try
                 {
                     inputInteger = int.Parse(input);
@@ -180,14 +179,12 @@ namespace LemonadeStand
                 "with their blessing and your promise of the occasional free glass of lemonade.  \n";
 
             welcomeScreen = welcomeScreen + "\n" + "Press enter/return to begin:";
-
             UserInterface.displayMessage(welcomeScreen, true); 
-
-            // throw new System.NotImplementedException();
         }
         public static int ShowPreparationScreen(Player player, Day day, Store store, ResultOfDay resultOfDay) //, Weather weather)
         {
             // Construct the display of all the information the player needs to start
+            // TODO - change the day.dayNumber to be 0-based
             string prepScreen ;
             prepScreen = "\n" +
                 $"========== {player.name}'s Lemonade Stand - Day {day.dayNumber} ==========\n" +
@@ -232,13 +229,13 @@ namespace LemonadeStand
                 "9) to quit \n" +
                 "0) to play today's round.\n" +
                 "Enter your selection:";
-
             clearScreen();
             return UserInterface.promptForIntegerInput(prepScreen, 0 , 9);
         }
 
         public static void showResultsScreen(Player player, Day day, Weather weather, Recipe optimalRecipe)
         {
+            // TODO - change the day.dayNumber to be 0-based
             // Construct the display of the results of the day's sales
             string resultsScreen = "\n" +
                 $"========== {player.name}'s Lemonade Stand - RESULTS FOR DAY {day.dayNumber} ==========\n" +
@@ -255,7 +252,8 @@ namespace LemonadeStand
                 resultsScreen +=
                 $"{i + 1})  {player.inventory.items[i].quantity} {player.inventory.items[i].name} \n";
             }
-            
+
+            // TODO - change the day.dayNumber to be 0-based
             resultsScreen += "\n" +
                 $"Your cost per pitcher was {player.resultOfDay.CostPerPitcher.ToString("C")} which is {(player.resultOfDay.CostPerPitcher / player.recipe.servings).ToString("C")} per cup, and \n" +
                 $"you charged {player.resultsOfDays[day.dayNumber - 1].PricePerCup.ToString("C")} per cup. \n" +
@@ -324,6 +322,5 @@ namespace LemonadeStand
             }
             return stringToPad;
         }
-
     } // class
 } // namespace

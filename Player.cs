@@ -16,17 +16,13 @@ namespace LemonadeStand
         public LemonadeRecipe recipe;
         public Inventory inventory;
         public double moneyOnHand;
-        
         //TODO - chg to be private?
         public List<Customer> customers;
-
         // Store historical info needed for day wrapup & final wrapup
         public List<ResultOfDay> resultsOfDays= new List<ResultOfDay>();
         public ResultOfDay resultOfDay;
-
         public double pricePerCupOfLemonade = UserInterface.initialPricePerCupOfLemonade;
-        //public Pitchers pitchers;
-
+        
         public Player(Store store, string greeting, double initialInvestment)
         {
             moneyOnHand = initialInvestment;
@@ -66,44 +62,13 @@ namespace LemonadeStand
             // create new results for thisPlayer
             resultOfDay = new ResultOfDay(dayNumber, moneyOnHand, pricePerCupOfLemonade);
             resultOfDay.PricePerCup = pricePerCupOfLemonade;
-            //resultsOfDays.Add(resultOfDay);
-
-
-            //Pitchers pitchers = new Pitchers(recipe, inventory, resultOfDay);
-            //pitchers = new Pitchers(recipe, inventory, resultOfDay);
-
         }
         public int sellLemonadeForDay(Day day)
         {
             Console.WriteLine("In Sales");
-            // moved to player.resetForNewDay
-            //// create new results for thisPlayer
-            //ResultOfDay resultOfDay = new ResultOfDay(day.dayNumber);
-            //Pitchers pitchers = new Pitchers(recipe, inventory); //, resultOfDay);
-
             resultOfDay.MoneyOnHandAtEOD = moneyOnHand;
-
             resultOfDay.CostPerPitcher = getCostPerPitcher();
-            // handled in showprepscreen
             resultOfDay.PricePerCup = pricePerCupOfLemonade;
-            // handled in game.playgame, after customers are created
-
-            //resultOfDay.PotentialCustomers = day.NumberOfPotentialCustomers;
-
-            // TODO - find out where handled
-            // handled at ??? 
-            //resultOfDay.MoneyOnHandAtBOD = moneyOnHand;
-
-            // moved to game.playGame, after weather forecast created so it can be used in showPrepScreen
-            //resultOfDay.WeatherForecastTemp = day.ForecastTemperature;
-            //resultOfDay.WeatherForecastConditionNumber = day.ForecastConditionNumber;
-            //resultOfDay.WeatherForecastChanceOfRainPercent = day.RainChancePercent;
-
-            // moved to game.playGame, after actual weather is created so it can be used in showResults
-            //resultOfDay.WeatherActualTemp = day.ActualTemperature;
-            //resultOfDay.WeatherActualConditionNumber = day.ActualConditionNumber;
-
-            // Make the first pitcher of the day
             MakeAnotherPitcher();
 
             Random randomGenerator = new Random();
@@ -120,8 +85,6 @@ namespace LemonadeStand
                     thisCustomer.IsActualCustomer = true;
                     recordSale(resultOfDay);//, pitchers);
                     salesCount++;
-                    //resultOfDay.NumberOfCupsSold++;
-                    //resultOfDay.SalesIncomeForDay = resultOfDay.SalesIncomeForDay + pricePerCupOfLemonade;
                     
                     // if pitcher is empty, make new pitcher if you can, 
                     // if not, set SoldOut = true;
@@ -130,10 +93,6 @@ namespace LemonadeStand
                         MakeAnotherPitcher();
                     }
                 }
-                //else
-                //{
-                //    Console.WriteLine("Not a customer!");
-                //}
                 // if we ran out, exit 
                 if (resultOfDay.SoldOut)
                 {
@@ -146,22 +105,18 @@ namespace LemonadeStand
             resultsOfDays.Add(resultOfDay);
             return salesCount;
         }
-
         public void recordSale(ResultOfDay resultOfDay)//, Pitchers pitchers)
         {   
             resultOfDay.NumberOfCupsSold++;
             resultOfDay.SalesIncomeForDay +=  resultOfDay.PricePerCup;
-            //moneyOnHand += resultOfDay.PricePerCup;
             resultOfDay.MoneyOnHandAtEOD += resultOfDay.PricePerCup;
             moneyOnHand += resultOfDay.PricePerCup;
             // decrement inventory of cups by 1
             inventory.items[3].quantity--;
             // increase expenses by the cost of 1 physical cup
             //resultOfDay.ExpensesForDay += inventory.items[3].GetPriceEach();
-
             // decrement cups in pitcher count; 
             resultOfDay.NumberOfCupsRemainingInPitcher--;
-            
         }
         public int CupsRemainingInPitcher
         {
@@ -180,14 +135,11 @@ namespace LemonadeStand
                 decreaseInventoryByOneRecipe();
                 //// increase expenses in the ledger
                 //resultOfDay.ExpensesForDay += getCostPerPitcher();
-
                 // add # of servings to resultOfDay.servingsin pitcher
                 resultOfDay.NumberOfCupsRemainingInPitcher = recipe.servings;
                 // increment # pitchers made in 
                 resultOfDay.NumberOfPitchersMade++;
-
                 UserInterface.displayMessage("Made another pitcher.",false);
-
                 return true;
             }
             else
@@ -196,17 +148,13 @@ namespace LemonadeStand
                 return false;
             }
         }
-
         public void decreaseInventoryByOneRecipe()
-        {
+        {       // do not decrease cups until you sell a cup
             for (int i = 0; i < inventory.items.Count - 1; i++)
-            {
-                // do not decrease cups until you sell a cup
+            {   
                 inventory.items[i].quantity -= recipe.items[i].quantity;
             }
         }
-        
-
         public int getMaxNumberOfPitchers()
         {
             // calculate the number of pitchers you can make based on current inventory
@@ -214,7 +162,6 @@ namespace LemonadeStand
             int i = 0;
             do
             {
-                // numberPerRecipe, numberOnHand
                 int numberPerRecipe = recipe.items[i].quantity;
                 int numberOnHand = inventory.items[i].quantity;
                 int quotient = numberOnHand / numberPerRecipe;
@@ -234,23 +181,6 @@ namespace LemonadeStand
             while (i < recipe.items.Count);
             return maxPitchers;
         }
-        //public double moneyOnHand
-        //{
-        //    get => default(int);
-        //    set
-        //    {
-        //    }
-        //}
-
-        //// member methods - … Can Do …
-        //public virtual int MakeSelection(int rangeZeroBased)
-        //{
-        //    // prompt for selection
-        //    string message = name + "'s turn: Please make a selection, enter 1 for Rock, 2 for Paper, " +
-        //        "3 for Scissors, 4 for Lizard, or 5 for Spock: ";
-        //    return Convert.ToInt32(UserInterface.pickWholeNumberOneThrough(5, message, false) - 1);
-        //}
-
         public double getCostPerPitcher()
         {
             // loop through items, multiplying GetPriceEach by quantity &
@@ -262,8 +192,6 @@ namespace LemonadeStand
             }
             return costPerPitcher;
         }
-        
-        
         public void PurchaseItem(int itemNumber, Store store, ResultOfDay resultOfDay)
         {
             // get the player's quantity, then check if he/she has enough money;
@@ -281,7 +209,6 @@ namespace LemonadeStand
                     (quantityToPurchase * store.inventory.items[itemNumber].QuantityInPrice);
                 // Deduct the amount from his moneyOnHand
                 moneyOnHand = moneyOnHand - saleAmount;
-
                 // add this purchase to expenses for the day
                 resultOfDay.ExpensesForDay += saleAmount;
                 Console.WriteLine("purchase complete");

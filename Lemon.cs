@@ -10,8 +10,6 @@ namespace LemonadeStand
         public Lemon(string name = "lemon", int quantity = 1)
             :base(name, quantity)
         {
-
         }
     }
-
 }
